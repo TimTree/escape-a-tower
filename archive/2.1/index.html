@@ -1,0 +1,1241 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Escape a Tower</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+<meta charset="UTF-8">
+
+<meta name="description" content="The classic text based PowerPoint game converted to Javascript.">
+
+<link rel="shortcut icon" type="image/x-icon" href="towerfavicon.ico" />
+
+<meta name="apple-mobile-web-app-title" content="Escape Tower">
+
+<link rel="apple-touch-icon" href="towerappicon.png">
+
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<style>
+
+/* Laptop/Desktop CSS */
+
+body {
+margin:0;
+background-color:#85776D;
+}
+
+span.center {
+display:block;
+text-align:center;
+}
+
+.break {
+line-height:2;
+}
+
+.choice {
+line-height:1.7;
+}
+
+#font {
+font-family:"Georgia";
+}
+
+#header {
+background:#eee;
+width:750px;
+margin:0 auto;
+display:block;
+padding-top:12px;
+padding-bottom:12px;
+padding-right:50px;
+padding-left:50px;
+height:100%;
+border:1px;
+}
+
+#title {
+text-align:center;
+color:#74685F;
+display:block;
+line-height:1.8;
+font-size:24pt;
+}
+
+#wrap {
+background:#D0CCB9;
+width:750px;
+margin:0 auto;
+display:block;
+padding-top:10px;
+padding-bottom:30px;
+padding-right:50px;
+padding-left:50px;
+height:100%;
+}
+
+#copyright {
+background:#99918A;
+width:750px;
+margin:0 auto;
+display:block;
+padding-top:8px;
+padding-bottom:8px;
+padding-right:50px;
+padding-left:50px;
+height:100%;
+font-size:10pt;
+text-align:center;
+}
+
+a {
+color:#817237;
+cursor:pointer;
+}
+
+#main {
+font-size:16pt;
+}
+
+li {
+line-height:1.5;
+}
+
+span.gameover {
+color:#FF0000;
+font-size:20pt;
+}
+
+span.checkpoint {
+color:#008000;
+font-size:20pt;
+font-weight:700;
+}
+
+span.theend {
+color:#0000FF;
+font-size:20pt;
+}
+
+#titlefont {
+font-family:trebuchet ms,sans-serif;
+font-size:50pt;
+font-weight:700;
+}
+
+#titleselect {
+font-size:28pt;
+}
+
+
+
+
+
+
+#bonusfeatures {
+font-size:28pt;
+}
+
+#secret {
+position:absolute;
+left:1px;
+top:1px;
+width:20px;
+height:20px;
+cursor:pointer;
+}
+
+/* Mobile Device CSS */
+
+@media screen and (max-width: 660px) {
+
+#header {
+width:80%;
+padding-right:15px;
+padding-left:15px;
+}
+
+#title {
+font-size:20pt;
+line-height:1.4;
+}
+
+#wrap {
+width:80%;
+padding-right:15px;
+padding-left:15px;
+}
+
+#copyright {
+width:80%;
+padding-right:15px;
+padding-left:15px;
+}
+
+#titlefont {
+font-size:32pt;
+font-weight:700;
+}
+
+#main {
+font-size:14pt;
+}
+
+#titleselect {
+font-size:24pt;
+}
+#bonusfeatures {
+font-size:24pt;
+}
+
+
+}
+
+@media screen and (min-width: 661px) and (max-width: 939px) { 
+
+#copyright {
+width:80%;
+}
+
+#wrap {
+width:80%;
+}
+
+#header {
+width:80%;
+}
+
+
+
+}
+
+
+
+
+</style>
+
+<script>
+
+var counter = 0;
+var checkpoint = 0;
+var complete = 0;
+
+if (localStorage.getItem("gameovercounter")) 
+{counter = localStorage.getItem("gameovercounter");}
+
+if (localStorage.getItem("checkpointmarker")) 
+{checkpoint = localStorage.getItem("checkpointmarker");}
+
+if (localStorage.getItem("completedgame")) 
+{complete = localStorage.getItem("completedgame");}
+
+window.onload = function() {loadit()}
+
+function loadit() {
+if (checkpoint == 0) {
+document.getElementById("titleselect").innerHTML="<a onclick=howtoplay()><strong>How to Play</strong></a>&nbsp;&nbsp;<wbr>&nbsp;&nbsp;<a onclick=prologue()><strong>New&nbsp;Game</strong></a>";}
+if (checkpoint >= 1) {
+document.getElementById("titleselect").innerHTML="<a onclick=howtoplay()><strong>How to Play</strong></a>&nbsp;&nbsp;<wbr>&nbsp;&nbsp;<a onclick=yousure()><strong>New&nbsp;Game</strong></a>&nbsp;&nbsp;<wbr>&nbsp;&nbsp;<a onclick=loadgame()><strong>Load&nbsp;Game</strong></a>";}
+if (complete == 1) {
+document.getElementById("bonusfeatures").innerHTML="<a onclick=bonus()><strong>Bonus Features</strong></a>";}
+}
+
+function loadgame() {
+if (checkpoint == 1){s1()}
+if (checkpoint == 2){s20()}
+if (checkpoint == 3){s29()}
+if (checkpoint == 4){s42()}
+if (checkpoint == 5){s47()}
+if (checkpoint == 6){s71()}
+if (checkpoint == 7){s76()}
+if (checkpoint == 8){s90()}
+if (checkpoint == 9){s102()}
+if (checkpoint == 10){s121()}
+}
+
+function yousure() {
+var b=confirm("Are you sure you want to start a new game? Your current save data will get deleted.");
+if (b==true) {prologue();}
+}
+
+function howtoplay() {
+document.getElementById("title").innerHTML="How to Play";
+document.getElementById("main").innerHTML="<ul><li>This game is story based.</li><li>As you progress through the story, there will be choices for you to choose. Click on the choice you think will best continue the story.</li><li>Some choices lead to <span style='color:#FF0000;'>game over</span>&#39;s. If this happens, you will return to the last <span style='color:#008000;'>checkpoint</span> you reached.</li><li>You beat the game when you reach <span style='color:#0000FF;'>The End</span>. Try to get there with the least amount of game over&#39;s.</li><li>If you exit the game before finishing it, a Load Game option will appear in the main menu, returning you to the nearest checkpoint.</li></ul><strong>Make it an app!</strong> If you are using an iOS device, you can save this game to your home screen to play in full screen and offline! Just tap the Share icon (the box with an arrow pointing up) in Safari and select Add to Home Screen.<br><br><span id = titleselect style='display:block;text-align:center;'><a onclick=imdone()>Main&nbsp;Menu</a></span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function vhistory() {
+document.getElementById("title").innerHTML="Version History";
+document.getElementById("main").innerHTML="<ul><strong>Note: Release notes contain in game spoilers.</strong><br><br><li><strong>Version 2.1</strong> (released Mar 8, 2014)<br>Based on user feedback, I made a small modification to the first part of the game to make that section a little easier. It does NOT alter the solution; rather, it provides a hint towards the right direction.</li><li><strong>Version 2.0</strong> (released Mar 4, 2014)<br>The classic PowerPoint game has been rewritten in HTML, CSS, and Javascript. What does this mean for you?<br>- To avoid conflicting names with another game, I renamed Escape the Tower to Escape <em>a</em> Tower.<br>- Escape a Tower is playable natively on a Web browser. The game loads more quickly, has a smaller file size, and best of all, you no longer need to download a file and open PowerPoint to play!<br>- You can also play Escape a Tower on mobile devices, such as the iPhone, iPad, Nexus, Samsung Galaxy, you name it!<br>- New save feature. If you exit the game before you beat it, you are now able to load the game from your nearest checkpoint!<br>- The game now tracks how many Game Over&#39;s you get while playing, which is displayed at the end of the game.<br>- Corrects some grammatical errors.</li><br class='break'><strong>PowerPoint Version History</strong><br class='break'><li><strong>Version 1.7</strong> (released Nov 21, 2012)<br>In this update: How to Play condensed into 1 slide, new 2 slide long prologue, Q&A updated, some graphical improvements, and fixes errors.</li><li><strong>Version 1.66</strong> (released Jul 6, 2012)<br>A copyright and Q&A revision.</li><li><strong>Version 1.65</strong> (released Jan 2, 2012)<br>A proofread of the entire game fixes spelling/grammatical errors. Also modifies Game Quiz and Game Scavenger Hunt.</li><li><strong>Version 1.6</strong> (released Dec 31, 2011)<br>This update moves the credits and finally fixes the game breaking PIN number glitch.</li><li><strong>Version 1.58</strong> (released Dec 16, 2011)<br>Added the Journey to Home trailer.</li><li><strong>Version 1.57</strong> (released Sept 2, 2011)<br>Apparently, the game title had some font issues with some versions of PowerPoint. This has been fixed.</li><li><strong>Version 1.56</strong> (released Aug 7, 2011)<br>Bug fixes</li><li><strong>Version 1.55</strong> (released Aug 5, 2011)<br>Added Q&A and revised the credits and Can YOU Beat the Creator, along with adding copyright.</li><li><strong>Version 1.5</strong> (released Jun 24, 2011)<br>It’s been a while! In this update, the Quit Game button now actually works. Along with that, the Trivia game has been made to be more fair, with some bug fixes.</li><li><strong>Version 1.45</strong> (released Jan 6, 2011)<br>Minor title, How to Play, and Credits revision, italicized <em>(cont.)</em>'s, and fixed a spelling error. Also disabled slide advancement by using the arrow keys.</li><li><strong>Version 1.43</strong> (released Jan 3, 2011)<br>PIN number part of game updated.</li><li><strong>Version 1.42</strong> (released Dec 19, 2010)<br>Mini bug fix and a minor text edit.</li><li><strong>Version 1.41</strong> (released Dec 13, 2010)<br>Think you can beat me in this game? Go ahead and test your skills in the brand new “Can YOU Beat the Creator?” option in Bonus Features. Good luck beating my time.</li><li><strong>Version 1.4</strong> (released Dec 11, 2010)<br>In this update:<br>- Brief prologue now available<br> - Replaced something in the NOTICE board that increases difficulty<br>- On Game Quiz, fixed minor bug and replaced question 5.<br>- Guard in Heads and Tails game now gives you a <em>better</em> secret. Hmm...</li><li><strong>Version 1.3</strong> (released Dec 8, 2010)<br>In this update:<br>- Fixed a bug that took you to a completely different slide if you clicked anywhere other than hyperlinks in the game.<br>- If you REDO in the PIN number, you should not receive a notification.<br>- Some slide transition, font, and wording updates<br>- Replaced question 8 of the Game Quiz<br>- Added a prologue in the game.</li><li><strong>Version 1.2</strong> (released Dec 2, 2010)<br>Updates are shown in bullet points.<br>- The How to Play section has been slightly redesigned. Check it out!<br>- A &quot;This game is NOT rigged&quot; disclaimer now shows up in the game of heads and tails with the guard.<br>- The how to make a slideshow game and version history bonus features now have the option to go back to the bonus features menu. Sweet!<br>- Most of the signs have been revamped. The look much better now!</li><li><strong>Version 1.15</strong> (released Nov 28, 2010)<br>Fixed a bug that made you open the guard room when you wanted to peek in it. I also improved the interpretation of how slideshow games are made.</li><li><strong>Version 1.1</strong> (released Nov 26, 2010)<br>I decided to do some revisions to the game. The title slide had a small makeover, the How to Play slides have been slightly redesigned, a checkpoint has been added to avoid frustration, two questions for the game quiz have been added, and a bug in the trivia and corridors has been fixed.</li><li><strong>Version 1.0</strong> (released Nov 25, 2010)<br>At last! The entire game is complete! Everything is there, including the bonus features! Plus, when my relatives came over to play the game during dinner, they loved it much more than ever! Yeah!</li><li>Oct 23, 2010<br>Development of Escape a Tower begins. The game originally starts out as a card game before my friends and family suggest the game to be created for the computer instead. I try using Microsoft Word to create the game, but that does not end up too well. In the end, Microsoft PowerPoint proves to be the best option at the time.</ul><span id=titleselect style='display:block;text-align:center;'><a onclick=imdone()>Main Menu</a></span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function imdone() {
+document.getElementById("title").innerHTML="<span id='titlefont'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower";
+document.getElementById("main").innerHTML="<span id='secret' onclick='secret()'></span><span class='center'><span style='font-size:24pt;'><span style='color:#C95000;'>An</span> <span style='color:#00A000;'><strong>Adventure Game</strong></span> <span style='color:#C95000;'>by</span> <br style='line-height:1.7;'><span style='color:#660066;font-family:verdana,Bitstream Vera Sans;'>Timothy Hsu</span></span><br><br><br><span id=titleselect></span><br class='break'><span id='bonusfeatures'></span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+document.getElementById("copyright").innerHTML="<span style='cursor:pointer;' onclick=vhistory()>Version 2.1</span> &nbsp;&#126;&nbsp; &copy;2010~2014 Timothy Hsu";
+loadit();
+}
+
+function prologue() {
+counter = 0;localStorage.setItem("gameovercounter", counter);
+checkpoint = 0;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Prologue";
+document.getElementById("main").innerHTML="It was a warm, sunny day, and you decide to take a stroll downtown. There, you decide to visit the video game store. To get there, however, you have to cross through a dark, narrow alley.<br class='break'>As you walk through the alley, a man dressed in black suddenly appears out of nowhere!<br class='break'><strong>&quot;BOO!&quot;</strong> he yells, making a mad sprint towards you.<br class='break'>Scared, you decide to make a big run for it, but you were no match for the man. You&#39;ve been snatched!<br><br><span style='font-size:22pt;display:block;text-align:center;'><a onclick=prologue2()>Continue</a>&nbsp;&nbsp;<wbr>&nbsp;&nbsp;<a onclick=s1()>Skip&nbsp;Prologue</a></span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function prologue2() {
+document.getElementById("main").innerHTML="You try, and try to free yourself from the man's tight grip, but his hand won&#39;t budge! Soon, you are taken into a ragged car, where the man chains you and takes off. <em>This man is a kidnapper!</em><br class='break'><strong>&quot;You are now mine! MWA, HA HA!&quot;</strong> he hisses.<br class='break'>It was a long trip, and soon, you fall asleep. You then awaken to find yourself inside a prison cell of a tall, scary tower. Is this the kidnapper&#39;s home? Who knows? You want to get out of here…NOW! <em>Can you escape the tower?</em><br><br><span style='font-size:22pt;display:block;text-align:center;'><a onclick=s1()>Begin.</a>";
+}
+
+function s1() {
+checkpoint = 1;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="The Prison Cell";
+document.getElementById("main").innerHTML="You are now inside the prison cell.<br class='break'><em>So what do you do?</em> Remember, your goal is to escape the tower.<br><br><a onclick=s2()><strong>A:</strong> Try to open the prison door.</a><br class='choice'><a onclick=s3()><strong>B:</strong> Jump off the window.</a><br class='choice'><a onclick=s4()><strong>C:</strong> See what&#39;s inside the cabinet.</a><br class='choice'><a onclick=s5()><strong>D:</strong> Do nothing.</a>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s2() {
+document.getElementById("main").innerHTML="You try to open the prison door. It&#39;s locked.<br class='break'><em>So now what?</em> <br><br><a onclick=s6()><strong>A:</strong> Try to open the door again.</a><br class='choice'><a onclick=s3()><strong>B:</strong> Give up and jump off the window.</a><br class='choice'><a onclick=s4()><strong>C:</strong> Give up and check the cabinet.</a><br class='choice'><a onclick=s7()><strong>D:</strong> Cry.</a>";
+}
+
+function s3() {
+document.getElementById("main").innerHTML="You try to jump off the window. The good news is, the window is able to open up, but as you jump off, you notice the bad news: you don&#39;t have a parachute.<br class='break'>As you fall, you think to yourself, &quot;What a stupid choice I made! Why in the world did I...&quot;<br class='break'>BOOM! You land on the ground, flat dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s4() {
+document.getElementById("main").innerHTML="You go check the cabinet. There are two drawers.<br class='break'><em>Which drawer do you open?</em> <br><br><a onclick=s8()><strong>A:</strong> The top one.</a><br class='choice'><a onclick=s9()><strong>B:</strong> The bottom one.</a><br class='choice'><a onclick=s1()><strong>C:</strong> I DON&#39;T WANNA DO THIS!!!</a>";
+}
+
+function s5() {
+document.getElementById("main").innerHTML="Well, ok then.<br class='break'>After a few hours, a witch chef enters your cell, handing over your lunch. The lunch <em>looks</em> like a piece of rubber. The witch leaves the room and closes the door. <em>Do you eat the lunch?</em><br><br><a onclick=s10()><strong>A:</strong> Yes.</a><br class='choice'><a onclick=s11()><strong>B:</strong> No. Instead, I throw the lunch out the window.</a><br class='choice'><a onclick=s12()><strong>C:</strong> No. Instead, I complain about the lunch.</a>";
+}
+
+function s6() {
+document.getElementById("main").innerHTML="Open the door again brings in the same effect: it&#39;s locked.<br class='break'>Only this time, the kidnapper notices that you&#39;re trying to open the door. He storms into the prison cell with his gun, and without any notice, he shoots you. You’re dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s7() {
+document.getElementById("main").innerHTML="Well, crying isn&#39;t the best thing to do. Your sobs are loud enough for the kidnapper to hear. He storms into the prison cell and sees you in the crying status.<br class='break'>&quot;Why did I kidnap a cry baby?&quot; the kidnapper thinks.<br class='break'>Then, without further notice, he grabs you (you’re weak from crying) and throws you off the window, making you dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s8() {
+document.getElementById("main").innerHTML="You open the top drawer.<br class='break'>Unfortunately, a poisonous snake resides in there, and it bites you, poisoning you up to the point where you’re irritated and eventually, dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s9() {
+document.getElementById("main").innerHTML="You open the bottom drawer. Inside, there appears to be a small piece of paper with handwriting on it. You read the note, and it states:<br class='break'><span style='font-family:Palatino Linotype,Times New Roman;'><em>To the witch chef,<br class='break'>Please provide a lunch to the prisoner each day. You may prepare whatever you want, as long as it does NOT kill the prisoner.<br class='break'>~The kidnapper</em></span><br class='break'>What now?<br><br><a onclick=s8()><strong>A:</strong> Open the top drawer.</a><br class='choice'><a onclick=s5()><strong>B:</strong> Wait for the lunch to arrive.</a>";
+}
+
+function s10() {
+document.getElementById("main").innerHTML="You eat the lunch. Apparently, the rubber has an acid that brings you great strength for a little while! Because of this, manage to bust the prison door open and escape the room!<br><br><a onclick=s20()><li>Continue onward.</li></a><br class='break'>(Note: As you escape the prison cell, your power disappears.)";
+}
+
+function s11() {
+document.getElementById("main").innerHTML="Uh oh. Throwing the lunch off the window is a bad idea, as when the lunch lands, it makes a HUGE explosion sound! (How did that happen?) The kidnapper hears it, and he storms into the prison cell.<br class='break'>&quot;You picky eater of nonsense!&quot; he yells to you.<br class='break'>And with that, he shoots you with his gun, making you dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s12() {
+document.getElementById("main").innerHTML="You start complaining about the lunch. The witch chef hears you and heads back in your cell.<br class='break'>&quot;What&#39;s wrong with the food?!&quot; asks the witch in an angry tone.<br class='break'><em>You say:</em><br><br><a onclick=s13()><strong>A:</strong> &quot;I hate you!&quot;</a><br class='choice'><a onclick=s14()><strong>B:</strong> &quot;My lunch is a little cold.&quot;</a><br class='choice'><a onclick=s15()><strong>C:</strong> &quot;I want to escape this tower. Can you help me?&quot;</a>";
+}
+
+function s13() {
+document.getElementById("main").innerHTML="&quot;I hate you!&quot; you respond.<br class='break'>The witch becomes furious.<br class='break'>&quot;YOU IDIOT!!!&quot; she rages. &quot;WATCH THE PAIN!!!&quot;<br class='break'>The witch uses a spell on you to paralyze you. Then, she tosses you off the window. You&#39;re dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s14() {
+document.getElementById("main").innerHTML="&quot;My lunch is a little cold,&quot; you respond.<br class='break'>&quot;Oh, really,&quot; the witch says. &quot;Fine! I&#39;ll heat it up for you!&quot;<br class='break'>The witch takes the lunch to heat it up. She forgets to close the prison door. <em>What do you do?</em><br><br><a onclick=s16()><strong>A:</strong> Go through the door.</a><br class='choice'><a onclick=s17()><strong>B:</strong> Wait for the lunch.</a>";
+}
+
+function s15() {
+document.getElementById("main").innerHTML="&quot;I want to escape this tower. Can you help me?&quot; you respond.<br class='break'>Wow. That was stupid. You literally gave away your plan.<br class='break'>&quot;Escape the tower?&quot; the witch responds back. &quot;That&#39;s the one thing the kidnapper forbids. You&#39;s doomed!&quot;<br class='break'>The witch calls the kidnapper. The kidnapper shoots you with his gun without notice. You&#39;re dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s16() {
+document.getElementById("main").innerHTML="Boo-yah! You get past the prison door, and the witch doesn&#39;t notice!<br class='break'>You&#39;ve escaped the room!<br><br><a onclick=s20()><li>Continue onward.</li></a>";
+}
+
+function s17() {
+document.getElementById("main").innerHTML="After the long wait, the witch returns with the heated lunch.<br class='break'>&quot;There. Happy?&quot; the witch miffs. &quot;I put a lot of hard work into this, so you better eat it!!!&quot;<br class='break'><em>What do you do?</em><br><br><a onclick=s18()><strong>A:</strong> Eat the heated lunch.</a><br class='choice'><a onclick=s19()><strong>B:</strong> Punch the witch.</a><br class='choice'><a onclick=s3()><strong>C:</strong> I&#39;m scared. Let&#39;s jump off the window.</a>";
+}
+
+function s18() {
+document.getElementById("main").innerHTML="You eat the heated lunch.<br class='break'>You see, the lunch used to have an acid that brings you great strength, but heating up the lunch makes the acid evaporate.<br class='break'>Also, the lunch is heated with poisonous coals, so after the meal is finished, you suffocate and fall dead.<br class='break'>&quot;Ha ha! Tricked you, tricked you!&quot; the witch laughs.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s19() {
+document.getElementById("main").innerHTML="You punch the witch.<br class='break'>The witch is stunned.<br class='break'>&quot;How dare you try to hurt me!&quot; she rages. <strong>&quot;WATCH THE PAIN!!!&quot;</strong><br class='break'>The witch uses a spell on you to paralyze you. Then, she tosses you off the window. You&quot;re dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s1()>(Go back to beginning)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s20() {
+checkpoint = 2;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Staircase Area With Two Doors";
+document.getElementById("main").innerHTML="The next area of the tower includes a giant staircase going down and two doors on each side of it. A sign stands next to the staircase. <em>What do you do?</em><br><br><a onclick=s21()><strong>A:</strong> Go down the stairs.</a><br class='choice'><a onclick=s22()><strong>B:</strong> Enter the left door.</a><br class='choice'><a onclick=s23()><strong>C:</strong> Enter the right door.</a><br class='choice'><a onclick=s24()><strong>D:</strong> Read the sign.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span><br class='choice'>If you get a game over or exit the game from now on, you will return to this point until you reach another checkpoint.</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s21() {
+document.getElementById("title").innerHTML="The Staircase";
+document.getElementById("main").innerHTML="Did you really think I’d make this adventure <em>that easy?</em> Well, I guess you did.<br class='break'>As you go down the stairs, you notice a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Goodbye!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s20()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s22() {
+document.getElementById("main").innerHTML="You try to open the left door. It&#39;s locked. There&#39;s a key handle on this door, though. Where can you find a key?<br><br><a onclick=s20()><li>Go back.</li></a>";
+}
+
+function s23() {
+document.getElementById("title").innerHTML="Mysterious Library";
+document.getElementById("main").innerHTML="You enter the right door. The door is not locked, so you manage to get in.<br class='break'>The room looks like a library of some kind. <em>What book do you read?</em><br><br><a onclick=s26()><strong>A:</strong> Read <em>The Book of Mysteries</em>.</a><br class='choice'><a onclick=s27()><strong>B:</strong> Read <em>The Solution to Everything</em>.</a><br class='choice'><a onclick=s28()><strong>C:</strong> Read <em>Wonders of the Tower</em>.</a><br class='choice'><a onclick=s20()><strong>D:</strong> Leave the room.</a>";
+}
+
+function s24() {
+document.getElementById("main").innerHTML="You read the sign. The sign says:<br class='break'><table style='margin:auto;background-color:#C6BC9C;padding:10px;border: 1px solid #766F4F;'><tr><td><span style='color:#C95000;font-family:tahoma;font-weight:700;'>WARNING: GIANT SPIDER AHEAD!!</span></td></tr></table><br class='break'><em>What do you do?</em><br><br><a onclick=s20()><strong>A:</strong> Go back.</a><br class='choice'><a onclick=s25()><strong>B:</strong> Go down the stairs anyway.</a>";
+}
+
+function s25() {
+document.getElementById("title").innerHTML="The Staircase";
+document.getElementById("main").innerHTML="Well, the sign actually is telling the truth. As you go down the stairs, you see a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Next time, listen to those signs!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s20()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s26() {
+document.getElementById("main").innerHTML="You read <em>The Book of Mysteries</em>. A section of the book states:<br class='break'><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;I see a key, somewhere in the shadows of a library tower. Find it, and the mystery is solved.&quot;</em></span><br class='break'><em>Do you trust this book?</em><br><br><a onclick=s29()><strong>A:</strong> Yes. Let&#39;s search in the shadows of this library.</a><br class='choice'><a onclick=s23()><strong>B:</strong> No. Let&#39;s go back.</a>";
+}
+
+function s27() {
+document.getElementById("main").innerHTML="You read <em>The Solution to Everything</em>.<br class='break'>Apparently, this book is used as a trick to end the lives of tower lurkers. As you open the book, a shard of light beams out, blinding you. Too bad!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s20()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s28() {
+document.getElementById("main").innerHTML="You read <em>Wonders of the Tower</em>. Parts of the book are shown here:<br class='break'><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;Open chest 2 for a hidden surprise. Then traverse through corridors 1, 3, 2, and 4, in this order. Do not forget this.&quot;</em></span><br class='break'><em>This is rather interesting...</em><br><br><a onclick=s26()><strong>A:</strong> Ok, let&#39;s read <em>The Book of Mysteries</em> now.</a><br class='choice'><a onclick=s27()><strong>B:</strong> &quot; <em>The Solution to Everything</em> now.</a><br class='choice'><a onclick=s20()><strong>C:</strong> Let&#39;s go back now.</a>";
+}
+
+function s29() {
+checkpoint = 3;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Mysterious Library";
+document.getElementById("main").innerHTML="You search in the shadows. Wow.<br class='break'>You find a key! For some reason, the book is indeed true.<br class='break'>Now what is this key useful for...?<br><br><a onclick=s30()><strong>A:</strong> Let&#39;s read <em>The Solution to Everything</em> to find out!</a><br class='choice'><a onclick=s31()><strong>B:</strong> Let&#39;s read <em>Wonders of the Tower</em> to find out!</a><br class='choice'><a onclick=s32()><strong>C:</strong> Leave the library.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s30() {
+document.getElementById("main").innerHTML="You read <em>The Solution to Everything</em>.<br class='break'>Apparently, this book is used as a trick to end the lives of tower lurkers. As you open the book, a shard of light beams out, blinding you. Too bad!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s29()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s31() {
+document.getElementById("main").innerHTML="So <em>Wonders of the Tower</em> does not give the way to use the key, but it does provide this:<br class='break'><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;Open chest 2 for a hidden surprise. Then traverse through corridors 1, 3, 2, and 4, in this order. Do not forget this.&quot;</em></span><br class='break'><em>This is rather interesting...</em><br><br><a onclick=s30()><strong>A:</strong> No solution, eh? let&#39;s read <em>The Solution to Everything</em> then.</a><br class='choice'><a onclick=s32()><strong>B:</strong> Eh, let&#39;s leave the library.</a>";
+}
+
+function s32() {
+document.getElementById("title").innerHTML="Staircase Area With Two Doors";
+document.getElementById("main").innerHTML="You are back in the area with the staircase, the two doors, and the sign.<br class='break'><em>So now what?</em><br><br><a onclick=s33()><strong>A:</strong> Go down the stairs.</a><br class='choice'><a onclick=s34()><strong>B:</strong> Check the left door now.</a><br class='choice'><a onclick=s35()><strong>C:</strong> Let&#39;s read that sign.</a>";
+}
+
+function s33() {
+document.getElementById("title").innerHTML="The Staircase";
+document.getElementById("main").innerHTML="Did you really think I’d make this adventure <em>that easy?</em> Well, I guess you did.<br class='break'>As you go down the stairs, you notice a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Goodbye!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s29()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s34() {
+document.getElementById("title").innerHTML="Room of Chests";
+document.getElementById("main").innerHTML="You check the left door. It&#39;s locked, but there&#39;s a key handle on this door. Since you have the key, you open the door and go inside!<br class='break'>In this room, there are three different treasure chests. <em>Which chest do you open?</em><br><br><a onclick=s37()><strong>A:</strong> Chest 1</a><br class='choice'><a onclick=s38()><strong>B:</strong> Chest 2</a><br class='choice'><a onclick=s39()><strong>C:</strong> Chest 3</a><br class='choice'><a onclick=s32()><strong>D:</strong> Get out of this room.</a>";
+}
+
+function s35() {
+document.getElementById("main").innerHTML="You read the sign. The sign says:<br class='break'><table style='margin:auto;background-color:#C6BC9C;padding:10px;border: 1px solid #766F4F;'><tr><td><span style='color:#C95000;font-family:tahoma;font-weight:700;'>WARNING: GIANT SPIDER AHEAD!!</span></td></tr></table><br class='break'>You should go back now. Really, I insist.<br><br><a onclick=s32()><strong>A:</strong> Go back.</a><br class='choice'><a onclick=s36()><strong>B:</strong> Go down the stairs anyway.</a>";
+}
+
+function s36() {
+document.getElementById("title").innerHTML="The Staircase";
+document.getElementById("main").innerHTML="Well, the sign actually is telling the truth. As you go down the stairs, you see a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Next time, listen to those signs!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s29()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s37() {
+document.getElementById("main").innerHTML="You open chest 1. Um,<br class='break'><strong>A GIANT SNAKE COMES OUT OF THE CHEST AND EATS YOU UP!!!</strong><br class='break'>Too bad...<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s29()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s38() {
+document.getElementById("main").innerHTML="You open chest 2.<br class='break'>Hey, there&#39;s something in here. It is a WOODEN SLINGSHOT!<br class='break'>This will be very useful later...<br><br><a onclick=s40()><strong>A:</strong> Leave the room.</a><br class='choice'><a onclick=s37()><strong>B:</strong> Any other goodies? Let&#39;s check chest 1.</a><br class='choice'><a onclick=s41()><strong>C:</strong> &quot; chest 3.</a>";
+}
+
+function s39() {
+document.getElementById("main").innerHTML="You open chest 3.<br class='break'>There is <em>nothing</em> inside this chest. Drat!<br><br><a onclick=s37()><strong>A:</strong> Open chest 1.</a><br class='choice'><a onclick=s38()><strong>B:</strong> Open chest 2.</a><br class='choice'><a onclick=s32()><strong>C:</strong> Leave the room.</a>";
+}
+
+function s40() {
+document.getElementById("title").innerHTML="The Staircase";
+document.getElementById("main").innerHTML="You leave the room. You&#39;ve already checked both doors already, so you go down the stairs.<br class='break'>A giant spider blocks the staircase, but since you now own a slingshot, you shoot the spider! You reach the bottom of the staircase!<br><br><a onclick=s42()><li>Continue onward.</li></a>";
+}
+
+function s41() {
+document.getElementById("main").innerHTML="You open chest 3.<br class='break'>There is <em>nothing</em> inside this chest. Drat!<br><br><a onclick=s37()><strong>A:</strong> Ok then. Let&#39;s check chest 1 then.</a><br class='choice'><a onclick=s40()><strong>B:</strong> Leave the room.</a>";
+}
+
+function s42() {
+checkpoint = 4;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="The Corridors";
+document.getElementById("main").innerHTML="Moving on, you see two different corridors.<br class='break'><em>Which one do you go through?</em><br><br><a onclick=s44()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s43()><strong>B:</strong> Corridor 2</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s43() {
+document.getElementById("main").innerHTML="As you move on through the corridor, there is a wall blocking your path. Dead end!<br class='break'>But as you try to go back, a sensor detects you, and a laser starts beaming on you, burning you until you die.<br class='break'>Curse those dead ends!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s42()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s44() {
+document.getElementById("main").innerHTML="Corridor 1 leads onward down the tower. Looks like you went the right way!<br class='break'>But hold on. Now you see 3 different corridors. <em>Which one do you go through?</em><br><br><a onclick=s43()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s43()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s45()><strong>C:</strong> Corridor 3</a>";
+}
+
+function s45() {
+document.getElementById("main").innerHTML="Good job! Corridor 3 was the way to go!<br class='break'>But now you see 4 corridors! <em>Which way do you go?</em><br><br><a onclick=s43()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s46()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s43()><strong>C:</strong> Corridor 3</a><br class='choice'><a onclick=s43()><strong>D:</strong> Corridor 4</a>";
+}
+
+function s46() {
+document.getElementById("main").innerHTML="Good job! You actually managed to choose the correct corridor again!<br class='break'>But now it gets bad. You guessed it: 5 corridors! <em>Which way do you go?</em><br><br><a onclick=s43()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s43()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s43()><strong>C:</strong> Corridor 3</a><br class='choice'><a onclick=s47()><strong>D:</strong> Corridor 4</a><br class='choice'><a onclick=s43()><strong>E:</strong> Corridor 5</a>";
+}
+
+function s47() {
+checkpoint = 5;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="The Corridors";
+document.getElementById("main").innerHTML="<strong>EXCELLENT!!!</strong> You succeed in going through all four corridors!<br class='break'>But don&#39;t celebrate yet; when you head for the door to leave the corridors once and for all, a man with a long beard stops you from your tracks!<br class='break'><strong>&quot;INTRUDER!&quot;</strong> he shouts as he whips out his rifle.<br class='break'>The good news is, he puts his rifle down right when he sees you. Strange, huh?<br><br><a onclick=s48()><li>Continue.</li></a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s48() {
+document.getElementById("title").innerHTML="The Corridors";
+document.getElementById("main").innerHTML="&quot;Hmm...you look innocent,&quot; he responds. &quot;I&#39;ll let you go through this door if you pass on one of my two games, Memory or Trivia.&quot;<br class='break'>This guy&#39;s offering a chance for you to escape the tower! What game do you play?<br><br><a onclick=s51()><strong>A:</strong> Memory</a><br class='choice'><a onclick=s59()><strong>B:</strong> Trivia</a><br class='choice'><a onclick=s49()><strong>C:</strong> How do you play these games?</a><br class='choice'><a onclick=s50()><strong>D:</strong> Forget about the games. Shoot this guy with your slingshot.</a>";
+}
+
+function s49() {
+document.getElementById("title").innerHTML="How to Play";
+document.getElementById("main").innerHTML="In <strong>Memory</strong>, the man will present you five of something. You will have to remember what these five things are and the order they show up.<br class='break'>When you&#39;re ready, the man will give you a quiz based on the five things, and you must get all the questions correct. If you don&#39;t, it&#39;s GAME OVER for you.<br class='break'>In <strong>Trivia</strong>, the man will give you five completely random questions, and you must answer them all correctly, or else it is a GAME OVER for you. All your answers must come from your own knowledge.<br class='break'>And don&#39;t even think about cheating on any of these games. You have been warned.<br><br><a onclick=s48()><li>Understood.</li></a>";
+}
+
+function s50() {
+document.getElementById("main").innerHTML="Well that is rude. It is also stupid as well. The slingshot is too weak to kill human beings. All you did is make the man angry.<br class='break'>&quot;So you&#39;re <strong><em>not</em></strong> innocent after all,&quot; he says. &quot;CURSE YOU!!!&quot;<br class='break'>BAM! The man shoots you with his rifle, and you’re dead. See ya!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s47()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s51() {
+document.getElementById("title").innerHTML="Memory Game";
+document.getElementById("main").innerHTML="You decide to play Memory.<br class='break'>&quot;All right then,&quot; the man says. &quot;Memorize the five things. Then I&#39;ll quiz ya on it.&quot;<br class='break'><span class='center'><em>The Five Things</em></span><br><table style='margin:auto;background-color:#BBB7B9;padding:5px 30px;border: 1px solid #7F7F7F;'><tr><td><span style='font-family:times new roman;'>Bee, Bo, Boo, Ba, Po</span></td></tr></table><br class='break'>Remember: Don&#39;t cheat!<br><br><a onclick=s53()><li>I am ready to go.</li></a>";
+}
+
+function s52() {
+document.getElementById("main").innerHTML="&quot;Wrongity wrongity wrong!!&quot; shouts the man with the beard.<br class='break'><span class='center'><strong>&quot;U NO SMART. U DUMB. U R IDIOT!! ME KILL U!!!&quot;</strong></span><br>The man kills you with his rifle, which means...<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s47()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s53() {
+document.getElementById("main").innerHTML="Ok. Let the quiz begin!<br class='break'>1. What is the 4th thing in the sequence?<br><br><a onclick=s52()><strong>A:</strong> Bo</a><br class='choice'><a onclick=s52()><strong>B:</strong> Po</a><br class='choice'><a onclick=s52()><strong>C:</strong> Boo</a><br class='choice'><a onclick=s54()><strong>D:</strong> Ba</a><br class='choice'><a onclick=s52()><strong>E:</strong> Bee</a>";
+}
+
+function s54() {
+document.getElementById("main").innerHTML="Correct. The man gives you the next question.<br class='break'>2. &quot;Boo&quot; is <em>when</em> in the sequence?<br><br><a onclick=s52()><strong>A:</strong> 1st</a><br class='choice'><a onclick=s52()><strong>B:</strong> 2nd</a><br class='choice'><a onclick=s55()><strong>C:</strong> 3rd</a><br class='choice'><a onclick=s52()><strong>D:</strong> 4th</a><br class='choice'><a onclick=s52()><strong>E:</strong> 5th</a>";
+}
+
+function s55() {
+document.getElementById("main").innerHTML="Right on. The man provides you with another question.<br class='break'>3. Which of these things is <em>NOT</em> in the sequence?<br><br><a onclick=s52()><strong>A:</strong> Bee</a><br class='choice'><a onclick=s56()><strong>B:</strong> Bah</a><br class='choice'><a onclick=s52()><strong>C:</strong> Po</a><br class='choice'><a onclick=s52()><strong>D:</strong> Bo</a><br class='choice'><a onclick=s52()><strong>E:</strong> Boo</a>";
+}
+
+function s56() {
+document.getElementById("main").innerHTML="You&#39;re getting it! The man now sees your intelligence, as he gives you the next question.<br class='break'>4. The insect that produces honey is <em>when</em> in the sequence?<br><br><a onclick=s57()><strong>A:</strong> 1st</a><br class='choice'><a onclick=s52()><strong>B:</strong> 2nd</a><br class='choice'><a onclick=s52()><strong>C:</strong> 3rd</a><br class='choice'><a onclick=s52()><strong>D:</strong> 4th</a><br class='choice'><a onclick=s52()><strong>E:</strong> 5th</a>";
+}
+
+function s57() {
+document.getElementById("main").innerHTML="Almost done! You got it correct, and now it seems like the man is hoping you get this final question correct.<br class='break'>5. What is the 3rd and 2nd thing in the sequence, in that order?<br><br><a onclick=s52()><strong>A:</strong> Ba, Bo</a><br class='choice'><a onclick=s52()><strong>B:</strong> Po, Bee</a><br class='choice'><a onclick=s52()><strong>C:</strong> Bo, Boo</a><br class='choice'><a onclick=s58()><strong>D:</strong> Boo, Bo</a><br class='choice'><a onclick=s52()><strong>E:</strong> Bo, Ba</a>";
+}
+
+function s58() {
+document.getElementById("main").innerHTML="&quot;Boo, Bo!&quot; you answer.<br class='break'>The man with the beard is amazed.<br class='break'>&quot;I can&#39;t believe it!&quot; the man says. &quot;You&#39;re smart! You can go through the door now!&quot;<br class='break'>The man steps out of the way for you to cross. Great job!<br class='break'>&quot;Across this door is an elevator,&quot; the man says. &quot;Get on it, and you&#39;ll get to the bottom of the tower.&quot;<br><br><a onclick=s71()><li>Go through the door.</li></a>";
+}
+
+function s59() {
+document.getElementById("title").innerHTML="Trivia Game";
+document.getElementById("main").innerHTML="You decide to play Trivia.<br class='break'>&quot;All right then,&quot; the man says. &quot;Let&#39;s play!&quot;<br class='break'>The first question is a test to prove you&#39;re not dumb.<br class='break'>1. What is 1+1?<br><br><a onclick=s66()><strong>A:</strong> 2</a><br class='choice'><a onclick=s52()><strong>B:</strong> 11</a><br class='choice'><a onclick=s60()><strong>C:</strong> 1+1</a><br class='choice'><a onclick=s52()><strong>D:</strong> Window</a><br class='choice'><a onclick=s62()><strong>E:</strong> I like pie.</a>";
+}
+
+function s60() {
+document.getElementById("main").innerHTML="&quot;Very funny,&quot; the man replies, &quot;but I want a <em>single number</em> answer.&quot;<br class='break'>Go again.<br><br><a onclick=s66()><strong>A:</strong> 2</a><br class='choice'><a onclick=s52()><strong>B:</strong> 11</a><br class='choice'><a onclick=s61()><strong>C:</strong> 1+1</a><br class='choice'><a onclick=s52()><strong>D:</strong> Window</a><br class='choice'><a onclick=s62()><strong>E:</strong> I like pie.</a>";
+}
+
+function s61() {
+document.getElementById("main").innerHTML="<strong>&quot;AHEM,&quot;</strong> shouts the man with the beard, <strong>&quot;I told you, a SINGLE NUMBER ANSWER!!!&quot;</strong><br class='break'>Before you can respond, the man shoots you with his rifle. You are dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s47()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s62() {
+document.getElementById("main").innerHTML="Look, I understand that you like pie, but do you <em>really</em> want this as your final answer?<br><br><a onclick=s52()><strong>A:</strong> Yes, yes!</a><br class='choice'><a onclick=s65()><strong>B:</strong> No, no!</a><br class='choice'><a onclick=s63()><strong>C:</strong> Give me my pie.</a>";
+}
+
+function s63() {
+document.getElementById("main").innerHTML="I don't have pie, okay? I just want to know whether or not this is your final answer. Answer me!<br><br><a onclick=s52()><strong>A:</strong> Okay, sure.</a><br class='choice'><a onclick=s65()><strong>B:</strong> LOL no.</a><br class='choice'><a onclick=s64()><strong>C:</strong> ME WANT ME PIE NOW!!!!!</a>";
+}
+
+function s64() {
+document.getElementById("main").innerHTML="(Sigh) Either you are in a pie craze or you just want to see what happens. Whatever the reason is, your little joke is going to end with a simple but powerful...<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s47()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s65() {
+document.getElementById("main").innerHTML="Then what is your final answer?<br><br><a onclick=s66()><strong>A:</strong> 2</a><br class='choice'><a onclick=s52()><strong>B:</strong> 11</a><br class='choice'><a onclick=s52()><strong>C:</strong> Window</a>";
+}
+
+function s66() {
+document.getElementById("main").innerHTML="Correct. You&#39;re not dumb. Congratulations.<br class='break'>The man gives you the next question.<br class='break'>The second question is a test to prove you know about history.<br class='break'>2. What year did Christopher Columbus arrive at North America?<br><br><a onclick=s52()><strong>A:</strong> 573 B.C.</a><br class='choice'><a onclick=s52()><strong>B:</strong> 1369 A.D.</a><br class='choice'><a onclick=s52()><strong>C:</strong> 1441 A.D.</a><br class='choice'><a onclick=s67()><strong>D:</strong> 1492 A.D.</a><br class='choice'><a onclick=s52()><strong>E:</strong> 1523 A.D.</a>";
+}
+
+function s67() {
+document.getElementById("main").innerHTML="Keep it up! You know about history. The man lets you move on.<br class='break'>The third question is a test to prove you have grammar skills.<br class='break'>3. What punctuation mark do you put on the blank of the following sentence:<br class='break'>I want one___third of a pint of milk.<br><br><a onclick=s52()><strong>A:</strong> A slash (/)</a><br class='choice'><a onclick=s52()><strong>B:</strong> A comma (,)</a><br class='choice'><a onclick=s68()><strong>C:</strong> A hyphen (-)</a><br class='choice'><a onclick=s52()><strong>D:</strong> A colon (:)</a><br class='choice'><a onclick=s52()><strong>E:</strong> Correct as is (assuming you remove the blank)</a>";
+}
+
+function s68() {
+document.getElementById("main").innerHTML="Good one! You have grammar skills. The next question has arrived.<br class='break'>The fourth question is a test to prove you know about the elements.<br class='break'>4. What is the element name for Sb?<br><br><a onclick=s52()><strong>A:</strong> Subium</a><br class='choice'><a onclick=s69()><strong>B:</strong> Antimony</a><br class='choice'><a onclick=s52()><strong>C:</strong> Seaborgium</a><br class='choice'><a onclick=s52()><strong>D:</strong> Tin</a><br class='choice'><a onclick=s52()><strong>E:</strong> Arsenic</a>";
+}
+
+function s69() {
+document.getElementById("main").innerHTML="Amazing! You know about the elements! Now for the final question.<br class='break'>The last question is a test to prove that you&#39;ve been paying attention throughout this adventure.<br class='break'>5. Which chest did you open to get the slingshot?<br><br><a onclick=s52()><strong>A:</strong> Chest 1</a><br class='choice'><a onclick=s70()><strong>B:</strong> Chest 2</a><br class='choice'><a onclick=s52()><strong>C:</strong> Chest 3</a><br class='choice'><a onclick=s52()><strong>D:</strong> Chest 467</a><br class='choice'><a onclick=s52()><strong>E:</strong> The slingshot was not in a chest.</a>";
+}
+
+function s70() {
+document.getElementById("main").innerHTML="&quot;Chest 2!&quot; you answer boldly.<br class='break'>The man with the beard is amazed.<br class='break'>&quot;Excellent job!&quot; the man says. &quot;You truly are a smart fellow. Go through the door if you wish.&quot;<br class='break'>The man steps out of the way for you to cross. Great job!<br class='break'>&quot;Across this door is an elevator,&quot; the man says. &quot;Get on it, and you&#39;ll get to the bottom of the tower.&quot;<br><br><a onclick=s71()><li>Go through the door.</li></a>";
+}
+
+function s71() {
+checkpoint = 6;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Outside the Elevator";
+document.getElementById("main").innerHTML="You go through the door. The man with the beard is correct about there being an elevator. What he didn&#39;t tell you though is that there are two different elevators. <em>Which elevator do you go into?</em><br><br><a onclick=s72()><strong>A:</strong> The left elevator</a><br class='choice'><a onclick=s73()><strong>B:</strong> The right elevator</a><br class='choice'><a onclick=s74()><strong>C:</strong> Go back to see if the man can help you.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s72() {
+document.getElementById("title").innerHTML="Left Elevator";
+document.getElementById("main").innerHTML="You get on the left elevator. As you enter, you notice something very strange about the elevator you are in: there&#39;s no top (ceiling)!<br class='break'><em>Will you still go on this elevator?</em><br><br><a onclick=s71()><strong>A:</strong> I&#39;m scared! I shall leave the elevator.</a><br class='choice'><a onclick=s82()><strong>B:</strong> Push the button. We&#39;re going down anyway.</a>";
+}
+
+function s73() {
+document.getElementById("title").innerHTML="Right Elevator";
+document.getElementById("main").innerHTML="You get on the right elevator. When you enter, you immediately notice a horrible thing about the elevator you&#39;re in: there&#39;s no bottom (floor)!<br class='break'>It&#39;s too late. You tumble down and down the passageway of the elevator, feeling ashamed of yourself.<br class='break'>&quot;NOOOO!!!!&quot; you yell. &quot;I&#39;m...&quot;<br class='break'>BOOM! You land on an electrical outlet, flat dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s71()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s74() {
+document.getElementById("title").innerHTML="The Corridors";
+document.getElementById("main").innerHTML="You see if the man can help you on this challenge. As you open the door back to the corridors, you notice that the man with the beard has vanished! What gives?<br><br><a onclick=s71()><strong>A:</strong> Go back.</a><br class='choice'><a onclick=s75()><strong>B:</strong> Search for the man.</a>";
+}
+
+function s75() {
+document.getElementById("main").innerHTML="You do not succeed at locating the man. Instead, you are brought into some bad news. After failing to find the man all over the corridors, you see yourself back on the first corridor. Unfortunately, you do not remember which corridors to cross at each time! Looks like you have to traverse this once again!<br><br><a onclick=s76()><li>Dang it! Continue.</li></a>";
+}
+
+function s76() {
+checkpoint = 7;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="The Corridors";
+document.getElementById("main").innerHTML="Which corridor do you go through first?<br><br><a onclick=s78()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s77()><strong>B:</strong> Corridor 2</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s77() {
+document.getElementById("main").innerHTML="Well, you truly did forget about which corridors to go through, as you did indeed go the wrong way. The sensor at the dead end beams at you so you burn up to death. You are dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s76()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s78() {
+document.getElementById("main").innerHTML="Good. Now which corridor do you cross next?<br><br><a onclick=s77()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s77()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s79()><strong>C:</strong> Corridor 3</a>";
+}
+
+function s79() {
+document.getElementById("main").innerHTML="Great. Now which corridor do you cross next?<br><br><a onclick=s77()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s80()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s77()><strong>C:</strong> Corridor 3</a><br class='choice'><a onclick=s77()><strong>D:</strong> Corridor 4</a>";
+}
+
+function s80() {
+document.getElementById("main").innerHTML="Excellent. Now which corridor do you cross next?<br><br><a onclick=s77()><strong>A:</strong> Corridor 1</a><br class='choice'><a onclick=s77()><strong>B:</strong> Corridor 2</a><br class='choice'><a onclick=s77()><strong>C:</strong> Corridor 3</a><br class='choice'><a onclick=s81()><strong>D:</strong> Corridor 4</a><br class='choice'><a onclick=s77()><strong>E:</strong> Corridor 5</a>";
+}
+
+function s81() {
+document.getElementById("main").innerHTML="Congratulations! You have traversed the corridors once again. The door where the man made you play Memory or Trivia is now in view. Going through it, you find out that you may now continue the adventure from where you left off!<br><br><a onclick=s71()><li>Finally, that torture is gone. Let&#39;s resume.</li></a>";
+}
+
+function s82() {
+document.getElementById("main").innerHTML="You press the button. Who cares about that nonexistent top of the elevator anyway?<br class='break'>The elevator moves down smoothly, and more smoothly, and even more smoothly, and...<br class='break'><strong>HALT!</strong><br class='break'>The elevator stops with a grinding halt. You are stuck! <em>What do you do?</em><br><br><a onclick=s83()><strong>A:</strong> Yell for help.</a><br class='choice'><a onclick=s84()><strong>B:</strong> Open the control panel of the elevator.</a><br class='choice'><a onclick=s85()><strong>C:</strong> Do nothing.</a>";
+}
+
+function s83() {
+document.getElementById("main").innerHTML="You yell for help. <strong>&quot;HELP!!&quot;</strong><br class='break'>Unfortunately, no one is able to hear you.<br><br><a onclick=s84()><strong>A:</strong> (sigh) Open up that control panel then.</a><br class='choice'><a onclick=s85()><strong>B:</strong> (sigh) Do nothing then.</a>";
+}
+
+function s84() {
+document.getElementById("main").innerHTML="You open up the control panel.<br class='break'>By doing that, you now know exactly what is wrong with the elevator: the battery is no longer working!<br class='break'><em>What do you do?</em><br><br><a onclick=s86()><strong>A:</strong> Fiddle around with the buttons of the control panel.</a><br class='choice'><a onclick=s87()><strong>B:</strong> Attempt to remove the battery by hand.</a><br class='choice'><a onclick=s88()><strong>C:</strong> Attempt to remove the battery by slingshot.</a>";
+}
+
+function s85() {
+document.getElementById("main").innerHTML="You do nothing.<br class='break'>So here&#39;s what happens. You eventually get hungry and thirsty after a few hours, and since there&#39;s nothing in the elevator to help you with that, you must starve and dehydrate yourself.<br class='break'>Eventually, the hunger and thirst comes to a breaking point when eventually, you die.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s71()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s86() {
+document.getElementById("main").innerHTML="You fiddle around with the buttons of the control panel.<br class='break'>Well, that isn&#39;t smart. You push so many buttons at once that eventually, you unknowingly press the red button, aka: the <em>Self-destruct</em> button.<br class='break'>The elevator goes...BOOM! You go...BOOM! You’ve now faced...DOOM!<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s71()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s87() {
+document.getElementById("main").innerHTML="You try and try to remove the battery by hand, but it will not budge. Aw, man!<br><br><a onclick=s86()><strong>A:</strong> Let&#39;s fiddle around with the buttons then.</a><br class='choice'><a onclick=s88()><strong>B:</strong> Let&#39;s take this sucker out by slingshot then.</a>";
+}
+
+function s88() {
+document.getElementById("main").innerHTML="There are two different ways to use the slingshot for this. <em>How so?</em><br><br><a onclick=s89()><strong>A:</strong> Shoot it with a pellet.</a><br class='choice'><a onclick=s90()><strong>B:</strong> Yank it out by using the sling.</a>";
+}
+
+function s89() {
+document.getElementById("main").innerHTML="Shooting the battery with a pellet was a very bad idea. The battery breaks, and now, you have no way to escape the elevator. You&#39;re doomed.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s71()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s90() {
+checkpoint = 8;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Left Elevator";
+document.getElementById("main").innerHTML="Y-Y-A-A-N-N-K-K-!-!<br class='break'>You did it! By using the sling of your slingshot, the battery is removed from the control panel.<br class='break'>After that, you look at the battery. There&#39;s a tiny label on it. It reads:<br class='break'><table style='margin:auto;background-color:#E7E4E2;padding:5px;'><tr><td><span style='font-family:arial narrow,arial;'>Operates with any low viscosity fluid</span></td></tr></table><br class='break'><em>What do you do?</em><br><br><a onclick=s91()><strong>A:</strong> Spit into the battery.</a><br class='choice'><a onclick=s92()><strong>B:</strong> Injure yourself for blood to enter the battery.</a><br class='choice'><a onclick=s93()><strong>C:</strong> What is viscosity?</a><br class='choice'><a onclick=s100()><strong>D:</strong> Cry.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s91() {
+document.getElementById("main").innerHTML="You spit into the battery. The battery not has a fluid in it. <em>Do you wish to put the battery into operation now?</em><br><br><a onclick=s95()><strong>A:</strong> Yes.</a><br class='choice'><a onclick=s90()><strong>B:</strong> No. Dump the spit and try something else.</a>";
+}
+
+function s92() {
+document.getElementById("main").innerHTML="Before you injure yourself, let me ask you something. <em>Are you sure you really want to do this?</em><br><br><a onclick=s96()><strong>A:</strong> Yes.</a><br class='choice'><a onclick=s90()><strong>B:</strong> No.</a>";
+}
+
+function s93() {
+document.getElementById("main").innerHTML="I can&#39;t tell you that. That would be <em>cheating</em>! And don&#39;t you dare look up the definition on a dictionary, or else!<br><br><a onclick=s90()><strong>A:</strong> I hate you. Go back.</a><br class='choice'><a onclick=s94()><strong>B:</strong> (Looks up the definition on the dictionary)</a>";
+}
+
+function s94() {
+document.getElementById("main").innerHTML="<span style='font-size:84pt;font-weight:700;display:block;text-align:center;'>&gt;:(</span><br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s90()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s95() {
+document.getElementById("main").innerHTML="You put the battery with the spit into the control panel and turn the battery on.<br class='break'>The bad news is, spit is known to have <em>abnormally high</em> viscosity, not low. So as you sail down the elevator, it begins to shake and shake until...<br class='break'>ZAP!<br class='break'>Electrical waves start appearing all over the elevator, and when it hits you, you find yourself at a<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s90()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s96() {
+document.getElementById("main").innerHTML="<em>Where do you injure yourself then?</em><br><br><a onclick=s97()><strong>A:</strong> The arm</a><br class='choice'><a onclick=s98()><strong>B:</strong> The leg</a><br class='choice'><a onclick=s99()><strong>C:</strong> The head</a>";
+}
+
+function s97() {
+document.getElementById("main").innerHTML="You injure yourself in the arm.<br class='break'>Blood comes out of your arm. But unfortunately, not enough blood was able to enter the battery. Oh, well.<br><br><a onclick=s98()><strong>A:</strong> Injure the leg then.</a><br class='choice'><a onclick=s99()><strong>B:</strong> Injure the head then.</a><br class='choice'><a onclick=s90()><strong>C:</strong> Try something else.</a>";
+}
+
+function s98() {
+document.getElementById("main").innerHTML="You injure yourself in the leg.<br class='break'>Ouch!<br class='break'>Uh, oh. You must&#39;ve injured that leg so hard that so much blood came out of you. You can&#39;t move anymore because of that leg, and none of the blood makes it to the battery! Too bad.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s90()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s99() {
+document.getElementById("main").innerHTML="You injure yourself in the head.<br class='break'>That was so stupid! Now your brain is hurt, and you cannot operate the way you should be operating! Before we get into any more nonsense, let&#39;s bring this over to a<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s90()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s100() {
+document.getElementById("main").innerHTML="You cry because you don’t know what to do. The sobs and tears of your crying eventually make its way over to the battery. You battery now has a fluid!<br class='break'><em>Do you wish to put the battery into operation now?</em><br><br><a onclick=s101()><strong>A:</strong> Yes.</a><br class='choice'><a onclick=s90()><strong>B:</strong> No. Dump the tears and try something else.</a>";
+}
+
+function s101() {
+document.getElementById("main").innerHTML="You put the battery with the tears into the control panel and turn the battery on.<br class='break'>The good news is, tears have a viscosity low enough for the elevator to operate!<br class='break'>The elevator moves smoothly until it reaches the bottom of the tower. Great job!<br><br><a onclick=s102()><li>Continue onward.</li></a><br><br><strong>Note:</strong> No research was put into how elevators operate, so the following situation you just faced may not occur in reality.";
+}
+
+function s102() {
+checkpoint = 9;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Bottom of the Tower";
+document.getElementById("main").innerHTML="You step outside the elevator to see a hallway with three doors. One of these doors is to the left, another is to the right, and the third door, aka: grand door, is at the end of the hallway. The grand door is the door to leave the tower. Also in the bottom floor is a strange looking floor.<br class='break'>Unfortunately, there are guards around the bottom of the tower, so escaping will not be easy.<br class='break'><em>So what do you do?</em><br><br><a onclick=s103()><strong>A:</strong> Attempt to enter the left door.</a><br class='choice'><a onclick=s104()><strong>B:</strong> Peek at what is inside the left door.</a><br class='choice'><a onclick=s105()><strong>C:</strong> Attempt to enter the right door.</a><br class='choice'><a onclick=s106()><strong>D:</strong> Peek at what is inside the right door.</a><br class='choice'><a onclick=s107()><strong>E:</strong> Take a look at the strange floor.</a><br class='choice'><a onclick=s108()><strong>F:</strong> Head on over to the grand door.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s103() {
+document.getElementById("title").innerHTML="Guard Meeting Room";
+document.getElementById("main").innerHTML="You manage to open the left door.<br class='break'>The left door leads to some sort of meeting room. Unfortunately, there are a whole bunch of guards in there!<br class='break'>&quot;Hey!&quot; says one of the guards. &quot;You&#39;re not a guard! We shall persecute you now!&quot;<br class='break'>All the guards come with their guns, and they all shoot you until you are dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s102()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s104() {
+document.getElementById("main").innerHTML="You peek at what the left door contains. It looks like some sort of meeting room with a whole bunch of guards inside. <br><br><a onclick=s102()><strong>A:</strong> Interesting. Go back.</a><br class='choice'><a onclick=s103()><strong>B:</strong> Let&#39;s come on in.</a>";
+}
+
+function s105() {
+document.getElementById("main").innerHTML="The right door is locked, but there are a set of numbers next to the handle. You can try to open the door by pressing a number, but do so at your own peril.<br class='break'><table style='margin:auto;background-color:#CECFCB;padding:5px;border:1px solid #9E985C;'><tr><td><span style='font-size:28pt;'><a onclick=s109()>1</a> | <a onclick=s109()>2</a> | <a onclick=s109()>3</a> | <a onclick=s109()>4</a> | <a onclick=s109()>5</a> | <a onclick=s109()>6</a> | <a onclick=s109()>7</a> | <a onclick=s110()>8</a> | <a onclick=s109()>9</a> | <a onclick=s109()>10</a></span></td></tr></table><br><br><a onclick=s102()><li>Go back.</li></a>";
+}
+
+function s106() {
+document.getElementById("main").innerHTML="But you can&#39;t do that, since there is no peep window on the right door!<br><br><a onclick=s102()><li>Curses! Go back.</li></a>";
+}
+
+function s107() {
+document.getElementById("main").innerHTML="You take a look at the strange floor. It defnitely is strange. Here is what it looks like from top view.<br class='break'><table style='margin:auto;background-color:#AFA489;padding:10px;border:1px solid #766F4F;'><tr><td><span style='font-size:28pt;font-family:times new roman;display:block;text-align:center;'>~*~<br>I ... II ... IV ... ___ ... XVI ... XXXII</span></td></tr></table><br><br><a onclick=s102()><li>Go back.</li></a>";
+}
+
+function s108() {
+document.getElementById("main").innerHTML="You head on over to the grand door.<br class='break'>A guard by the door notices you and gets <strong>angry</strong> at you.<br class='break'>&quot;You are in <strong>huge</strong> trouble!!&quot; the guard says.<br class='break'>He shoots you until you are dead.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s102()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s109() {
+document.getElementById("main").innerHTML="You press a button to try to open the right door. A HUGE alarm goes off. The guards notice that, and they see you, so they shoot you off until you’re dead. That ensures a simple but deadly<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s102()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s110() {
+document.getElementById("main").innerHTML="You press the &quot;8&quot; button, As you do so, the right door unlocks, and you can now go inside!<br><br><a onclick=s111()><li>Go inside the door.</li></a>";
+}
+
+function s111() {
+document.getElementById("title").innerHTML="Storage Room";
+document.getElementById("main").innerHTML="The door leads to a storage room that has tons of boxes. It looks like all the boxes are opened up with junk inside except for three boxes. One box is big, another is small, and the third is somewhere in between. <em>Which box do you open?</em><br><br><a onclick=s112()><strong>A:</strong> The small box</a><br class='choice'><a onclick=s113()><strong>B:</strong> The medium box</a><br class='choice'><a onclick=s114()><strong>C:</strong> The big box</a>";
+}
+
+var smallbox=0;
+var bigbox=0;
+
+function s112() {
+smallbox=1;
+document.getElementById("main").innerHTML="You open the small box. Inside, you find a Guard Badge! You put the badge on.<span id='fulluniform'></span>";
+
+if (smallbox==1&&bigbox==1) {document.getElementById("fulluniform").innerHTML="<br class='break'>Now, with the guard badge and uniform, you look like a guard from the tower!<br><br><a onclick=s113()><strong>A:</strong> Maybe I&#39;ll look even more like a guard if I open the medium box...</a><br class='choice'><a onclick=s121()><strong>B:</strong> Leave the room.</a>";}
+
+else {document.getElementById("fulluniform").innerHTML="<br><br><a onclick=s113()><strong>A:</strong> I now want to open the medium box.</a><br class='choice'><a onclick=s114()><strong>B:</strong> I now want to open the big box.</a><br class='choice'><a onclick=s115()><strong>C:</strong> Leave the room.</a>";}
+}
+
+function s113() {
+smallbox=0;
+bigbox=0;
+document.getElementById("main").innerHTML="You open the medium box. Inside, you find a gun! This can be incredibly useful somehow...<br class='break'>But then, a guard enters the storage room and sees you. He gets angry that you’re fiddling around in here and shoots you. You try to shoot back, but your gun is not loaded! Sorry.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s102()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s114() {
+bigbox=1;
+document.getElementById("main").innerHTML="You open the big box. Inside, you find a Guard Uniform! You put the uniform on.<span id='fulluniform'></span>";
+
+if (smallbox==1&&bigbox==1) {document.getElementById("fulluniform").innerHTML="<br class='break'>Now, with the guard badge and uniform, you look like a guard from the tower!<br><br><a onclick=s113()><strong>A:</strong> Maybe I&#39;ll look even more like a guard if I open the medium box...</a><br class='choice'><a onclick=s121()><strong>B:</strong> Leave the room.</a>";}
+
+else {document.getElementById("fulluniform").innerHTML="<br><br><a onclick=s112()><strong>A:</strong> I now want to open the small box.</a><br class='choice'><a onclick=s113()><strong>B:</strong> I now want to open the medium box.</a><br class='choice'><a onclick=s115()><strong>C:</strong> Leave the room.</a>";}
+}
+
+function s115() {
+document.getElementById("title").innerHTML="Bottom of the Tower";
+document.getElementById("main").innerHTML="<em>Now what do you want to do?</em><br><br><a onclick=s116()><strong>A:</strong> Attempt to enter the left door.</a><br class='choice'><a onclick=s117()><strong>B:</strong> Peek at what is inside the left door.</a><br class='choice'><a onclick=s118()><strong>C:</strong> Take a look at the strange floor.</a><br class='choice'><a onclick=s119()><strong>D:</strong> Head on over to the grand door.</a><br class='choice'><a onclick=s120()><strong>E:</strong> Head back to the storage room.</a>";
+}
+
+function s116() {
+document.getElementById("title").innerHTML="Guard Meeting Room";
+document.getElementById("main").innerHTML="You enter the left door. Inside is the guard meeting room. The guards aren&#39;t happy when they see you.<br class='break'><span id='guardsays'></span><br><br><a onclick=s115()><li>Um, okay.</li></a>";
+
+if (smallbox==1) {document.getElementById("guardsays").innerHTML="&quot;True guards don&#39;t wear just their badge!&quot; a guard says. &quot;Go back when you put on your uniform!&quot;<br class='break'>The guards escort you out of the room.";}
+
+if (bigbox==1) {document.getElementById("guardsays").innerHTML="&quot;True guards don&#39;t wear just their uniform!&quot; a guard says. &quot;Go back when you put on your badge!&quot;<br class='break'>The guards escort you out of the room.";}
+}
+
+function s117() {
+document.getElementById("main").innerHTML="You peek at what the left door contains. It looks like some sort of meeting room with a whole bunch of guards inside. <br><br><a onclick=s115()><strong>A:</strong> Interesting. Go back.</a><br class='choice'><a onclick=s116()><strong>B:</strong> Let&#39;s come on in.</a>";
+}
+
+function s118() {
+document.getElementById("main").innerHTML="You take a look at the strange floor. It defnitely is strange. Here is what it looks like from top view.<br class='break'><table style='margin:auto;background-color:#AFA489;padding:10px;border:1px solid #766F4F;'><tr><td><span style='font-size:28pt;font-family:times new roman;display:block;text-align:center;'>~*~<br>I ... II ... IV ... ___ ... XVI ... XXXII</span></td></tr></table><br><br><a onclick=s115()><li>Go back.</li></a>";
+}
+
+function s119() {
+document.getElementById("main").innerHTML="You head on over to the grand door. The guard by the door sees you and gets <strong>angry</strong> at you.<br class='break'><span id='guardsays'></span><br><br><a onclick=s115()><li>Um, okay.</li></a>";
+
+if (smallbox==1) {document.getElementById("guardsays").innerHTML="&quot;A true guard wears their uniform!&quot; he yells. &quot;Now don&#39;t come back until that uniform is on!&quot;";}
+
+if (bigbox==1) {document.getElementById("guardsays").innerHTML="&quot;A true guard wears their badge!&quot; he yells. &quot;Now don&#39;t come back until that badge is on!&quot;";}
+}
+
+function s120() {
+document.getElementById("title").innerHTML="Storage Room";
+document.getElementById("main").innerHTML="You head back to the storage room. Choose a box to open.<br><br><span id='boxtoopen'></span>";
+
+if (smallbox==1) {document.getElementById("boxtoopen").innerHTML="<a onclick=s113()><strong>A:</strong> Open the medium box.</a><br class='choice'><a onclick=s114()><strong>B:</strong> Open the big box.</a><br class='choice'><a onclick=s115()><strong>C:</strong> Leave the storage room.</a>";}
+
+if (bigbox==1) {document.getElementById("boxtoopen").innerHTML="<a onclick=s112()><strong>A:</strong> Open the small box.</a><br class='choice'><a onclick=s113()><strong>B:</strong> Open the medium box.</a><br class='choice'><a onclick=s115()><strong>C:</strong> Leave the storage room.</a>";}
+}
+
+function s121() {
+checkpoint = 10;localStorage.setItem("checkpointmarker", checkpoint);
+document.getElementById("title").innerHTML="Bottom of the Tower";
+document.getElementById("main").innerHTML="<em>Now what do you want to do?</em><br><br><a onclick=s126()><strong>A:</strong> Attempt to enter the left door.</a><br class='choice'><a onclick=s124()><strong>B:</strong> Peek at what is inside the left door.</a><br class='choice'><a onclick=s125()><strong>C:</strong> Take a look at the strange floor.</a><br class='choice'><a onclick=s138()><strong>D:</strong> Head on over to the grand door.</a><br class='choice'><a onclick=s122()><strong>E:</strong> Head back to the storage room.</a><br><br><span class='center'><span class='checkpoint'>CHECKPOINT!</span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function s122() {
+document.getElementById("title").innerHTML="Storage Room";
+document.getElementById("main").innerHTML="What? Is there anything you missed? <br><br><a onclick=s123()><strong>A:</strong> Open the medium box.</a><br class='choice'><a onclick=s121()><strong>B:</strong> Leave the storage room.</a>";
+}
+
+function s123() {
+document.getElementById("main").innerHTML="You open the medium box. Inside, you find a gun! This can be incredibly useful somehow...<br class='break'>But then, a guard enters the storage room and sees you. He gets angry that you’re fiddling around in here and shoots you. You try to shoot back, but your gun is not loaded! Sorry.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s121()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s124() {
+document.getElementById("main").innerHTML="You peek at what the left door contains. It looks like some sort of meeting room with a whole bunch of guards inside. <br><br><a onclick=s121()><strong>A:</strong> Interesting. Go back.</a><br class='choice'><a onclick=s126()><strong>B:</strong> Let&#39;s come on in.</a>";
+}
+
+function s125() {
+document.getElementById("main").innerHTML="You take a look at the strange floor. It defnitely is strange. Here is what it looks like from top view.<br class='break'><table style='margin:auto;background-color:#AFA489;padding:10px;border:1px solid #766F4F;'><tr><td><span style='font-size:28pt;font-family:times new roman;display:block;text-align:center;'>~*~<br>I ... II ... IV ... ___ ... XVI ... XXXII</span></td></tr></table><br><br><a onclick=s121()><li>Go back.</li></a>";
+}
+
+function s126() {
+document.getElementById("title").innerHTML="Guard Meeting Room";
+document.getElementById("main").innerHTML="You enter the left door. Inside is the guard meeting room. Since you are wearing full uniform, the guards let you in.<br class='break'><em>What do you do in the room?</em><br><br><a onclick=s127()><strong>A:</strong> Brew some coffee with the coffee maker.</a><br class='choice'><a onclick=s128()><strong>B:</strong> Take a look at the notice board.</a><br class='choice'><a onclick=s129()><strong>C:</strong> Chat with a guard.</a><br class='choice'><a onclick=s135()><strong>D:</strong> Sit on a lounge chair and relax.</a><br class='choice'><a onclick=s121()><strong>E:</strong> Leave the room.</a>";
+}
+
+function s127() {
+document.getElementById("main").innerHTML="You brew some coffee. Then you drink it. Yum! That was one GREAT coffee!<br><br><a onclick=s126()><li>Go back.</li></a>";
+}
+
+function s128() {
+document.getElementById("main").innerHTML="<table style='margin:auto;background-color:#EDDA70;padding:5px;border:1px solid #EDA93D;'><tr><td><span style='color:#4195AE;font-family:arial;font-weight:700;'><span class='center' style='color:#FF6600;text-decoration:underline;'>NOTICE</span><ul><li>Remember that ALL GUARDS must wear their full uniform at all times while they’re working. Anybody not obeying the rules will get kicked out of this room! NO EXCEPTIONS!</li><li>Remember that to leave the tower, you must show the guard your full uniform and insert the following code at the grand door: 7852</li><li>To open the door to the electrical room, insert the following code at the front: 3284</li><li>FREE coffee for all guards.</ul></td></tr></table><br><br><a onclick=s126()><li>Go back.</li></a>";
+}
+
+function s129() {
+document.getElementById("main").innerHTML="You chat with a guard. The guard you talk to seems to be nice.<br class='break'>&quot;Hey you!&quot; he says. &quot;I will give you a <em>secret</em> if you guess the side my coin lands on correctly.&quot;<br class='break'><em>Do you wish for a chance to hear the secret?</em><br><br><a onclick=s130()><strong>A:</strong> You&#39;re on, guard!</a><br class='choice'><a onclick=s126()><strong>B:</strong> Nah, no thanks.";
+}
+
+function s130() {
+document.getElementById("main").innerHTML="&quot;Okay,&quot; the guard says. &quot;Heads or tails?&quot;<br><br><a onclick=s131()><strong>A:</strong> Heads!</a><br class='choice'><a onclick=s132()><strong>B:</strong> Tails!";
+}
+
+function s131() {
+document.getElementById("main").innerHTML="The guard flips the coin. It lands on tails.<br class='break'>&quot;Sorry, but you lost,&quot; the guard says.<br><br><a onclick=s133()><li>Well that stinks.</li>";
+}
+
+function s132() {
+document.getElementById("main").innerHTML="The guard flips the coin. It lands on tails. You win!<br class='break'>&quot;Here is the secret,&quot; the guard says. &quot;Once you beat this game, <strong>click on the top-left corner of the main menu</strong>, and something cool will happen. Got that?&quot;<br><br><a onclick=s133()><li>Gotcha.</li>";
+}
+
+function s133() {
+document.getElementById("main").innerHTML="<em>So what do you do now?</em><br><br><a onclick=s136()><strong>A:</strong> Brew some coffee with the coffee maker.</a><br class='choice'><a onclick=s137()><strong>B:</strong> Take a look at the notice board.</a><br class='choice'><a onclick=s134()><strong>C:</strong> Chat with a different guard.</a><br class='choice'><a onclick=s135()><strong>D:</strong> Sit on a lounge chair and relax.</a><br class='choice'><a onclick=s121()><strong>E:</strong> Leave the room.</a>";
+}
+
+function s134() {
+document.getElementById("main").innerHTML="You chat with a different guard. This different guard does not seem to like you.<br class='break'>&quot;A real guard should not be socializing like this!&quot; he shouts. &quot;You must get to work now!&quot;<br class='break'>The guard then forces you to work on torturous activities, and since I&#39;m too lazy to explain what really happens, I&#39;ll just give you a game over just because I want to.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s121()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s135() {
+document.getElementById("main").innerHTML="You sit at a lounge chair and relax. A guard spots you and tells you, &quot;That is not a way a guard acts! You are not a guard! Prosecute this person!&quot;<br class='break'>You are then prosecuted, which means…<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s121()>(Go back to checkpoint)</a>";
+counter++;localStorage.setItem("gameovercounter", counter);
+}
+
+function s136() {
+document.getElementById("main").innerHTML="You brew some coffee. Then you drink it. Yum! That was one GREAT coffee!<br><br><a onclick=s133()><li>Go back.</li></a>";
+}
+
+function s137() {
+document.getElementById("main").innerHTML="<table style='margin:auto;background-color:#EDDA70;padding:5px;border:1px solid #EDA93D;'><tr><td><span style='color:#4195AE;font-family:arial;font-weight:700;'><span class='center' style='color:#FF6600;text-decoration:underline;'>NOTICE</span><ul><li>Remember that ALL GUARDS must wear their full uniform at all times while they’re working. Anybody not obeying the rules will get kicked out of this room! NO EXCEPTIONS!</li><li>Remember that to leave the tower, you must show the guard your full uniform and insert the following code at the grand door: 7852</li><li>To open the door to the electrical room, insert the following code at the front: 3284</li><li>FREE coffee for all guards.</ul></td></tr></table><br><br><a onclick=s133()><li>Go back.</li></a>";
+}
+
+function s138() {
+document.getElementById("main").innerHTML="You head on over to the grand door. The guard by the door sees you and approves your access to the grand door.<br class='break'>At the grand door, you see a giant number pad. In order to leave the tower, you must insert the correct code. <em>Are you ready to insert the number in?</em><br><br><a onclick=s139()><strong>A:</strong> Yes I am.</a><br class='choice'><a onclick=s121()><strong>B:</strong> No I am not.</a>";
+}
+
+function s139() {
+document.getElementById("main").innerHTML="Enter the four numbers you think make the code.<br class='break'><input id='pin' maxlength='4' type='text' style='margin:0 auto;display:block;text-align:center;font-size:24pt;width:100px;font-family:georgia;'></input><table style='margin:auto;background-color:#CECFCB;padding:5px 20px;border:1px solid #9E985C;font-size:32pt;'><tr><td style='padding:3px 15px;'><a onclick=numpad(1)>1</a></td><td style='padding:3px 15px;'><a onclick=numpad(2)>2</a></td><td style='padding:3px 15px;'><a onclick=numpad(3)>3</a></td></tr><tr><td style='padding:3px 15px;'><a onclick=numpad(4)>4</a></td><td style='padding:3px 15px;'><a onclick=numpad(5)>5</a></td><td style='padding:3px 15px;'><a onclick=numpad(6)>6</a></td></tr><tr><td style='padding:3px 15px;'><a onclick=numpad(7)>7</a></td><td style='padding:3px 15px;'><a onclick=numpad(8)>8</a></td><td style='padding:3px 15px;'><a onclick=numpad(9)>9</a></td></tr><tr><td style='padding:3px 15px;'><a onclick=numpad(0)>0</a></td><td colspan='2'><a onclick=redo()>REDO</a></td></tr></table><br><span class='center' style='font-size:20pt;'><a onclick=s140()>Enter code.</a></span><br><br><a onclick=s121()><li>Go back.</li></a>";
+}
+
+function numpad(text){
+if (pin.value.length<4){
+    document.getElementById('pin').value += text;}
+else {}
+}
+
+function redo() {
+document.getElementById('pin').value = "";}
+
+function s140() {
+var x=document.getElementById("pin").value;
+if(x=="7852"){setTimeout(function(){document.getElementById("title").innerHTML="Correct!";document.getElementById("main").innerHTML="YEAH! Congratulations! The great, extraordinary grand door opens! Lights pop out, fresh air reveals itself, and best of all, <strong>you, yes you, can finally escape the tower!</strong><br class='break'>You step out the door in great delight, and when you see the fresh, green outdoors, you think to yourself, &quot;I did it! I did it with all I could!&quot;<br class='break'>And it&#39;s true. You officially win the game (that is, if you didn&#39;t cheat)!<br><br><span class='center'><span class='theend'>THE END!</span><br class='break'><a onclick=credits()>Continue.</a>";},500);}
+
+else
+{setTimeout(function(){document.getElementById("title").innerHTML="Wrong!";document.getElementById("main").innerHTML="You entered the wrong number!<br class='break'>Alarms ring, cowbells shriek, and the guard that guards the grand door is <strong>SUPER ANGRY</strong> at you!<br class='break'><strong>&quot;YOU!&quot;</strong> he screams. <strong>&quot;YOU ARE NOT A TRUE GUARD!!!!!!! HOW DARE YOU TRY TO ESCAPE, PRISONER!!!!!!!&quot;</strong><br class='break'>BAM, BAM, BAM! With three shots taken, you are taken out and dead for good.<br><br><span class='center'><span class='gameover'>GAME OVER</span><br class='break'><a onclick=s121()>(Go back to checkpoint)</a>";},500);
+counter++;localStorage.setItem("gameovercounter", counter);}
+}
+
+function credits() {document.getElementById("title").innerHTML="Credits";
+document.getElementById("main").innerHTML="<span class='center'><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span><br class='break'><strong>Game Creator</strong><br><em>Timothy Hsu</em><br class='break'><strong>Software Used</strong><br><em>PowerPoint 2010/2011<br>Notepad<br>TextEdit<br>iOS Simulator<br>Google Chrome</em><br class='break'><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu</em><br class='break'>&copy;2010-2014 Timothy Hsu.<br class='break'>You completed the game with " + counter + " Game Overs.<br class='break'>Don&#39;t forget to check out the <strong>Bonus Features</strong> you just unlocked by completing the game!<br class='break'><a onclick=imdone()>Main Menu</a></span>";
+checkpoint = 0;localStorage.setItem("checkpointmarker", checkpoint);
+complete = 1;localStorage.setItem("completedgame", complete);
+smallbox=0;
+bigbox=0;
+}
+
+function bonus() {
+document.getElementById("title").innerHTML="Bonus Features";
+document.getElementById("main").innerHTML="<ul>Select a bonus feature from here.<br class='break'><a onclick=qa()><li>Q&A</li></a><a onclick=webdesign()><li>Guide to Web Design</li></a><a onclick=gamequiz()><li>Game Quiz</li></a><a onclick=trythis()><li>Try This!</li></a><a onclick=beatcreator()><li>Beat the Creator</li></a><a onclick=recgames()><li>Recommended Games</li></a></ul><span id = titleselect style='display:block;text-align:center;'><a onclick=imdone()>Main&nbsp;Menu</a></span>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+
+function qa() {
+document.getElementById("title").innerHTML="Q&A";
+document.getElementById("main").innerHTML="<strong>Q: How did you get the idea to make this game?</strong><br>A: Believe it or not, this game would not have been made if it weren&#39;t for Neopets. In Neopets, there was this feature called &quot;Neoadventures&quot;, which let users create games similar to the concept of Escape a Tower. I deleted my Neopets account in August 2010 due to addiction, so I&#39;m afraid you won&#39;t be able to play the neoadventure I made.<br class='break'><strong>Q: What inspired you to make this game?</strong><br>A: One day at my grandparents&#39; house, I got bored, so I cut out some printer paper and began making this game on paper. My mom found Escape a Tower interesting and told me to remake the game on the computer. That is how this game was made to what it is today.<br class='break'><strong>Q: Will there ever be a sequel to Escape a Tower?</strong><br>A: Maybe. At first, I was planning on making a sequel called Journey to Home, which is about navigating back home after escaping the tower, but I have long ago scratched that idea. Recently, I&#39;ve been thinking about creating Escape a Tower 2, with puzzles based on a real tower and gameplay less linear than the first, but it may or may not happen. Or maybe I should stick to creating new original text adventure plots. I have no idea.<br class='break'><strong>Q: How long did it take to create this game?</strong><br>A: A LOT of time. The original version released back in 2010 took about ten hours to create. Then I went back and made a countless number of revisions. (You can view the entire version history by clicking on the version number at the main menu.) Converting this game from PowerPoint to Javascript took multiple hours as well.<br class='break'><strong>Q: Why did you want to convert Escape a Tower to Javascript?</strong><br>A: The main motivation behind this conversion is for the ability to play the game on a mobile device. So whenever I want to show someone my game, I can show it to them straight from my phone instead of telling them to go on their computer. The other main motive is to phase myself out of PowerPoint. To me, it is a lot more impressive sounding to say I created a game from scratch using Javascript than PowerPoint. And lastly, there&#39;s the Game Over counter and the load game feature that could not have been possible in PowerPoint in the first place.<br class='break'><strong>Q: What is your favorite Web browser?</strong><br>A: I like Google Chrome for its simplicity and its amazing inspect element tool which I used during the development of this game, but Firefox is great as well for its extensions.<br class='break'><strong>Q: What else do you like to do other than make video games?</strong><br>A: I enjoy <em>playing</em> video games, as well as writing stories, doodling, and cycling.<br class='break'><strong>Q: How can I give you feedback on this game?</strong><br>A: You can either let me know in person (if you know me) or you can post a comment on my <a href='http://slideshowgames.blogspot.com/2011/08/escape-tower-more-info.html' target='_blank'>Website</a>. Thanks for your time to comment!<br><br><span class='center'><a onclick=bonus()>Back to Bonus Features</a></span>";
+}
+
+function webdesign() {
+document.getElementById("title").innerHTML="Guide to Web Design";
+document.getElementById("main").innerHTML="Escape a Tower is created from three different Web languages: HTML, CSS, and Javascript.<br class='break'>HTML stands for Hypertext Markup Language. You use HTML to tell your web browser what information to display. All websites need HTML, as it is the basis of a website.<br class='break'>CSS stands for Cascading Style Sheets. CSS is used to describe what the HTML looks like. CSS is what makes websites have a graphical look.<br class='break'>With Javascript, you can add interactivity to a website, such as alert boxes, actions when you click on buttons, etc.<br class='break'>If you are interested in learning these Web languages, I recommend going on W3 Schools or Codecademy.<br><br><span class='center'><a onclick=bonus()>Back to Bonus Features</a></span>";
+}
+
+function gamequiz() {
+document.getElementById("title").innerHTML="Game Quiz";
+document.getElementById("main").innerHTML="To play the Game Quiz, there will be a question. Think of an answer, and when you got one, click on the Reveal the Answer button to see the answer. There will be 6 questions.<br><br><a onclick=playquiz()><li>Play Game Quiz</li></a><br class='choice'><a onclick=bonus()>Back to Bonus Features</a>";
+}
+
+function playquiz() {
+document.getElementById("main").innerHTML="1. Where did you find the slingshot?<br><br><span id='answer'><a onclick=reveal1()>Reveal the answer.</a></span>";
+}
+
+function reveal1()
+{document.getElementById("answer").innerHTML="Answer: Room of Chests<br><br><a onclick=playquiz2()>Next Question</a>";}
+
+function playquiz2() {
+document.getElementById("main").innerHTML="2. What is inside the top drawer at the prison cell?<br><br><span id='answer'><a onclick=reveal2()>Reveal the answer.</a></span>";}
+
+function reveal2()
+{document.getElementById("answer").innerHTML="Answer: A poisonous snake<br><br><a onclick=playquiz3()>Next Question</a>";}
+
+function playquiz3() {
+document.getElementById("main").innerHTML="3. What special perk do guards get? (listed on notice board)<br><br><span id='answer'><a onclick=reveal3()>Reveal the answer.</a></span>";}
+
+function reveal3()
+{document.getElementById("answer").innerHTML="Answer: Free coffee<br><br><a onclick=playquiz4()>Next Question</a>";}
+
+function playquiz4() {
+document.getElementById("main").innerHTML="4. What is the code to escape the tower?<br><br><span id='answer'><a onclick=reveal4()>Reveal the answer.</a></span>";}
+
+function reveal4()
+{document.getElementById("answer").innerHTML="Answer: 7852<br><br><a onclick=playquiz5()>Next Question</a>";}
+
+function playquiz5() {
+document.getElementById("main").innerHTML="5. There are 2 ways to complete the prison cell section of the game. What are they?<br><br><span id='answer'><a onclick=reveal5()>Reveal the answer.</a></span>";}
+
+function reveal5()
+{document.getElementById("answer").innerHTML="Answer: Eat the lunch the witch gives you OR escape the cell while the witch is heating up your lunch.<br><br><a onclick=playquiz6()>Next Question</a>";}
+
+function playquiz6() {
+document.getElementById("main").innerHTML="6. What happens if you read <em>The Solution to Everything?</em><br><br><span id='answer'><a onclick=reveal6()>Reveal the answer.</a></span>";}
+
+function reveal6()
+{document.getElementById("answer").innerHTML="Answer: A shard of light beams out.<br><br><a onclick=bonus()>Back to Bonus Features</a>";}
+
+function trythis() {
+document.getElementById("title").innerHTML="Try This!";
+document.getElementById("main").innerHTML="Now that you&#39;ve beaten Escape the Tower, you can go back and look through all the other choices in the game! If you do so, you should really try these.<br class='break'>- Open chest 1 in the Room of Chests.<br class='break'>- Choose &quot;I like pie&quot; in the first question of Trivia.<br class='break'>- In the elevator, ask what viscosity is and then choose (looks up the definition on the dictionary).<br class='break'>- In the guard room, chat with the guard and play his game.<br><br><span class='center'><a onclick=bonus()>Back to Bonus Features</a></span>";
+}
+
+function beatcreator() {
+document.getElementById("title").innerHTML="Beat the Creator";
+document.getElementById("main").innerHTML="I the creator, beat Escape a Tower in just <strong>33.2 seconds.</strong><br class='break'><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Here are a few guidelines.<br class='break'>- Start the stopwatch when you click on New Game.<br class='break'>- Stop the stopwatch as soon as you see The End.<br class='break'>- Don&#39;t cheat. That means no Inspect Element, Javascript Console, etc.<br class='break'>- Good luck, and have fun.<br><br><span class='center'><a onclick=bonus()>Back to Bonus Features</a></span>";
+}
+
+function recgames() {
+document.getElementById("title").innerHTML="Recommended Games";
+document.getElementById("main").innerHTML="If you liked Escape a Tower, consider playing the following games.<br class='break'><strong>Escape the Tower</strong>: A game with (almost) the same exact name! In this neat little Flash game, you will need to rummage around a single room solving a complex puzzle in order to open the door. <a href='http://www.gamershood.com/escape_the_tower.htm' target='_blank'>Link to game.</a><br class='break'><strong>Ren&#39;Py Games</strong>: Ren&#39;Py is a visual novel engine, which can be used to create immersive text adventures like this game. Take a look at the Ren&#39;Py game library <a href='http://games.renpy.org/' target='_blank'>here</a>.<br class='break'><strong>Dunnet</strong>: Did you know that if you&#39;re using a Mac, there&#39;s a text adventure game built in to your operating system? To access this game on OS X, launch Terminal and enter the following command:<br class='break'>emacs -batch -1 dunnet<br class='break'>Now go nuts.<br><br><span class='center'><a onclick=bonus()>Back to Bonus Features</a></span>";
+}
+
+function secret() {
+document.getElementById("title").innerHTML="The Secret Area that No One Should Know About";
+if (complete == 1) {
+document.getElementById("main").innerHTML="<strong>WHAT?!</strong> You FOUND MY <strong>SECRET AREA?!</strong> HOW DARE YOU?! YOU ARE IN <strong>HUGE TROUBLE!!!</strong><br class='break'>How in the WORLD did you FIND THIS PLACE???<br><br><a onclick=secret9()><strong>A:</strong> A guard in the tower told me about it.</a><br class='choice'><a onclick=secret2()><strong>B:</strong> I just randomly clicked and found it.</a><br class='choice'><a onclick=secret7()><strong>C:</strong> I peeked at the source code.</a><br class='choice'><a onclick=imdone()><strong>D:</strong> Um, I got to get out of this creepy place.</a>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";
+}
+else {document.getElementById("main").innerHTML="Um, I&#39;m still setting up this place. Come back here once you&#39;ve completed the game at least once.<br><br><a onclick=imdone()><li> Er, ok...</li></a>";
+document.getElementById("copyright").innerHTML="<span style='visibility:hidden;'>.</span>";}
+}
+
+function secret2() {
+document.getElementById("main").innerHTML="Well, I admire your skills in random clicking, but <strong>YOU REALLY SHOULDN&#39;T BE DOING THAT!!!</strong> WHY DID YOU DO THAT??!!<br><br><a onclick=secret3()><strong>A:</strong> It was an accident, really.</a><br class='choice'><span style='font-size:10pt;'><a onclick=secret4()><strong>B:</strong> I learned that there are people out there who love to put in secret things in their stuff, so I went and tried it everywhere and eventually found this finger pointing some invisible link so I clicked on it and then you were barking at me, so now I&#39;m telling the truth and you&#39;re still barking at me, so what in the world-Oh what in the world am I supposed to do? What am I supposed to do? I really want you to understand so I don&#39;t have to discuss this ridiculously long reason again and again and again and again and forever going until I eventually pass out and faint so I have to go to the hospital and a whole bunch of bad things happen and then I die and go to a graveyard that I really don&#39;t want to be in! GAAHHH! It hurts my brain so much by saying all that things!!!! Curse my horrible intelligence by saying it so long that even I didn&#39;t understand!</a></span>";
+}
+
+function secret3() {
+document.getElementById("main").innerHTML="An ACCIDENT? (Looks at you directly in the eye) <strong>YOU&#39;RE SMILING!</strong> I SAW THAT! YOU&#39;RE GUILITY! I&#39;M GONNA KICK YOU OUT!<br class='break'>To make a long story short, you get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret4() {
+document.getElementById("main").innerHTML="I don&#39;t CARE about all that <strong>LONG, NERDY TALK!</strong> GIVE ME A <em>LEGIT</em> REASON, <strong>NOW!!!</strong><br><br><a onclick=secret5()><strong>A:</strong> In other words, I was just curious to see what clicking everywhere would do in this game.</a><br class='choice'><span style='font-size:10pt;'><a onclick=secret6()><strong>B:</strong> Well, if you wanted me to explain this reason simpler, I don&#39;t think I can do that. I am too used to saying things in this ridiculously small font that it would be a nightmare if I don&#39;t see the whole page filled up like madness, so that is why I have to say all this stuff in a long and long and random thing that sometimes, I don&#39;t know what the heck I am saying, so in order to restore my painful remorse, I jump up in the air three times in a row and breath on my forehead until I’m filled with fresh-filled oxygen that I can inflate my way up to the sky and go to outer space and look at all the planets and breath all my oxygen that someday, I can be the first person to survive in space without an air tank, oh would that be awesome! I will be rich and famous and be crazy cool! Yee-haw! Woo-yeah! I am as happy as a fine goat lying in the valleys of a poor land of destiny! It definitely rocks. You should try it. Trust me, it feels as good as drinking juice. Juice is good.</a></span>";
+}
+
+function secret5() {
+document.getElementById("main").innerHTML="Did you know that <strong>curiosity killed the cat?</strong> Well this time, <strong>CURIOSITY KILLED YOU!!!</strong><br class='break'>The person gets a knife out, and you die.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret6() {
+document.getElementById("main").innerHTML="<span style='font-size:10pt;'>Your long and somewhat random and nerdy and boring and funny and unmethodical and hilarious and silly talk is really crazy and I think you should shut up before I cut your eyeballs out and throw them off the secret slides and LOL at you like you are such a sucker! Seriously, why do you enjoy talking a lot? It must take skill to do so, because it is so long for everyone else to talk in such a tiny font. How on Earth do you do it? Was it from your family genes? How about alleles? Is it dominant or recessive? I need a Punnett square to find out! Please give me a Punnett square! Oh please, will you? It will be so nice for you to so so that maybe I will get out my guilt and fly away to Unicorn Land! UNICORNS! They are cute and fluffy and so magical...I want to marry one someday! It will be so romantic, and then we have kids and those kids would look so weird and people laugh at me, but I am a brave person and I will overcome...</span><br class='break'>Wait a sec, <strong>I&#39;M INFECTED!!!</strong><br class='break'>To make a long story short, you get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret7() {
+document.getElementById("main").innerHTML="Really, <em>huh?</em> Well if you did that, you just did something HORRIBLE that I, yes I, consider to be the incorrigible, awful <strong>CHEATING!!! <em>GET OUT OF HERE!!!</em></strong><br><br><a onclick=secret8()><strong>A:</strong> No way! (Shoot the person with your slingshot)</a><br class='choice'><a onclick=imdone()><strong>B:</strong> Yeah, gotta go.</a>";
+}
+
+function secret8() {
+document.getElementById("main").innerHTML="OH, SO YOU REALLY THINK I WOULD DIE WITH A <strong>PUNY SLINGSHOT?!</strong> TAKE A LOOK AT WHAT <strong>I HAVE!!!</strong> (takes out a knife from the pocket)<br class='break'>To make a long story short, you die.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret9() {
+document.getElementById("main").innerHTML="REALLY, huh? I thought I told that guard to say that <strong>HIS NAME WAS HUGO!!! YOU MUST BE LYING!!!</strong><br><br><a onclick=secret13()><strong>A:</strong> No, I&#39;m not! Go...go check for yourself!</a><br class='choice'><a onclick=secret10()><strong>B:</strong> I DID LIE! (cries) Please forgive me.</a><br class='choice'><a onclick=imdone()><strong>C:</strong> Leave before anything else happens.</a>";
+}
+
+function secret10() {
+document.getElementById("main").innerHTML="(Stares at you) Oh, alright, <strong>CRY BABY</strong>, I forgive you. <strong>NOW GET OUT!</strong><br><br><a onclick=imdone()><strong>A:</strong> Get out.</a><br class='choice'><a onclick=secret11()><strong>B:</strong> Can I play with you?</a>";
+}
+
+function secret11() {
+document.getElementById("main").innerHTML="ABSOLUTELY NOT! <strong>NOW PLEASE GET OUT!</strong><br><br><a onclick=imdone()><strong>A:</strong> Get out.</a><br class='choice'><a onclick=secret12()><strong>B:</strong> But we can have fun! We can have a tea party, play hide-and-seek, have a pillow fight, and...</a>";
+}
+
+function secret12() {
+document.getElementById("main").innerHTML="<strong>OH THAT&#39;S IT! I CAN&#39;T TAKE THIS PAIN ANYMORE!!!</strong><br class='break'>To make a long story short, you get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret13() {
+document.getElementById("main").innerHTML="Hmmmm......(stares at you directly in the eyes) Well FINE! <strong>I&#39;LL HEAD OVER TO THAT GUARD TO VERIFY HIS MISTAKE!!!</strong><br class='break'>The person leaves the secret area to talk to the guard. What do you do?<br><br><a onclick=secret14()><strong>A:</strong> Dance around the secret area like a maniac.</a><br class='choice'><a onclick=secret20()><strong>B:</strong> Take a look inside the lone drawer.</a><br class='choice'><a onclick=secret24()><strong>C:</strong> Scream, &quot;DON&#39;T LEAVE! I LOVE YOU!&quot;</a><br class='choice'><a onclick=secret30()><strong>D:</strong> Stay in the secret area silently and patiently.</a>";
+}
+
+function secret14() {
+document.getElementById("main").innerHTML="You bounce around, clap about, and squeal mindlessly to your heart&#39;s content. Everything feels good until...<br class='break'><strong>CRACK!</strong><br class='break'>Oh, snap. You pause what you&#39;re doing to investigate what happened. It turns out a vase broke from all that jiggling.<br class='break'>You&#39;re screwed. Or are you?<br><br><a onclick=secret15()><strong>A:</strong> Quickly gather all the pieces of the vase and hide them.</a><br class='choice'><a onclick=secret16()><strong>B:</strong> Leave the broken vase be and hope for the best.</a><br class='choice'><a onclick=secret17()><strong>C:</strong> Run away.</a>";
+}
+
+function secret15() {
+document.getElementById("main").innerHTML="You pick any signs of the vase and hide the pieces in every pocket you have. As soon as that is finished, the person comes back.<br class='break'>HEY, what happened to my VASE? (stares at you, notices your stuffed pockets) AHA! <strong>YOU STOLE IT! I THOUGHT I TRUSTED YOU! FEEL THE PAIN!</strong> (pulls out pocket knife)<br class='break'>To make a long story short, you die.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret16() {
+document.getElementById("main").innerHTML="Eventually, the person returns.<br class='break'>Oh shoot, WHAT HAPPENED TO MY <strong>VASE??!!</strong> (stares blankly at you) <strong>IT&#39;S ALL YOUR FAULT, IDIOT!!!</strong><br class='break'>Before you can respond, the person kicks you out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret17() {
+document.getElementById("main").innerHTML="You try to escape the premises. Unfortunately, that&#39;s when the person returns.<br class='break'>Um, what are YOU trying to do? Are you <strong>hiding something?</strong><br><br><a onclick=secret18()><strong>A:</strong> Yeah, I just broke your vase and now I&#39;m trying to escape so I don&#39;t get in trouble, so...</a><br class='choice'><a onclick=secret19()><strong>B:</strong> No...I, um, just realized I have, you know, other commitments.</a>";
+}
+
+function secret18() {
+document.getElementById("main").innerHTML="Well, at least you&#39;re being honest. But still, <strong>YOU BROKE MY VASE, IDIOT!!!</strong><br class='break'>To make a long story short, you get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret19() {
+document.getElementById("main").innerHTML="<em>Really,</em> huh? <strong>Alright then.</strong><br class='break'>The person lets you leave, and you escape. Let&#39;s just hope nothing bad happens once the person sees the broken vase, shall we?<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret20() {
+document.getElementById("main").innerHTML="You look inside the lone drawer. It&#39;s slightly opened.<br class='break'>Wow! There’s a whole bunch of <em>personal things</em> in here, like a wallet, an ID card, pictures of the person doing embarrassing things, a piece of paper with the person&#39;s e-mail password written on it, and so many other things. Amazing.<br><br><a onclick=secret21()><strong>A:</strong> Take the wallet and go.</a><br class='choice'><a onclick=secret22()><strong>B:</strong> Take the entire drawer and go.</a><br class='choice'><a onclick=secret23()><strong>C:</strong> Close the drawer. That would be mean to take something.</a>";
+}
+
+function secret21() {
+document.getElementById("main").innerHTML="You take the wallet out of the drawer and go. <em>You do it successfully!</em><br class='break'>As you leave, you open up the wallet and find...25 cents! At least that&#39;s something. Good job!<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret22() {
+document.getElementById("main").innerHTML="You take the entire drawer and leave.<br class='break'>Right as you take the drawer out, the person seems to be coming back. Uh, oh.<br class='break'><strong>WHAT ARE YOU DOING INTRUDING MY BELONGINGS? I WAS TALKING TO THE GUARD AND NOW THIS HAPPENS?! GET OUT!</strong><br class='break'>To make a long story short, you get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret23() {
+document.getElementById("main").innerHTML="You close the drawer. You are right about the mean thing anyways.<br class='break'>The person comes back and notices the drawer that has been closed.<br class='break'><strong>HEY! I DON&#39;T REMEMBER MY DRAWER BEING <em>COMPLETELY</em> CLOSED! GET OUT!!!</strong><br><br><a onclick=imdone()><li>Get out before things get worse.</li></a>";
+}
+
+function secret24() {
+document.getElementById("main").innerHTML="You hear ther person running back to the secret area.<br class='break'><strong>I AM BUSY RIGHT NOW! PLEASE SHUT UP!!!</strong><br><br><a onclick=secret25()><strong>A:</strong> But I love you so much!</a><br class='choice'><a onclick=imdone()><strong>B:</strong> Perhaps I should leave now.</a>";
+}
+
+function secret25() {
+document.getElementById("main").innerHTML="What? REALLY? You <em>REALLY LOVE ME?</em><br><br><a onclick=secret27()><strong>A:</strong> Of course I do! Let&#39;s go on a date.</a><br class='choice'><a onclick=secret26()><strong>B:</strong> Just kidding! Obviously not!</a>";
+}
+
+function secret26() {
+document.getElementById("main").innerHTML="YOU KNOW HOW MUCH I HATE YOU? <strong>I just want to kill you...NOW!!!</strong><br class='break'>To make a long story short, you die when the knife is taken out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret27() {
+document.getElementById("main").innerHTML="A date? Well, I&#39;m going to talk to the guard about the situation regarding you entering this place. Can&#39;t do it right now.<br><br><a onclick=secret28()><strong>A:</strong> Oh, come on! We&#39;ll have a great time! Forget about the guard.</a><br class='choice'><a onclick=secret29()><strong>B:</strong> Fine. I hate you then.</a>";
+}
+
+function secret28() {
+document.getElementById("main").innerHTML="But I can&#39;t forget about the guard, and you know what? You shouldn&#39;t be <strong>PEER-PRESSURING</strong> me to do things either. <strong>GET OUT!</strong><br class='break'>You get kicked out.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret29() {
+document.getElementById("main").innerHTML="If you hate me, then you really should GET OUT OF MY SECRET SLIDES.<br class='break'>You head on out, feeling indifferent.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+function secret30() {
+document.getElementById("main").innerHTML="It is nice that you are waiting patiently for the person to come back. The person comes back.<br class='break'>So, the GUARD told ME that he <em>used</em> to say that his name was Hugo, but when version 1.4 of the game released, he found out about this place and decided to change his secret. I guess I understand why you came here now. <em>Sorry for yelling at you.</em><br class='break'>Still, this is my secret place, and I want my privacy here. Can you please leave now?<br><br><a onclick=imdone()><strong>A:</strong> Leave the secret area. Let&#39;s respect the person.</a><br class='choice'><a onclick=secret31()><strong>B:</strong> Nope, because I am evil.</a>";
+}
+
+function secret31() {
+document.getElementById("main").innerHTML="<strong>Well, you&#39;re leaving anyway!</strong><br class='break'>You get kicked out by the person without further notice.<br><br><a onclick=imdone()><li>Back to main menu</li></a>";
+}
+
+</script>
+  
+</head>
+
+<body>
+
+<div id="font">
+
+<!--[if lte IE 8]>
+<span class="center">Your browser is unsupported. Time for an upgrade. Try a newer <a href="http://windows.microsoft.com/en-US/internet-explorer/download-ie">Internet Explorer</a>, <a href="http://www.mozilla.org/en-US/firefox/new/">Firefox</a>, or <a href="https://www.google.com/intl/en/chrome/browser/">Chrome</a>.<br></span>
+<![endif]-->
+
+<noscript><span style="display:block;text-align:center;font-weight:700;font-size:14pt;">Javascript is disabled. Please enable it in order to play the game.</span><br></noscript>
+
+<div id="header">
+<span id="title">
+<span id="titlefont"><span style="color:#184EC6;">Escape</span> <span style="color:#9E8E5C;">a</span> Tower
+</span>
+</div>
+
+<div id="wrap">
+
+<p id="main">
+<span id="secret" onclick="secret()">
+</span>
+
+<span class="center"><span style="font-size:24pt;"><span style="color:#C95000;">An</span> <span style="color:#00A000;"><strong>Adventure Game</strong></span> <span style="color:#C95000;">by</span> <br style="line-height:1.7;"><span style="color:#660066;font-family:verdana,Bitstream Vera Sans;">Timothy Hsu</span></span><br><br><br><span id=titleselect></span><br class="break"><span id="bonusfeatures"></span>
+
+</span>
+
+</p>
+
+</div>
+
+<div id="copyright"><span style="cursor:pointer;" onclick=vhistory()>
+Version 2.1</span> &nbsp;&#126;&nbsp; &copy;2010~2014 Timothy Hsu
+</div>
+
+</div>
+
+</body>
+</html>
