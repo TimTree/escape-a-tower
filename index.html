@@ -222,16 +222,16 @@ var checkpoint = 0;
 var complete = 0;
 
 if(typeof(localStorage) !== "undefined") {
-if (localStorage.getItem("gameovercounter")) 
+if (localStorage.getItem("gameovercounter"))
 {counter = Number(localStorage.getItem("gameovercounter"));}
 
-if (localStorage.getItem("checkpointmarker")) 
+if (localStorage.getItem("checkpointmarker"))
 {checkpoint = Number(localStorage.getItem("checkpointmarker"));}
 
-if (localStorage.getItem("completedgame")) 
+if (localStorage.getItem("completedgame"))
 {complete = Number(localStorage.getItem("completedgame"));}
 }
- 
+
 var isNotSafariPrivate = function() {
 var doesItWork = 'test', storage = window.sessionStorage;
 try {
@@ -293,11 +293,11 @@ if (r==true) {localStorage.removeItem("gameovercounter");localStorage.removeItem
 function counterCheck() {
 if ( isNotSafariPrivate() ) {localStorage.setItem("gameovercounter", counter);}
 }
-    
+
 function checkpointCheck() {
 if ( isNotSafariPrivate() ) {localStorage.setItem("checkpointmarker", checkpoint);}
 }
-    
+
 function completeCheck() {
 if ( isNotSafariPrivate() ) {localStorage.setItem("completedgame", complete);}
 }
@@ -358,7 +358,7 @@ document.getElementById("main").innerHTML="<p>You open the bottom drawer. Inside
 }
 
 function s10() {
-document.getElementById("main").innerHTML="<p>You eat the lunch. Apparently, the rubber has an acid that brings you great strength for a little while! Because of this, manage to bust the prison door open and escape the room!</p><ul id='moveon'><li onclick=s20()>Continue onward.</li></ul><p>(Note: As you escape the prison cell, your power disappears.)</p>";
+document.getElementById("main").innerHTML="<p>You eat the lunch. Apparently, the rubber has an acid that brings you great strength for a little while! Because of this, you manage to bust the prison door open and escape the room!</p><ul id='moveon'><li onclick=s20()>Continue onward.</li></ul><p>(Note: As you escape the prison cell, your power disappears.)</p>";
 }
 
 function s11() {
@@ -780,7 +780,7 @@ counter++;counterCheck();
 }
 
 function s100() {
-document.getElementById("main").innerHTML="<p>You cry because you don’t know what to do. The sobs and tears of your crying eventually make its way over to the battery. You battery now has a fluid!</p><p><em>Do you wish to put the battery into operation now?</em></p><ol type='A'><li onclick=s101()><span>Yes.</span></a><li onclick=s90()><span>No. Dump the tears and try something else.</span></li></ol>";
+document.getElementById("main").innerHTML="<p>You cry because you don’t know what to do. The sobs and tears of your crying eventually make its way over to the battery. Your battery now has a fluid!</p><p><em>Do you wish to put the battery into operation now?</em></p><ol type='A'><li onclick=s101()><span>Yes.</span></a><li onclick=s90()><span>No. Dump the tears and try something else.</span></li></ol>";
 }
 
 function s101() {
@@ -1228,7 +1228,7 @@ loadit();
 }
 
 </script>
-  
+
 </head>
 
 <body>
