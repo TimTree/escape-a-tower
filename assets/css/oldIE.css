@@ -1,0 +1,35 @@
+body {
+  padding:0 22px;
+  width:720px;
+}
+
+#secret {
+  cursor:hand;
+  background-color:#85776D;
+}
+
+#secret2 {
+  cursor:hand;
+  background-color:#85776D;
+}
+
+ol li {
+  cursor:hand;
+}
+
+#moveon li {
+  cursor:hand;
+}
+
+a {
+  cursor:hand;
+}
+
+.wrap {
+  width:720px;
+  text-align:left;
+}
+
+.IEThing {
+  text-align:center;
+}

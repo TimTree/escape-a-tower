@@ -1,0 +1,117 @@
+POWERPOINT VERSION HISTORY
+
+Version 1.7 (released Nov 21, 2012)
+------------------------------------
+In this update: How to Play condensed into 1 slide, new 2 slide long prologue,
+Q&A updated, some graphical improvements, and fixes errors.
+
+Version 1.66 (released Jul 6, 2012)
+------------------------------------
+A copyright and Q&A revision.
+
+Version 1.65 (released Jan 2, 2012)
+------------------------------------
+A proofread of the entire game fixes spelling/grammatical errors. Also modifies
+Game Quiz and Game Scavenger Hunt.
+
+Version 1.6 (released Dec 31, 2011)
+------------------------------------
+This update moves the credits and finally fixes the game breaking PIN number
+glitch.
+
+Version 1.58 (released Dec 16, 2011)
+------------------------------------
+Added the Journey to Home trailer.
+
+Version 1.57 (released Sept 2, 2011)
+------------------------------------
+Apparently, the game title had some font issues with some versions of
+PowerPoint. This has been fixed.
+
+Version 1.56 (released Aug 7, 2011)
+------------------------------------
+Bug fixes
+
+Version 1.55 (released Aug 5, 2011)
+------------------------------------
+Added Q&A and revised the credits and Can YOU Beat the Creator, along with
+adding copyright.
+
+Version 1.5 (released Jun 24, 2011)
+------------------------------------
+It's been a while! In this update, the Quit Game button now actually works.
+Along with that, the Trivia game has been made to be more fair, with some bug
+fixes.
+
+Version 1.45 (released Jan 6, 2011)
+------------------------------------
+Minor title, How to Play, and Credits revision, italicized (cont.)'s, and fixed
+a spelling error. Also disabled slide advancement by using the arrow keys.
+
+Version 1.43 (released Jan 3, 2011)
+------------------------------------
+PIN number part of game updated.
+
+Version 1.42 (released Dec 19, 2010)
+------------------------------------
+Mini bug fix and a minor text edit.
+
+Version 1.41 (released Dec 13, 2010)
+------------------------------------
+Think you can beat me in this game? Go ahead and test your skills in the brand
+new "Can YOU Beat the Creator?" option in Bonus Features. Good luck beating my
+time.
+
+Version 1.4 (released Dec 11, 2010)
+------------------------------------
+In this update:
+- Brief prologue now available
+- Replaced something in the NOTICE board that increases difficulty
+- On Game Quiz, fixed minor bug and replaced question 5.
+- Guard in Heads and Tails game now gives you a better secret. Hmm...
+
+Version 1.3 (released Dec 8, 2010)
+------------------------------------
+In this update:
+- Fixed a bug that took you to a completely different slide if you clicked
+anywhere other than hyperlinks in the game.
+- If you REDO in the PIN number, you should not receive a notification.
+- Some slide transition, font, and wording updates
+- Replaced question 8 of the Game Quiz
+- Added a prologue in the game.
+
+Version 1.2 (released Dec 2, 2010)
+------------------------------------
+Updates are shown in bullet points.
+- The How to Play section has been slightly redesigned. Check it out!
+- A "This game is NOT rigged" disclaimer now shows up in the game of heads and
+tails with the guard.
+- The how to make a slideshow game and version history bonus features now have
+the option to go back to the bonus features menu. Sweet!
+- Most of the signs have been revamped. The look much better now!
+
+Version 1.15 (released Nov 28, 2010)
+------------------------------------
+Fixed a bug that made you open the guard room when you wanted to peek in it. I
+also improved the interpretation of how slideshow games are made.
+
+Version 1.1 (released Nov 26, 2010)
+------------------------------------
+I decided to do some revisions to the game. The title slide had a small
+makeover, the How to Play slides have been slightly redesigned, a checkpoint has
+been added to avoid frustration, two questions for the game quiz have been
+added, and a bug in the trivia and corridors has been fixed.
+
+Version 1.0 (released Nov 25, 2010)
+------------------------------------
+At last! The entire game is complete! Everything is there, including the bonus
+features! Plus, when my relatives came over to play the game during dinner, they
+loved it much more than ever! Yeah!
+
+Oct 23, 2010
+------------------------------------
+Development of Escape a Tower begins. The game originally starts out as a card
+game before my friends and family suggest the game to be created for the
+computer instead. I try using Microsoft Word to create the game, but that does
+not end up too well. In the end, Microsoft PowerPoint proves to be the best
+option at the time.

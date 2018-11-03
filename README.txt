@@ -8,16 +8,16 @@ Enjoy!
 
 
 COMPATIBLE BROWSERS
-You'll need to enable JavaScript and use one of the following browsers:
+Escape a Tower works on the latest versions of these browsers with JavaScript enabled:
 
 Microsoft Edge
-Internet Explorer 10+
-Firefox 3.5+
-Chrome 4+
-Safari 4+ (Mobile: iOS 6+)
-Opera 11.50+
+Internet Explorer
+Firefox
+Chrome
+Safari
+Opera
 
-If you use an older browser for whatever reason, try the Ancient Version inside the "ancient" folder.
+Older browsers (pre-2012) may run the game but without save support or some visual effects.
 
 
 COPYRIGHT NOTICE
