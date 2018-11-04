@@ -8,6 +8,8 @@ var saveData = {
   complete: 0
 };
 
+var leaperMode = false;
+
 var autoComplete = (function() {
     var counter = 0;
     return function() {
@@ -127,9 +129,18 @@ function gameOver() {
   } else {
     goBackWords = "Go back to checkpoint";
   }
-  saveData.counter += 1;
-  save();
+  if (!leaperMode) {
+    saveData.counter += 1;
+    save();
+  }
   return "<div class='center'><p><span class='gameover'>GAME OVER</span></p><p><a onclick='loadgame()'>(" + goBackWords + ")</a></p></div>";
+}
+
+function markCheckpoint(x) {
+  saveData.checkpoint = x;
+  if (!leaperMode) {
+    save();
+  }
 }
 
 function prologue() {
@@ -148,8 +159,7 @@ function prologue2() {
 }
 
 function s1() {
-  saveData.checkpoint = 1;
-  save();
+  markCheckpoint(1);
   titler.innerHTML = "The Prison Cell";
   main.innerHTML = "<p>You are now inside the prison cell.</p><p><em>So what do you do?</em> Remember, your goal is to escape the tower.</p>"
   + choices(
@@ -280,8 +290,7 @@ function s19() {
 }
 
 function s20() {
-  saveData.checkpoint = 2;
-  save();
+  markCheckpoint(2);
   titler.innerHTML = "Staircase Area With Two Doors";
   main.innerHTML = "<p>The next area of the tower includes a giant staircase going down and two doors on each side of it. A sign stands next to the staircase. <em>What do you do?</em></p>"
   + choices(
@@ -373,8 +382,7 @@ function s28(instance) {
 }
 
 function s29() {
-  saveData.checkpoint = 3;
-  save();
+  markCheckpoint(3);
   titler.innerHTML = "Mysterious Library";
   main.innerHTML = "<p>You search in the shadows. Wow.</p><p>You find a key! For some reason, the book is indeed true.</p><p>Now what is this key useful for...?</p>"
   + choices(
@@ -446,8 +454,7 @@ function s40() {
 }
 
 function s42() {
-  saveData.checkpoint = 4;
-  save();
+  markCheckpoint(4);
   titler.innerHTML = "The Corridors";
   main.innerHTML = "<p>Moving on, you see two different corridors.</p><p><em>Which one do you go through?</em></p>"
   + choices(
@@ -494,8 +501,7 @@ function s46() {
 }
 
 function s47() {
-  saveData.checkpoint = 5;
-  save();
+  markCheckpoint(5);
   titler.innerHTML = "The Corridors";
   main.innerHTML = "<p><strong>EXCELLENT!!!</strong> You succeed in going through all four corridors!</p><p>But don't celebrate yet; when you head for the door to leave the corridors once and for all, a man with a long beard stops you from your tracks!</p><p><strong>&quot;INTRUDAH!&quot;</strong> he shouts as he whips out his rifle.</p><p>The good news is, he puts his rifle down right when he sees you. Strange, huh?</p>"
   + choices(["Continue.", "s48()"])
@@ -720,8 +726,7 @@ function s70() {
 }
 
 function s71() {
-  saveData.checkpoint = 6;
-  save();
+  markCheckpoint(6);
   titler.innerHTML = "Outside the Elevator";
   main.innerHTML = "<p>You go through the door. The man with the beard was correct about there being an elevator. What he didn't tell you though is that there are two different elevators. <em>Which elevator do you go into?</em></p>"
   + choices(
@@ -763,8 +768,7 @@ function s75() {
 }
 
 function s76() {
-  saveData.checkpoint = 7;
-  save();
+  markCheckpoint(7);
   titler.innerHTML = "The Corridors";
   main.innerHTML = "<p>Which corridor do you go through first?</p>"
   + choices(
@@ -873,8 +877,7 @@ function s89() {
 }
 
 function s90() {
-  saveData.checkpoint = 8;
-  save();
+  markCheckpoint(8);
   titler.innerHTML = "Left Elevator";
   main.innerHTML = "<p>Y-Y-A-A-N-N-K-K-!-!</p><p>You did it! By using the sling of your slingshot, the battery slides off from the control panel.</p><p>After that, you look at the battery. There's a tiny label on it. It reads:</p><p class='IEThing'><table style='margin:auto;background-color:#E7E4E2;'><tr><td style='padding:6px;'><span style='font-family:\"arial narrow\", arial, sans-serif;'>Operates with any low viscosity fluid</span></td></tr></table></p><p><em>What do you do?</em></p>"
   + choices(
@@ -964,8 +967,7 @@ function s101() {
 }
 
 function s102() {
-  saveData.checkpoint = 9;
-  save();
+  markCheckpoint(9);
   titler.innerHTML = "Bottom of the Tower";
   main.innerHTML = "<p>You step outside the elevator to see a hallway with three doors. One of these doors is to the left, another is to the right, and the third door, aka: grand door, is at the end of the hallway. The grand door is the door to leave the tower. Also in the bottom floor is a strange looking floor.</p><p>Unfortunately, there are guards around the bottom of the tower, so escaping will not be easy.</p><p><em>So what do you do?</em></p>"
   + choices(
@@ -1076,8 +1078,7 @@ function s112() {
 }
 
 function s113() {
-  smallbox = 0;
-  bigbox = 0;
+  clearGameVars();
   main.innerHTML = "<p>You open the medium box. Inside, you find a gun! This can be incredibly useful somehow...</p><p>But then, a guard enters the storage room and sees you. He gets angry that you're fiddling around in here and shoots you. You try to shoot back, but your gun is not loaded! Sorry.</p>"
   + gameOver();
 }
@@ -1158,8 +1159,7 @@ function s120() {
 }
 
 function s121() {
-  saveData.checkpoint = 10;
-  save();
+  markCheckpoint(10);
   titler.innerHTML = "Bottom of the Tower";
   main.innerHTML = "<p><em>Now what do you want to do?</em></p>"
   + choices(
@@ -1217,15 +1217,15 @@ function s128(instance) {
 }
 
 function s129() {
-  main.innerHTML = "<p>You chat with a guard. The guard you talk to seems to be nice.</p><p>&quot;Hey you!&quot; he says. &quot;I will give you a <em>secret</em> if you guess the side my coin lands on correctly.&quot;</p><p><em>Do you wish for a chance to hear the secret?</em></p>"
+  main.innerHTML = "<p>You chat with a guard. The guard you talk to seems to be nice.</p><p>&quot;Hey there!&quot; he says. &quot;Name's Hugo. I'll give you a <em>secret</em> if you guess the side my coin lands on correctly.&quot;</p><p><em>Do you wish for a chance to hear the secret?</em></p>"
   + choices(
-    ["You're on, guard!", "s130()"],
+    ["You're on, Hugo!", "s130()"],
     ["Nah, no thanks.", "s126()"]
   );
 }
 
 function s130() {
-  main.innerHTML = "<p>&quot;Okay,&quot; the guard says. &quot;Heads or tails?&quot;</p>"
+  main.innerHTML = "<p>&quot;Okay,&quot; Hugo says. &quot;Heads or tails?&quot;</p>"
   + choices(
     ["Heads!", "s131()"],
     ["Tails!", "s132()"]
@@ -1233,12 +1233,12 @@ function s130() {
 }
 
 function s131() {
-  main.innerHTML = "<p>The guard flips the coin. It lands on tails.</p><p>&quot;Sorry, but you lost,&quot; the guard says.</p>"
+  main.innerHTML = "<p>Hugo flips the coin. It lands on tails.</p><p>&quot;Sorry, but you lost,&quot; he says.</p>"
   + choices(["Well that stinks.", "s133()"]);
 }
 
 function s132() {
-  main.innerHTML = "<p>The guard flips the coin. It lands on tails. You win!</p><p>&quot;Here is the secret,&quot; the guard says. &quot;Once you beat this game, <strong>click on the top-left corner of the main menu</strong>, and something cool will happen. Got that?&quot;</p>"
+  main.innerHTML = "<p>Hugo flips the coin. It lands on tails. You win!</p><p>&quot;Ok, here's the secret,&quot; he says. &quot;Once you beat this game, <strong>click on the top-left corner of the main menu</strong>, and something cool will happen. Got that?&quot;</p>"
   + choices(["Gotcha.", "s133()"]);
 }
 
@@ -1303,17 +1303,29 @@ function s140() {
 }
 
 function credits() {
+  var gameOverCountText = "";
   var singleplural;
-  if (saveData.counter === 1) {
-    singleplural = "Game Over";
-  } else {
-    singleplural = "Game Overs";
+  var bonusFeaturesText = "";
+  if (!leaperMode) {
+    if (saveData.counter === 1) {
+      singleplural = "over";
+    } else {
+      singleplural = "overs";
+    }
+    gameOverCountText = "<p>You beat the game with " + saveData.counter + " game " + singleplural + ".</p>";
+  }
+  if (saveData.complete === 0) {
+    bonusFeaturesText = "<hr><p>You've unlocked the <strong>Bonus Features</strong> for beating the game!</p>";
   }
   titler.innerHTML = "Credits";
-  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p><p>You completed the game with " + saveData.counter + " " + singleplural + ".</p><p>Don't forget to check out the <strong>Bonus Features</strong> you just unlocked by completing the game!</p><p><a onclick='imdone()'>Main Menu</a></p></div>";
+  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='disableLeapMode();imdone()'>Main Menu</a></p></div>";
   saveData.checkpoint = 0;
   saveData.complete = 1;
   save();
+  clearGameVars();
+}
+
+function clearGameVars() {
   smallbox = 0;
   bigbox = 0;
 }
@@ -1331,7 +1343,23 @@ function qa() {
 
 function gameLeaper() {
   titler.innerHTML = "Game Leaper";
-  main.innerHTML = "<p>Work in progress.</p><ol id='moveon'><li onclick='s1()'>The Prison Cell</li><li onclick='s20()'>Staircase Area With Two Doors</li><li onclick='s29()'>Mysterious Library</li><li onclick='s42()'>The Corridors</li><li onclick='s47()'>Memory or Trivia</li><li onclick='s71()'>Outside the Elevator</li><li onclick='s76()'>The Corridors (again)</li><li onclick='s90()'>Left Elevator</li><li onclick='s102()'>Bottom of the Tower</li><li onclick='s121()'>Bottom of the Tower 2</li></ol><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<p>Work in progress.</p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors</li><li onclick='enableLeapMode();s29()'>Mysterious Library</li><li onclick='enableLeapMode();s42()'>The Corridors</li><li onclick='enableLeapMode();s47()'>Memory or Trivia</li><li onclick='enableLeapMode();s71()'>Outside the Elevator</li><li onclick='enableLeapMode();s76()'>The Corridors (again)</li><li onclick='enableLeapMode();s90()'>Left Elevator</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2</li></ol><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+}
+
+var tempSave = 0;
+function enableLeapMode() {
+  leaperMode = true;
+  tempSave = saveData.checkpoint;
+  document.getElementById("leaper").style.display="block";
+  clearGameVars();
+}
+
+function disableLeapMode() {
+  leaperMode = false;
+  saveData.checkpoint = tempSave;
+  tempSave = 0;
+  document.getElementById("leaper").style.display="none";
+  clearGameVars();
 }
 
 function gamequiz() {

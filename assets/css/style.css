@@ -199,6 +199,20 @@ blockquote {
   font-family:courier, serif;
 }
 
+#leaper {
+  font-size:14pt;
+  font-weight:700;
+  text-align:center;
+  padding:0.35em 0;
+  background-color:#47a547;
+  cursor:pointer;
+  display:none;
+}
+
+#leaper:active {
+  background-color:#3c963c;
+}
+
 /* Mobile Device CSS */
 
 @media screen and (max-width: 670px) {
@@ -231,6 +245,10 @@ blockquote {
 
   #bonusfeatures {
     font-size:24pt;
+  }
+
+  #leaper {
+    font-size:12pt;
   }
 }
 
