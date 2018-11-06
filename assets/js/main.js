@@ -1479,7 +1479,7 @@ function secret() {
   titler.innerHTML = "The Secret Area that No One Should Know About";
   copyright.style.visibility = "hidden";
   if (saveData.complete === 1) {
-    main.innerHTML = "<p><strong>WHAT?!</strong> You FOUND MY <strong>SECRET AREA?!</strong> HOW DARE YOU?! YOU ARE IN <strong>HUGE TROUBLE!!!</strong></p><p>How in the WORLD did you FIND THIS PLACE???</p>"
+    main.innerHTML = "<p>&quot;<strong>WHAT?!</strong> You FOUND MY <strong>SECRET AREA?!</strong> HOW DARE YOU?! YOU ARE IN <strong>HUGE TROUBLE!!!</strong></p><p>&quot;How in the WORLD did you FIND THIS PLACE???&quot;</p>"
     + choices(
       ["A guard in the tower told me about it.", "secret9()"],
       ["I just randomly clicked and found it.", "secret2()"],
@@ -1488,13 +1488,13 @@ function secret() {
     );
   }
   else {
-    main.innerHTML = "<p>Um, I'm still setting up this place. Come back here once you've completed the game at least once.</p>"
+    main.innerHTML = "<p>&quot;Um, I'm still setting up this place. Come back here once you've completed the game at least once.&quot;</p>"
     + choices(["Er, ok...", "imdone()"]);
   }
 }
 
 function secret2() {
-  main.innerHTML = "<p>Well, I admire your skills in random clicking, but <strong>YOU REALLY SHOULDN'T BE DOING THAT!!!</strong> WHY DID YOU DO THAT??!!</p>"
+  main.innerHTML = "<p>&quot;Well, I admire your skills in random clicking, but <strong>YOU REALLY SHOULDN'T BE DOING THAT!!!</strong> WHY DID YOU DO THAT??!!&quot;</p>"
   + choices(
     ["It was an accident, really.", "secret3()"],
     ["<span style='font-size:10pt;'>I learned that there are people out there who love to put in secret things in their stuff, so I went and tried it everywhere and eventually found this finger pointing to some invisible link so I clicked on it and then you were barking at me, so now I'm telling the truth and you're still barking at me, so what in the world-Oh what in the world am I supposed to do? What am I supposed to do? I really want you to understand so I don't have to discuss this ridiculously long reason again and again and again and again and forever going until I eventually pass out and faint so I have to go to the hospital and a whole bunch of bad things happen and then I die and go to a graveyard that I really don't want to be in! GAAHHH! It hurts my brain so much by saying all that things!!!! Curse my horrible intelligence by saying it so long that even I didn't understand!</span>", "secret4()"]
@@ -1502,12 +1502,12 @@ function secret2() {
 }
 
 function secret3() {
-  main.innerHTML = "<p>An ACCIDENT? (Looks at you directly in the eye) <strong>YOU'RE SMILING!</strong> I SAW THAT! YOU'RE GUILITY! I'M GONNA KICK YOU OUT!</p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p>&quot;An ACCIDENT?&quot; (Looks at you directly in the eye) &quot;<strong>YOU'RE SMILING!</strong> I SAW THAT! YOU'RE GUILITY! I'M GONNA KICK YOU OUT!&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret4() {
-  main.innerHTML = "<p>I don't CARE about all that <strong>LONG, NERDY TALK!</strong> GIVE ME A <em>LEGIT</em> REASON, <strong>NOW!!!</strong></p>"
+  main.innerHTML = "<p>&quot;I don't CARE about all that <strong>LONG, NERDY TALK!</strong> GIVE ME A <em>LEGIT</em> REASON, <strong>NOW!!!</strong>&quot;</p>"
   + choices(
     ["In other words, I was curious.", "secret5()"],
     ["<span style='font-size:10pt;'>Well, if you wanted me to explain this reason simpler, I don't think I can do that. I am too used to saying things in this ridiculously small font that it would be a nightmare if I don't see the whole page filled up like madness, so that is why I have to say all this stuff in a long and long and random thing that sometimes, I don't know what the heck I am saying, so in order to restore my painful remorse, I jump up in the air three times in a row and breathe on my forehead until I'm filled with so much fresh-filled oxygen that I can inflate my way up to the sky and go to outer space and look at all the planets and breathe all my oxygen so that someday, I can be the first person to survive in space without an air tank, oh would that be awesome! I will be rich and famous and be crazy cool! Yee-haw! Woo-yeah! I am as happy as a fine goat lying in the valleys of a poor land of destiny! It definitely rocks. You should try it. Trust me, it feels as good as drinking juice. Juice is good.</span>", "secret6()"]
@@ -1515,17 +1515,17 @@ function secret4() {
 }
 
 function secret5() {
-  main.innerHTML = "<p>Did you know that <strong>curiosity killed the cat?</strong> Well this time, <strong>CURIOSITY KILLED YOU!!!</strong></p><p>The person gets a knife out, and you die.</p>"
+  main.innerHTML = "<p>&quot;Did you know that <strong>curiosity killed the cat?</strong> Well this time, <strong>CURIOSITY KILLED YOU!!!</strong>&quot;</p><p>The person gets a knife out, and you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret6() {
-  main.innerHTML = "<p><span style='font-size:10pt;'>Your long and somewhat random and nerdy and boring and funny and unmethodical and hilarious and silly talk is really crazy and I think you should shut up before I cut your eyeballs out and throw them off the secret area and LOL at you like you are such a sucker! Seriously, why do you enjoy talking a lot? It must take skill to do so, because it is so long for everyone else to talk in such a tiny font. How on Earth do you do it? Was it from your family genes? How about alleles? Is it dominant or recessive? I need a Punnett square to find out! Please give me a Punnett square! Oh please, will you? It will be so nice for you to do so so that maybe I will get out my guilt and fly away to Unicorn Land! UNICORNS! They are cute and fluffy and so magical...I want to marry one someday! It will be so romantic, and then we have kids and those kids would look so weird and people laugh at me, but I am a brave person and I will overcome...</span></p><p>Wait a sec, <strong>I'M INFECTED!!!</strong></p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p><span style='font-size:10pt;'>&quot;Your long and somewhat random and nerdy and boring and funny and unmethodical and hilarious and silly talk is really crazy and I think you should shut up before I cut your eyeballs out and throw them off the secret area and LOL at you like you are such a sucker! Seriously, why do you enjoy talking a lot? It must take skill to do so, because it is so long for everyone else to talk in such a tiny font. How on Earth do you do it? Was it from your family genes? How about alleles? Is it dominant or recessive? I need a Punnett square to find out! Please give me a Punnett square! Oh please, will you? It will be so nice for you to do so so that maybe I will get out my guilt and fly away to Unicorn Land! UNICORNS! They are cute and fluffy and so magical...I want to marry one someday! It will be so romantic, and then we have kids and those kids would look so weird and people laugh at me, but I am a brave person and I will overcome...</span></p><p>&quot;Wait a sec, <strong>I'M INFECTED!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret7() {
-  main.innerHTML = "<p>Really, <em>huh?</em> Well if you did that, you just did something HORRIBLE that I, yes I, consider to be the incorrigible, awful <strong>CHEATING!!! <em>GET OUT OF HERE!!!</em></strong></p>"
+  main.innerHTML = "<p>&quot;Really, <em>huh?</em> Well if you did that, you just did something HORRIBLE that I, yes I, consider to be the incorrigible, awful <strong>CHEATING!!! <em>GET OUT OF HERE!!!</em></strong>&quot;</p>"
   + choices(
     ["No way! (Shoot the person with your slingshot)", "secret8()"],
     ["Yeah, gotta go.", "imdone()"]
@@ -1533,12 +1533,12 @@ function secret7() {
 }
 
 function secret8() {
-  main.innerHTML = "<p>OH, SO YOU REALLY THINK I WOULD DIE WITH A <strong>PUNY SLINGSHOT?!</strong> TAKE A LOOK AT WHAT <strong>I HAVE!!!</strong> (takes out a knife from the pocket)</p><p>To make a long story short, you die.</p>"
+  main.innerHTML = "<p>&quot;OH, SO YOU REALLY THINK I WOULD DIE WITH A <strong>PUNY SLINGSHOT?!</strong> TAKE A LOOK AT WHAT <strong>I HAVE!!!</strong>&quot; (takes out a knife from the pocket)</p><p>To make a long story short, you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret9() {
-  main.innerHTML = "<p>REALLY, huh? Well I don't BELIEVE that <strong>MUMBO JUMBO!!! YOU MUST BE LYING!!!</strong></p>"
+  main.innerHTML = "<p>&quot;REALLY, huh? Well I don't BELIEVE that <strong>MUMBO JUMBO!!! YOU MUST BE LYING!!!</strong>&quot;</p>"
   + choices(
     ["No, I'm not! Go...go check for yourself!", "secretWho()"],
     ["I DID LIE! (cries) Please forgive me.", "secret10()"],
@@ -1547,7 +1547,7 @@ function secret9() {
 }
 
 function secret10() {
-  main.innerHTML = "<p>(Stares at you) Oh, alright, <strong>CRY BABY</strong>, I forgive you. <strong>NOW GET OUT!</strong></p>"
+  main.innerHTML = "<p>(Stares at you) &quot;Oh, alright, <strong>CRY BABY</strong>, I forgive you. <strong>NOW GET OUT!</strong>&quot;</p>"
   + choices(
     ["Get out.", "imdone()"],
     ["Can I play with you?", "secret11()"]
@@ -1555,7 +1555,7 @@ function secret10() {
 }
 
 function secret11() {
-  main.innerHTML = "<p>ABSOLUTELY NOT! <strong>NOW PLEASE GET OUT!</strong></p>"
+  main.innerHTML = "<p>&quot;ABSOLUTELY NOT! <strong>NOW PLEASE GET OUT!</strong>&quot;</p>"
   + choices(
     ["Get out.", "imdone()"],
     ["But we can have fun! We can have a tea party, play hide-and-seek, have a pillow fight, and...", "secret12()"]
@@ -1563,12 +1563,12 @@ function secret11() {
 }
 
 function secret12() {
-  main.innerHTML = "<p><strong>OH THAT'S IT! I CAN'T TAKE THIS PAIN ANYMORE!!!</strong></p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p>&quot;<strong>OH THAT'S IT! I CAN'T TAKE THIS PAIN ANYMORE!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secretWho() {
-  main.innerHTML = "<p>Hmmmm......(stares at you directly in the eyes) Well FINE! But <strong>WHICH GUARD TOLD YOU ABOUT THIS???</strong></p>"
+  main.innerHTML = "<p>&quot;Hmmmm......&quot; (stares at you directly in the eyes) &quot;Well FINE! But <strong>WHICH GUARD TOLD YOU ABOUT THIS???</strong>&quot;</p>"
   + choices(
     ["Martha!", "secretMartha()"],
     ["Hugo!", "secretHugo()"],
@@ -1577,7 +1577,7 @@ function secretWho() {
 }
 
 function secretMartha() {
-  main.innerHTML = "<p>Heh heh...I know 100% you're lying...</p><p><strong>'CAUSE THERE AIN'T NO GUARD NAMED MARTHA!!!</strong></p>"
+  main.innerHTML = "<p>&quot;Heh heh...I know 100% you're lying...</p><p><strong>&quot;'CAUSE THERE AIN'T NO GUARD NAMED MARTHA!!!</strong>&quot;</p>"
   + choices(
     ["Aww man, you got me!", "secretMarthaAwwMan()"],
     ["Jokes on you, 'cause <em>AIN'T NO</em> really means <em>YES THERE IS</em>!", "secretMarthaAint()"]
@@ -1585,24 +1585,24 @@ function secretMartha() {
 }
 
 function secretMarthaAwwMan() {
-  main.innerHTML = "<p>Ha, thought so!</p><p>Man, that felt <em>great</em>. <strong>I CAUGHT SOMEONE LYING RED-HANDED!!</strong> Oh I'm so AWESOME, I should be a <strong>LAWYER</strong> someday! Ah, the <em>money</em> I'd get for my <strong>sheer</strong> lie-checking <em>brilliance</em>! <strong><em>MONEY MONEH MONAY!!</em></strong> Hallelujah, <strong>HOLLYWOOD!!!</strong></p>"
+  main.innerHTML = "<p>&quot;Ha, thought so!</p><p>&quot;Man, that felt <em>great</em>. <strong>I CAUGHT SOMEONE LYING RED-HANDED!!</strong> Oh I'm so AWESOME, I should be a <strong>LAWYER</strong> someday! Ah, the <em>money</em> I'd get for my <strong>sheer</strong> lie-checking <em>brilliance</em>! <strong><em>MONEY MONEH MONAY!!</em></strong> Hallelujah, <strong>HOLLYWOOD!!!</strong> ...&quot;</p>"
   + choices(["Leave before anything worse happens.", "imdone()"]);
 }
 
 function secretMarthaAint() {
-  main.innerHTML = "<p>(groan) So you're one of <strong>THOSE PEOPLE</strong>...</p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p>(groan) &quot;So you're one of <strong>THOSE PEOPLE</strong>...&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secretHugo() {
   isHugo = true;
-  main.innerHTML = "<p><strong>Hugo</strong>, eh? Man, I can't <em>stand</em> that guy! <strong>I'M GONNA HUNT HUGO DOWN!!!</strong></p><p>The person leaves the secret area to confront Hugo.</p>"
+  main.innerHTML = "<p>&quot;<strong>Hugo</strong>, eh? Man, I can't <em>stand</em> that guy! <strong>I'M GONNA HUNT HUGO DOWN!!!</strong>&quot;</p><p>The person leaves the secret area to confront Hugo.</p>"
   + choices(["Continue.", "secret13()"]);
 }
 
 function secretManBeard() {
   isHugo = false;
-  main.innerHTML = "<p><strong>The man with the beard</strong>, eh? Yeah, there's <em>something</em> about that guy. <strong>I'M GONNA HUNT HIM DOWN!!!</strong></p><p>The person leaves the secret area to confront the man with the beard.</p>"
+  main.innerHTML = "<p>&quot;<strong>The man with the beard</strong>, eh? Yeah, there's <em>something</em> about that guy. <strong>I'M GONNA HUNT HIM DOWN!!!</strong>&quot;</p><p>The person leaves the secret area to confront the man with the beard.</p>"
   + choices(["Continue.", "secret13()"]);
 }
 
@@ -1632,17 +1632,17 @@ function secret14() {
 }
 
 function secret15() {
-  main.innerHTML = "<p>You pick up any signs of the vase and hide the pieces in every pocket you have. As soon as you finish, the person comes back.</p><p>HEY, what happened to my VASE? (stares at you, notices your stuffed pockets) AHA! <strong>YOU STOLE IT! I THOUGHT I TRUSTED YOU! FEEL THE PAIN!</strong> (pulls out pocket knife)</p><p>To make a long story short, you die.</p>"
+  main.innerHTML = "<p>You pick up any signs of the vase and hide the pieces in every pocket you have. As soon as you finish, the person comes back.</p><p>&quot;HEY, what happened to my VASE?&quot; (stares at you, notices your stuffed pockets) &quot;AHA! <strong>YOU STOLE IT! I THOUGHT I TRUSTED YOU! FEEL THE PAIN!</strong>&quot; (pulls out pocket knife)</p><p>To make a long story short, you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret16() {
-  main.innerHTML = "<p>Eventually, the person returns.</p><p>Oh shoot, WHAT HAPPENED TO MY <strong>VASE??!!</strong> (stares blankly at you) <strong>IT'S ALL YOUR FAULT, IDIOT!!!</strong></p><p>Before you can respond, the person kicks you out.</p>"
+  main.innerHTML = "<p>Eventually, the person returns.</p><p>&quot;Oh shoot, WHAT HAPPENED TO MY <strong>VASE??!!</strong>&quot; (stares blankly at you) &quot;<strong>IT'S ALL YOUR FAULT, IDIOT!!!</strong>&quot;</p><p>Before you can respond, the person kicks you out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret17() {
-  main.innerHTML = "<p>You try to escape the premises. Unfortunately, that's when the person returns.</p><p>Um, what are YOU trying to do? Are you <strong>hiding something?</strong></p>"
+  main.innerHTML = "<p>You try to escape the premises. Unfortunately, that's when the person returns.</p><p>&quot;Um, what are YOU trying to do? Are you <strong>hiding something?</strong>&quot;</p>"
   + choices(
     ["Yeah, I just broke your vase and now I'm trying to escape so I don't get in trouble, so...", "secret18()"],
     ["No...I, um, just realized I have, you know, other commitments.", "secret19()"]
@@ -1650,12 +1650,12 @@ function secret17() {
 }
 
 function secret18() {
-  main.innerHTML = "<p>Well, at least you're being honest. But still, <strong>YOU BROKE MY VASE, IDIOT!!!</strong></p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p>&quot;Well, at least you're being honest. But still, <strong>YOU BROKE MY VASE, IDIOT!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret19() {
-  main.innerHTML = "<p><em>Really,</em> huh? <strong>Alright then.</strong></p><p>The person lets you leave, and you escape. Let's just hope nothing bad happens once the person sees the broken vase, shall we?</p>"
+  main.innerHTML = "<p>&quot;<em>Really,</em> huh? <strong>Alright then.</strong>&quot;</p><p>The person lets you leave, and you escape. Let's just hope nothing bad happens once the person sees the broken vase, shall we?</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
@@ -1669,22 +1669,22 @@ function secret20() {
 }
 
 function secret21() {
-  main.innerHTML = "<p>You take the wallet out of the drawer and flee the scene. Somehow, you manage not to get caught.</p><p>Once the coast is clear, you open up the wallet and find...25 cents. That's something, but <em>was this really the right thing to do?</em></p>";
+  main.innerHTML = "<p>You take the wallet out of the drawer and flee the scene. Somehow, you manage not to get caught.</p><p>Once the coast is clear, you open up the wallet and find...25 cents. That's something, but <em>was this really the right thing to do?</em></p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret22() {
-  main.innerHTML = "<p>You take the entire drawer and leave.</p><p>Right as you take the drawer out, the person comes back. Uh, oh.</p><p><strong>WHAT ARE YOU DOING INTRUDING MY BELONGINGS? I LEAVE AND NOW THIS HAPPENS?! GET OUT!</strong></p><p>To make a long story short, you get kicked out.</p>"
+  main.innerHTML = "<p>You take the entire drawer and leave.</p><p>Right as you take the drawer out, the person comes back. Uh, oh.</p><p>&quot;<strong>WHAT ARE YOU DOING INTRUDING MY BELONGINGS? I LEAVE AND NOW THIS HAPPENS?! GET OUT!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret23() {
-  main.innerHTML = "<p>You close the drawer. You are right about the mean thing anyways.</p><p>The person comes back and notices the drawer that has been closed.</p><p><strong>HEY! I DON'T REMEMBER MY DRAWER BEING <em>COMPLETELY</em> CLOSED! GET OUT!!!</strong></p>"
+  main.innerHTML = "<p>You close the drawer. You are right about the mean thing anyways.</p><p>The person comes back and notices the drawer that has been closed.</p><p>&quot;<strong>HEY! I DON'T REMEMBER MY DRAWER BEING <em>COMPLETELY</em> CLOSED! GET OUT!!!</strong>&quot;</p>"
   + choices(["Get out before things get worse.", "imdone()"]);
 }
 
 function secret24() {
-  main.innerHTML = "<p>You hear the person running back to the secret area.</p><p><strong>I AM BUSY RIGHT NOW! PLEASE SHUT UP!!!</strong></p>"
+  main.innerHTML = "<p>You hear the person running back to the secret area.</p><p>&quot;<strong>I AM BUSY RIGHT NOW! PLEASE SHUT UP!!!</strong>&quot;</p>"
   + choices(
     ["But I love you so much!", "secret25()"],
     ["Perhaps I should leave now.", "imdone()"]
@@ -1692,7 +1692,7 @@ function secret24() {
 }
 
 function secret25() {
-  main.innerHTML = "<p>What? REALLY? You <em>REALLY LOVE ME?</em></p>"
+  main.innerHTML = "<p>&quot;What? REALLY? You <em>REALLY LOVE ME?</em>&quot;</p>"
   + choices(
     ["Of course I do! Let's go on a date.", "secret27()"],
     ["Just kidding! Obviously not!", "secret26()"]
@@ -1700,7 +1700,7 @@ function secret25() {
 }
 
 function secret26() {
-  main.innerHTML = "<p>YOU KNOW HOW MUCH I HATE YOU? <strong>I just want to kill you...NOW!!!</strong></p><p>To make a long story short, you die when the knife is taken out.</p>"
+  main.innerHTML = "<p>&quot;YOU KNOW HOW MUCH I HATE YOU? <strong>I just want to kill you...NOW!!!</strong>&quot;</p><p>To make a long story short, you die when the knife is taken out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
@@ -1711,7 +1711,7 @@ function secret27() {
   } else {
     whichGuard = "the man with the beard";
   }
-  main.innerHTML = "<p>A date? Well, I'm going to talk to "+whichGuard+" about the situation regarding you entering this place. Can't do it right now.</p>"
+  main.innerHTML = "<p>&quot;A date? Well, I'm going to talk to "+whichGuard+" about the situation regarding you entering this place. Can't do it right now.&quot;</p>"
   + choices(
     ["Oh, come on! We'll have a great time! Forget about "+whichGuard+".", "secret28()"],
     ["Fine. I hate you then.", "secret29()"]
@@ -1725,17 +1725,17 @@ function secret28() {
   } else {
     whichGuard = "the man with the beard";
   }
-  main.innerHTML = "<p>But I can't forget about "+whichGuard+", and you know what? You shouldn't be <strong>PEER-PRESSURING</strong> me to do things either. <strong>GET OUT!</strong></p><p>You get kicked out.</p>"
+  main.innerHTML = "<p>&quot;But I can't forget about "+whichGuard+", and you know what? You shouldn't be <strong>PEER-PRESSURING</strong> me to do things either. <strong>GET OUT!</strong>&quot;</p><p>You get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret29() {
-  main.innerHTML = "<p>If you hate me, then you really should GET OUT OF MY SECRET AREA.</p><p>You head on out, feeling indifferent.</p>"
+  main.innerHTML = "<p>&quot;If you hate me, then you really should GET OUT OF MY SECRET AREA.&quot;</p><p>You head on out, feeling indifferent.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
 function secret30() {
-  main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>Yup, Hugo confessed. Had to give him <em>the talk</em> as well, but I think he understands not to mention this place again. <em>Sorry for yelling at you.</em></p><p>Anyway, this is my secret place, and I want my privacy here. Can you please leave now?</p>"
+  main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>&quot;Yup, Hugo confessed. Had to give him <em>the talk</em> as well, but I think he understands not to mention this place again. <em>Sorry for yelling at you.</em></p><p>&quot;Anyway, this is my secret place, and I want my privacy here. Can you please leave now?&quot;</p>"
   + choices(
     ["Leave the secret area. Let's respect the person.", "imdone()"],
     ["Nope, because I am evil.", "secret31()"]
@@ -1743,7 +1743,7 @@ function secret30() {
 }
 
 function secretManBeardAftermath() {
-  main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>Ugh, I couldn't <em>find</em> the man with the beard! That guy <em>really</em> is <strong>something</strong>...</p><p>Anyway, <strong>you're off the hook</strong>. But this IS my secret place, and I want my privacy here. Can you please leave now?</p>"
+  main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>&quot;Ugh, I couldn't <em>find</em> the man with the beard! That guy <em>really</em> is <strong>something</strong>...</p><p>&quot;Anyway, <strong>you're off the hook</strong>. But this IS my secret place, and I want my privacy here. Can you please leave now?&quot;</p>"
   + choices(
     ["Leave the secret area. Let's respect the person.", "imdone()"],
     ["Nope, because I am evil.", "secret31()"]
@@ -1751,7 +1751,7 @@ function secretManBeardAftermath() {
 }
 
 function secret31() {
-  main.innerHTML = "<p><strong>Well, you're leaving anyway!</strong></p><p>You get kicked out by the person without further notice.</p>"
+  main.innerHTML = "<p>&quot;<strong>Well, you're leaving anyway!</strong>&quot;</p><p>You get kicked out by the person without further notice.</p>"
   + choices(["Back to main menu", "imdone()"]);
 }
 
