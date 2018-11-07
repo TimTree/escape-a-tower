@@ -21,7 +21,7 @@ Older browsers (pre-2012) may run the game but without save support or some visu
 
 
 COPYRIGHT NOTICE
-Escape a Tower is copyright (c) 2010-2016 Timothy Hsu. You may use the game layout for your personal projects, but redistributing the game text, verbatim or modified, is not permitted without the author's permission.
+Escape a Tower is copyright (c) 2010-2018 Timothy Hsu. You may use the game layout for your personal projects, but redistributing the game text, verbatim or modified, is not permitted without the author's permission.
 
 
 CONTACT INFO

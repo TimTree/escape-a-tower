@@ -148,7 +148,7 @@ function prologue() {
   saveData.checkpoint = 0;
   save();
   titler.innerHTML = "Prologue";
-  main.innerHTML = "<p>It is a warm, sunny day, and you decide to take a stroll downtown. There, you decide to visit the video game store. To get there, however, you have to cross through a dark, narrow alley.</p><p>As you walk through the alley, a man dressed in black suddenly appears out of nowhere!</p><p><strong>&quot;BOO!&quot;</strong> he yells, making a mad sprint towards you.</p><p>Scared, you decide to make a big run for it, but you are no match for the man. You've been snatched!</p>"
+  main.innerHTML = "<p>It is a warm, sunny day, and you decide to take a stroll downtown. There, you decide to visit the video game store. To get to the store, you have to cross through a dark, narrow alley.</p><p>As you walk through the alley, a man dressed in black suddenly appears out of nowhere!</p><p><strong>&quot;BOO!&quot;</strong> he yells, making a mad sprint towards you.</p><p>Scared, you decide to make a big run for it, but you are no match for the man. You've been snatched!</p>"
   + "<div id='prologueselect'><ul><li><a onclick='prologue2()'>Continue</a></li><wbr><li><a onclick=s1()>Skip&nbsp;Prologue</a></li></ul></div>";
   copyright.style.visibility = "hidden";
 }
@@ -182,7 +182,7 @@ function s2() {
 }
 
 function s3() {
-  main.innerHTML = "<p>You try to jump off the window. The good news is, the window is able to open up, but as you jump off, you notice the bad news: you don't have a parachute.</p><p>As you fall, you think to yourself, &quot;What a stupid choice I made! Why in the world did I...&quot;</p><p>BOOM! You land on the ground, flat dead.</p>"
+  main.innerHTML = "<p>You try to jump off the window. The good news is, the window can open up, but as you jump off, you notice the bad news: you don't have a parachute.</p><p>As you fall, you think to yourself, &quot;What a stupid choice I made! Why in the world did I...&quot;</p><p>BOOM! You land on the ground, flat dead.</p>"
   + gameOver();
 }
 
@@ -261,7 +261,7 @@ function s14() {
 }
 
 function s15() {
-  main.innerHTML = "<p>&quot;I want to escape this tower. Can you help me?&quot; you respond.</p><p>Wow. That was stupid. You literally gave away your plan.</p><p>&quot;Escape the tower?&quot; the witch responds back. &quot;That's the one thing the kidnapper forbids. You're doomed!&quot;</p><p>The witch calls the kidnapper. The kidnapper shoots you with his gun without notice. You're dead.</p>"
+  main.innerHTML = "<p>&quot;I want to escape this tower. Can you help me?&quot; you respond.</p><p>Welp, you literally gave away your plan.</p><p>&quot;Escape the tower?&quot; the witch responds back. &quot;That's the one thing the kidnapper forbids. You're doomed!&quot;</p><p>The witch calls the kidnapper. The kidnapper shoots you with his gun without notice. You're dead.</p>"
   + gameOver();
 }
 
@@ -377,7 +377,7 @@ function s28(instance) {
                   ["Eh, let's leave the library.", "s32()"]
                 );
   }
-  main.innerHTML = "<p>You read <em>Wonders of the Tower</em>. Parts of the book are shown here:</p><p><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;Open chest 2 for a hidden surprise. Then traverse through corridors 1, 3, 2, and 4, in this order. Do not forget this.&quot;</em></span></p><p><em>This is rather interesting...</em></p>"
+  main.innerHTML = condMessage+"<p><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;Open chest 2 for a hidden surprise. Then traverse through corridors 1, 3, 2, and 4, in this order. Do not forget this.&quot;</em></span></p><p><em>This is rather interesting...</em></p>"
   + condChoices;
 }
 
@@ -521,7 +521,7 @@ function s48() {
 }
 
 function s49() {
-  titler.innerHTML = "How to Play";
+  titler.innerHTML = "How to Play Memory/Trivia";
   main.innerHTML = "<p>In <strong>Memory</strong>, the man will present you five of something. You will have to remember what these five things are and the order they show up.</p><p>When you're ready, the man will give you a quiz based on the five things, and you must get all the questions correct. If you don't, it's GAME OVER for you.</p><p>In <strong>Trivia</strong>, the man will give you five completely random questions, and you must answer them all correctly, or else it is a GAME OVER for you. All your answers must come from your own knowledge.</p><p>And don't even <em>think</em> about cheating on any of these games. You have been warned.</p>"
   + choices(["Understood.", "s48()"]);
 }
@@ -640,7 +640,7 @@ function s62() {
 }
 
 function s63() {
-  main.innerHTML = "<p>I don't have pie, okay? I just want to know whether or not this is your final answer. Answer me!</p>";
+  main.innerHTML = "<p>I don't have pie, okay? I just want to know whether or not this is your final answer. Answer me!</p>"
   + choices(
     ["Okay, sure.", "s52()"],
     ["LOL no.", "s65()"],
@@ -728,7 +728,7 @@ function s70() {
 function s71() {
   markCheckpoint(6);
   titler.innerHTML = "Outside the Elevator";
-  main.innerHTML = "<p>You go through the door. The man with the beard was correct about there being an elevator. What he didn't tell you though is that there are two different elevators. <em>Which elevator do you go into?</em></p>"
+  main.innerHTML = "<p>You go through the door. The man with the beard was correct about there being an elevator. What he didn't tell you is that there are two different elevators. <em>Which elevator do you go into?</em></p>"
   + choices(
     ["The left elevator", "s72()"],
     ["The right elevator", "s73()"],
@@ -815,7 +815,7 @@ function s80() {
 }
 
 function s81() {
-  main.innerHTML = "<p>Congratulations! You have traversed the corridors once again. You go through the door where the man made you play Memory or Trivia. Now you may continue the adventure from where you left off!</p><ul id='moveon'>"
+  main.innerHTML = "<p>Congratulations! You have traversed the corridors once again. You go through the door where the man made you play Memory or Trivia. Now you may continue the adventure from where you left off!</p>"
   + choices(["Glad that's over with. Let's resume.", "s71()"]);
 }
 
@@ -872,7 +872,7 @@ function s88() {
 }
 
 function s89() {
-  main.innerHTML = "<p>Shooting the battery with a pellet was a very bad idea. The battery breaks, and now, you have no way to escape the elevator. You're doomed.</p>"
+  main.innerHTML = "<p>Shooting the battery with a pellet was a very bad idea. The battery breaks, and now you have no way to escape the elevator. You're doomed.</p>"
   + gameOver();
 }
 
@@ -1177,7 +1177,7 @@ function s121() {
 function s122() {
   titler.innerHTML = "Storage Room";
   main.innerHTML = "<p>What? Is there anything you missed?</p>"
-  choices(
+  + choices(
     ["Open the medium box.", "s113()"],
     ["Leave the storage room.", "s121()"]
   );
@@ -1239,7 +1239,7 @@ function seventeenCups2() {
 }
 
 function seventeenCups3() {
-  main.innerHTML = "<p>As great as this all is, you technically didn't escape the tower.</p><p>So unfortunately, you'll have to get a...</p>"
+  main.innerHTML = "<p>As great as this all is, you technically didn't escape the tower.</p><p>So unfortunately, you'll have to get a</p>"
   + gameOver();
 }
 
@@ -1461,7 +1461,7 @@ function trythis() {
 
 function beatcreator() {
   titler.innerHTML = "Beat the Creator";
-  main.innerHTML = "<p>I the creator, can beat Escape a Tower in just <strong>33.2 seconds.</strong></p><p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Here are a few guidelines.</p><p>- Start the stopwatch when you click on New Game.</p><p>- Stop the stopwatch as soon as you see The End.</p><p>- Don't cheat. That means no Inspect Element, JavaScript Console, etc.</p><p>- Good luck, and have fun.</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<p>I the creator, can beat Escape a Tower in just <strong>33.2 seconds.</strong></p><p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Here are a few guidelines.</p><ul><li>Start the stopwatch when you click on New Game.</li><li>Stop the stopwatch as soon as you see The End.</li><li>Don't cheat. That means no Game Leaper, JavaScript Console, etc.</li><li>Good luck, and have fun.</li></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
 function recgames() {
@@ -1758,7 +1758,7 @@ function secret31() {
 function imdone() {
   titler.innerHTML = "<span id='unsupported'></span><div id='titlefont'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</div>";
   checkUnsupported();
-  main.innerHTML = "<div id='secret' onclick='secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\";font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
+  main.innerHTML = "<div id='secret' onclick='secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\",sans-serif;font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
   copyright.style.visibility = "visible";
   copyright.innerHTML = "Version 2.5 Alpha &nbsp;&#126;&nbsp; &copy;2010-2018 Timothy Hsu";
   loadit();
