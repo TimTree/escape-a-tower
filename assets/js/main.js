@@ -34,7 +34,7 @@ var scenes6 = [67,68,69,70,71,78,79,80,81,82,83,84,85];
 var scenes7 = [72,73,74,75,76,77];
 var scenes8 = [86,87,88,89,90,91,92,93,94,95,96,97];
 var scenes9 = [98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114];
-var scenes10 = [100,103,109,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133];
+var scenes10 = [100,103,109,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,180];
 var scenes11 = [134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171];
 
 if (supportsLocalStorage) {
@@ -1129,8 +1129,8 @@ function s102() {
 function s103() {
   titler.innerHTML = "Guard Meeting Room";
   main.innerHTML = "<p>You manage to open the left door.</p><p>The left door leads to some sort of meeting room. Unfortunately, there are a whole bunch of guards in there!</p><p>&quot;Hey!&quot; says one of the guards. &quot;You're not a guard! We shall execute you now!&quot;</p><p>All the guards come with their guns, and they all shoot you until you are dead.</p>"
-  addScene(99);
   + gameOver();
+  addScene(99);
 }
 
 function s104(instance) {
@@ -1534,11 +1534,12 @@ function credits() {
     bonusFeaturesText = "<hr><p>You've unlocked the <strong>Bonus Features</strong> for beating the game!</p>";
   }
   titler.innerHTML = "Credits";
-  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='imdone()'>Main Menu</a></p></div>";
+  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='leaveGame()'>Main Menu</a></p></div>";
   saveData.checkpoint = 0;
   saveData.complete = 1;
   save();
   clearGameVars();
+  addScene(180);
 }
 
 function clearGameVars() {
@@ -1727,13 +1728,13 @@ function secret() {
       ["A guard in the tower told me about it.", "secret9()"],
       ["I just randomly clicked and found it.", "secret2()"],
       ["I peeked at the source code.", "secret7()"],
-      ["Um, I got to get out of this creepy place.", "imdone()"]
+      ["Um, I got to get out of this creepy place.", "leaveGame()"]
     );
     addScene(134);
   }
   else {
     main.innerHTML = "<p>&quot;Um, I'm still setting up this place. Come back here once you've completed the game at least once.&quot;</p>"
-    + choices(["Er, ok...", "imdone()"]);
+    + choices(["Er, ok...", "leaveGame()"]);
   }
 }
 
@@ -1748,7 +1749,7 @@ function secret2() {
 
 function secret3() {
   main.innerHTML = "<p>&quot;An ACCIDENT?&quot; (Looks at you directly in the eye) &quot;<strong>YOU'RE SMILING!</strong> I SAW THAT! YOU'RE GUILITY! I'M GONNA KICK YOU OUT!&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(136);
 }
 
@@ -1763,13 +1764,13 @@ function secret4() {
 
 function secret5() {
   main.innerHTML = "<p>&quot;Did you know that <strong>curiosity killed the cat?</strong> Well this time, <strong>CURIOSITY KILLED YOU!!!</strong>&quot;</p><p>The person gets a knife out, and you die.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(138);
 }
 
 function secret6() {
   main.innerHTML = "<p><span style='font-size:10pt;'>&quot;Your long and somewhat random and nerdy and boring and funny and unmethodical and hilarious and silly talk is really crazy and I think you should shut up before I cut your eyeballs out and throw them off the secret area and LOL at you like you are such a sucker! Seriously, why do you enjoy talking a lot? It must take skill to do so, because it is so long for everyone else to talk in such a tiny font. How on Earth do you do it? Was it from your family genes? How about alleles? Is it dominant or recessive? I need a Punnett square to find out! Please give me a Punnett square! Oh please, will you? It will be so nice for you to do so so that maybe I will get out my guilt and fly away to Unicorn Land! UNICORNS! They are cute and fluffy and so magical...I want to marry one someday! It will be so romantic, and then we have kids and those kids would look so weird and people laugh at me, but I am a brave person and I will overcome...</span></p><p>&quot;Wait a sec, <strong>I'M INFECTED!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(139);
 }
 
@@ -1777,14 +1778,14 @@ function secret7() {
   main.innerHTML = "<p>&quot;Really, <em>huh?</em> Well if you did that, you just did something HORRIBLE that I, yes I, consider to be the incorrigible, awful <strong>CHEATING!!! <em>GET OUT OF HERE!!!</em></strong>&quot;</p>"
   + choices(
     ["No way! (Shoot the person with your slingshot)", "secret8()"],
-    ["Yeah, gotta go.", "imdone()"]
+    ["Yeah, gotta go.", "leaveGame()"]
   );
   addScene(140);
 }
 
 function secret8() {
   main.innerHTML = "<p>&quot;OH, SO YOU REALLY THINK I WOULD DIE WITH A <strong>PUNY SLINGSHOT?!</strong> TAKE A LOOK AT WHAT <strong>I HAVE!!!</strong>&quot; (takes out a knife from the pocket)</p><p>To make a long story short, you die.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(141);
 }
 
@@ -1793,7 +1794,7 @@ function secret9() {
   + choices(
     ["No, I'm not! Go...go check for yourself!", "secretWho()"],
     ["I DID LIE! (cries) Please forgive me.", "secret10()"],
-    ["Leave before anything else happens.", "imdone()"]
+    ["Leave before anything else happens.", "leaveGame()"]
   );
   addScene(142);
 }
@@ -1801,7 +1802,7 @@ function secret9() {
 function secret10() {
   main.innerHTML = "<p>(Stares at you) &quot;Oh, alright, <strong>CRY BABY</strong>, I forgive you. <strong>NOW GET OUT!</strong>&quot;</p>"
   + choices(
-    ["Get out.", "imdone()"],
+    ["Get out.", "leaveGame()"],
     ["Can I play with you?", "secret11()"]
   );
   addScene(143);
@@ -1810,7 +1811,7 @@ function secret10() {
 function secret11() {
   main.innerHTML = "<p>&quot;ABSOLUTELY NOT! <strong>NOW PLEASE GET OUT!</strong>&quot;</p>"
   + choices(
-    ["Get out.", "imdone()"],
+    ["Get out.", "leaveGame()"],
     ["But we can have fun! We can have a tea party, play hide-and-seek, have a pillow fight, and...", "secret12()"]
   );
   addScene(144);
@@ -1818,7 +1819,7 @@ function secret11() {
 
 function secret12() {
   main.innerHTML = "<p>&quot;<strong>OH THAT'S IT! I CAN'T TAKE THIS PAIN ANYMORE!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(145);
 }
 
@@ -1843,13 +1844,13 @@ function secretMartha() {
 
 function secretMarthaAwwMan() {
   main.innerHTML = "<p>&quot;Ha, thought so!</p><p>&quot;Man, that felt <em>great</em>. <strong>I CAUGHT SOMEONE LYING RED-HANDED!!</strong> Oh I'm so AWESOME, I should be a <strong>LAWYER</strong> someday! Ah, the <em>money</em> I'd get for my <strong>sheer</strong> lie-checking <em>brilliance</em>! <strong><em>MONEY MONEH MONAY!!</em></strong> Hallelujah, <strong>HOLLYWOOD!!!</strong> ...&quot;</p>"
-  + choices(["Leave before anything worse happens.", "imdone()"]);
+  + choices(["Leave before anything worse happens.", "leaveGame()"]);
   addScene(148);
 }
 
 function secretMarthaAint() {
   main.innerHTML = "<p>(groan) &quot;So you're one of <strong>THOSE PEOPLE</strong>...&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(149);
 }
 
@@ -1896,13 +1897,13 @@ function secret14() {
 
 function secret15() {
   main.innerHTML = "<p>You pick up any signs of the vase and hide the pieces in every pocket you have. As soon as you finish, the person comes back.</p><p>&quot;HEY, what happened to my VASE?&quot; (stares at you, notices your stuffed pockets) &quot;AHA! <strong>YOU STOLE IT! I THOUGHT I TRUSTED YOU! FEEL THE PAIN!</strong>&quot; (pulls out pocket knife)</p><p>To make a long story short, you die.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(154);
 }
 
 function secret16() {
   main.innerHTML = "<p>Eventually, the person returns.</p><p>&quot;Oh shoot, WHAT HAPPENED TO MY <strong>VASE??!!</strong>&quot; (stares blankly at you) &quot;<strong>IT'S ALL YOUR FAULT, IDIOT!!!</strong>&quot;</p><p>Before you can respond, the person kicks you out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(155);
 }
 
@@ -1917,13 +1918,13 @@ function secret17() {
 
 function secret18() {
   main.innerHTML = "<p>&quot;Well, at least you're being honest. But still, <strong>YOU BROKE MY VASE, IDIOT!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(157);
 }
 
 function secret19() {
   main.innerHTML = "<p>&quot;<em>Really,</em> huh? <strong>Alright then.</strong>&quot;</p><p>The person lets you leave, and you escape. Let's just hope nothing bad happens once the person sees the broken vase, shall we?</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(158);
 }
 
@@ -1939,19 +1940,19 @@ function secret20() {
 
 function secret21() {
   main.innerHTML = "<p>You take the wallet out of the drawer and flee the scene. Somehow, you manage not to get caught.</p><p>Once the coast is clear, you open up the wallet and find...25 cents. That's something, but <em>was this really the right thing to do?</em></p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(160);
 }
 
 function secret22() {
   main.innerHTML = "<p>You take the entire drawer and leave.</p><p>Right as you take the drawer out, the person comes back. Uh, oh.</p><p>&quot;<strong>WHAT ARE YOU DOING INTRUDING MY BELONGINGS? I LEAVE AND NOW THIS HAPPENS?! GET OUT!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(161);
 }
 
 function secret23() {
   main.innerHTML = "<p>You close the drawer. You are right about the mean thing anyways.</p><p>The person comes back and notices the drawer that has been closed.</p><p>&quot;<strong>HEY! I DON'T REMEMBER MY DRAWER BEING <em>COMPLETELY</em> CLOSED! GET OUT!!!</strong>&quot;</p>"
-  + choices(["Get out before things get worse.", "imdone()"]);
+  + choices(["Get out before things get worse.", "leaveGame()"]);
   addScene(162);
 }
 
@@ -1959,7 +1960,7 @@ function secret24() {
   main.innerHTML = "<p>You hear the person running back to the secret area.</p><p>&quot;<strong>I AM BUSY RIGHT NOW! PLEASE SHUT UP!!!</strong>&quot;</p>"
   + choices(
     ["But I love you so much!", "secret25()"],
-    ["Perhaps I should leave now.", "imdone()"]
+    ["Perhaps I should leave now.", "leaveGame()"]
   );
   addScene(163);
 }
@@ -1975,7 +1976,7 @@ function secret25() {
 
 function secret26() {
   main.innerHTML = "<p>&quot;YOU KNOW HOW MUCH I HATE YOU? <strong>I just want to kill you...NOW!!!</strong>&quot;</p><p>To make a long story short, you die when the knife is taken out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(165);
 }
 
@@ -2002,20 +2003,20 @@ function secret28() {
     whichGuard = "the man with the beard";
   }
   main.innerHTML = "<p>&quot;But I can't forget about "+whichGuard+", and you know what? You shouldn't be <strong>PEER-PRESSURING</strong> me to do things either. <strong>GET OUT!</strong>&quot;</p><p>You get kicked out.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(167);
 }
 
 function secret29() {
   main.innerHTML = "<p>&quot;If you hate me, then you really should GET OUT OF MY SECRET AREA.&quot;</p><p>You head on out, feeling indifferent.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(168);
 }
 
 function secret30() {
   main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>&quot;Yup, Hugo confessed. Had to give him <em>the talk</em> as well, but I think he understands not to mention this place again. <em>Sorry for yelling at you.</em></p><p>&quot;Anyway, this is my secret place, and I want my privacy here. Can you please leave now?&quot;</p>"
   + choices(
-    ["Leave the secret area. Let's respect the person.", "imdone()"],
+    ["Leave the secret area. Let's respect the person.", "leaveGame()"],
     ["Nope, because I am evil.", "secret31()"]
   );
   addScene(169);
@@ -2024,7 +2025,7 @@ function secret30() {
 function secretManBeardAftermath() {
   main.innerHTML = "<p>It is nice that you are waiting patiently for the person to come back. The person comes back.</p><p>&quot;Ugh, I couldn't <em>find</em> the man with the beard! That guy <em>really</em> is <strong>something</strong>...</p><p>&quot;Anyway, <strong>you're off the hook</strong>. But this IS my secret place, and I want my privacy here. Can you please leave now?&quot;</p>"
   + choices(
-    ["Leave the secret area. Let's respect the person.", "imdone()"],
+    ["Leave the secret area. Let's respect the person.", "leaveGame()"],
     ["Nope, because I am evil.", "secret31()"]
   );
   addScene(170);
@@ -2032,8 +2033,17 @@ function secretManBeardAftermath() {
 
 function secret31() {
   main.innerHTML = "<p>&quot;<strong>Well, you're leaving anyway!</strong>&quot;</p><p>You get kicked out by the person without further notice.</p>"
-  + choices(["Back to main menu", "imdone()"]);
+  + choices(["Back to main menu", "leaveGame()"]);
   addScene(171);
+}
+
+function leaveGame() {
+  if (leaperMode) {
+    disableLeapMode();
+    gameLeaper();
+  } else {
+    imdone();
+  }
 }
 
 function imdone() {
@@ -2042,5 +2052,4 @@ function imdone() {
   main.innerHTML = "<div id='secret' onclick='changeEnclosure();secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\",sans-serif;font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
   copyright.style.visibility = "visible";
   loadit();
-  disableLeapMode();
 }
