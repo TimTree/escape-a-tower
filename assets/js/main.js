@@ -26,6 +26,16 @@ var autoComplete = (function() {
 })();
 
 var scenes1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+var scenes2 = [20,21,22,23,24,25,26,27,28];
+var scenes3 = [21,24,25,27,28,29,30,31,32,33,34,35];
+var scenes4 = [36,37,38,39,40];
+var scenes5 = [41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66];
+var scenes6 = [67,68,69,70,71,78,79,80,81,82,83,84,85];
+var scenes7 = [72,73,74,75,76,77];
+var scenes8 = [86,87,88,89,90,91,92,93,94,95,96,97];
+var scenes9 = [98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114];
+var scenes10 = [100,103,109,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133];
+var scenes11 = [134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171];
 
 if (supportsLocalStorage) {
   if (localStorage.getItem("escapeTowerSaveData")) {
@@ -221,6 +231,7 @@ function s2() {
 function s3() {
   main.innerHTML = "<p>You try to jump off the window. The good news is, the window can open up, but as you jump off, you notice the bad news: you don't have a parachute.</p><p>As you fall, you think to yourself, &quot;What a stupid choice I made! Why in the world did I...&quot;</p><p>BOOM! You land on the ground, flat dead.</p>"
   + gameOver();
+  addScene(3);
 }
 
 function s4() {
@@ -230,6 +241,7 @@ function s4() {
     ["The bottom one.", "s9()"],
     ["I DON'T WANNA DO THIS!!!", "s1()"]
   );
+  addScene(4);
 }
 
 function s5() {
@@ -239,21 +251,25 @@ function s5() {
     ["No. Instead, I throw the lunch out the window.", "s11()"],
     ["No. Instead, I complain about the lunch.", "s12()"]
   );
+  addScene(5);
 }
 
 function s6() {
   main.innerHTML = "<p>Opening the door again brings in the same effect: it's locked.</p><p>Only this time, the kidnapper notices that you're trying to open the door. He storms into the prison cell with his gun, and without any notice, he shoots you. You're dead.</p>"
   + gameOver();
+  addScene(6);
 }
 
 function s7() {
   main.innerHTML = "<p>Well, crying isn't the best thing to do. Your sobs are loud enough for the kidnapper to hear. He storms into the prison cell and sees you in the crying status.</p><p>&quot;Why did I kidnap a cry baby?&quot; the kidnapper thinks.</p><p>Then, without further notice, he grabs you (you're weak from crying) and throws you off the window, making you dead.</p>"
   + gameOver();
+  addScene(7);
 }
 
 function s8() {
   main.innerHTML = "<p>You open the top drawer.</p><p>Unfortunately, a poisonous snake resides in there, and it bites you, poisoning you up to the point where you're irritated and eventually, dead.</p>"
   + gameOver();
+  addScene(8);
 }
 
 function s9() {
@@ -262,17 +278,20 @@ function s9() {
     ["Open the top drawer.", "s8()"],
     ["Wait for the lunch to arrive.", "s5()"]
   );
+  addScene(9);
 }
 
 function s10() {
   main.innerHTML = "<p>You eat the lunch. Apparently, the rubber has an acid that brings you great strength for a little while! Because of this, you manage to bust the prison door open and escape the room!</p>"
   + choices(["Continue onward.", "s20()"])
   + "<p>(Note: As you escape the prison cell, your power disappears.)</p>";
+  addScene(10);
 }
 
 function s11() {
   main.innerHTML = "<p>Uh oh. Throwing the lunch off the window was a bad idea, as when the lunch lands, it makes a HUGE explosion sound! (How did that happen?) The kidnapper hears it, and he storms into the prison cell.</p><p>&quot;You picky eater of nonsense!&quot; he yells to you.</p><p>And with that, he shoots you with his gun, making you dead.</p>"
   + gameOver();
+  addScene(11);
 }
 
 function s12() {
@@ -282,11 +301,13 @@ function s12() {
     ["&quot;My lunch is a little cold.&quot;", "s14()"],
     ["&quot;I want to escape this tower. Can you help me?&quot;", "s15()"]
   );
+  addScene(12);
 }
 
 function s13() {
   main.innerHTML = "<p>&quot;I hate you!&quot; you respond.</p><p>The witch fumes with anger.</p><p>&quot;YOU IDIOT!!!&quot; she rages. &quot;WATCH THE PAIN!!!&quot;</p><p>The witch uses a spell on you to paralyze you. Then, she tosses you off the window. You're dead.</p>"
   + gameOver();
+  addScene(13);
 }
 
 function s14() {
@@ -295,16 +316,19 @@ function s14() {
     ["Go through the door.", "s16()"],
     ["Wait for the lunch.", "s17()"]
   );
+  addScene(14);
 }
 
 function s15() {
   main.innerHTML = "<p>&quot;I want to escape this tower. Can you help me?&quot; you respond.</p><p>Welp, you literally gave away your plan.</p><p>&quot;Escape the tower?&quot; the witch responds back. &quot;That's the one thing the kidnapper forbids. You're doomed!&quot;</p><p>The witch calls the kidnapper. The kidnapper shoots you with his gun without notice. You're dead.</p>"
   + gameOver();
+  addScene(15);
 }
 
 function s16() {
   main.innerHTML = "<p>Boo-yah! You get past the prison door, and the witch doesn't notice!</p>You've escaped the room!</p>"
   + choices(["Continue onward.", "s20()"]);
+  addScene(16);
 }
 
 function s17() {
@@ -314,16 +338,19 @@ function s17() {
     ["Punch the witch.", "s19()"],
     ["I'm scared. Let's jump off the window.", "s3()"]
   );
+  addScene(17);
 }
 
 function s18() {
   main.innerHTML = "<p>You eat the heated lunch.</p><p>You see, the lunch used to have an acid that brings you great strength, but heating up the lunch made the acid evaporate.</p><p>Also, the witch heated the lunch with poisonous coals, so after you finish the meal, you suffocate and fall dead.</p><p>&quot;Ha ha! Tricked you, tricked you!&quot; the witch laughs.</p>"
   + gameOver();
+  addScene(18);
 }
 
 function s19() {
   main.innerHTML = "<p>You punch the witch.</p><p>The witch is stunned.</p><p>&quot;How dare you try to hurt me!&quot; she rages. <strong>&quot;WATCH THE PAIN!!!&quot;</strong></p><p>The witch uses a spell on you to paralyze you. Then, she tosses you off the window. You're dead.</p>"
   + gameOver();
+  addScene(19);
 }
 
 function s20() {
@@ -337,6 +364,7 @@ function s20() {
     ["Read the sign.", "s24(1)"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p><p>If you get a game over or leave from now on, you will return here until you reach another checkpoint.</p></div>";
+  addScene(20);
   copyright.style.visibility = "hidden";
 }
 
@@ -344,11 +372,13 @@ function s21() {
   titler.innerHTML = "The Staircase";
   main.innerHTML = "<p>Did you really think I'd make this adventure <em>that easy?</em> Well, I guess you did.</p><p>As you go down the stairs, you notice a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Goodbye!</p>"
   + gameOver();
+  addScene(21);
 }
 
 function s22() {
   main.innerHTML = "<p>You try to open the left door. It's locked. There's a key handle on this door, though. Where can you find a key?</p>"
   + choices(["Go back.", "s20()"]);
+  addScene(22);
 }
 
 function s23() {
@@ -360,6 +390,7 @@ function s23() {
     ["Read <em>Wonders of the Tower</em>.", "s28(1)"],
     ["Leave the room.", "s20()"]
   );
+  addScene(23);
 }
 
 function s24(instance) {
@@ -377,12 +408,14 @@ function s24(instance) {
     ["Go back.", condFunction],
     ["Go down the stairs anyway.", "s25()"]
   );
+  addScene(24);
 }
 
 function s25() {
   titler.innerHTML = "The Staircase";
   main.innerHTML = "<p>Well, the sign actually is telling the truth.</p><p>As you go down the stairs, you see a giant spider blocking the staircase, and before you can run away, it captures and tangles you to the end of your life. Next time, listen to those signs!</p>"
   + gameOver();
+  addScene(25);
 }
 
 function s26() {
@@ -391,11 +424,13 @@ function s26() {
     ["Yes. Let's search in the shadows of this library.", "s29()"],
     ["No. Let's go back.", "s23()"]
   );
+  addScene(26);
 }
 
 function s27() {
   main.innerHTML = "<p>You read <em>The Solution to Everything</em>.</p><p>Apparently, this book is used as a trick to end the lives of tower lurkers. As you open the book, a shard of light beams out, blinding you. Too bad!</p>"
   + gameOver();
+  addScene(27);
 }
 
 function s28(instance) {
@@ -416,6 +451,7 @@ function s28(instance) {
   }
   main.innerHTML = condMessage+"<p><span style='font-family:Palatino Linotype,Times New Roman;'><em>&quot;Open chest 2 for a hidden surprise. Then traverse through corridors 1, 3, 2, and 4, in this order. Do not forget this.&quot;</em></span></p><p><em>This is rather interesting...</em></p>"
   + condChoices;
+  addScene(28);
 }
 
 function s29() {
@@ -429,6 +465,7 @@ function s29() {
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
   copyright.style.visibility = "hidden";
+  addScene(29);
 }
 
 function s32() {
@@ -439,6 +476,7 @@ function s32() {
     ["Check the left door now.", "s34()"],
     ["Let's read that sign.", "s24(2)"]
   );
+  addScene(30);
 }
 
 function s34() {
@@ -450,11 +488,13 @@ function s34() {
     ["Chest 3", "s39(1)"],
     ["Get out of this room.", "s32()"]
   );
+  addScene(31);
 }
 
 function s37() {
   main.innerHTML = "<p>You open chest 1. Um,</p><p><strong>A GIANT SNAKE COMES OUT OF THE CHEST AND EATS YOU UP!!!</strong></p><p>Too bad...</p>"
   + gameOver();
+  addScene(32);
 }
 
 function s38() {
@@ -464,6 +504,7 @@ function s38() {
     ["&quot; chest 3.", "s39(2)"],
     ["Leave the room.", "s40()"]
   );
+  addScene(33);
 }
 
 function s39(instance) {
@@ -482,12 +523,14 @@ function s39(instance) {
   }
   main.innerHTML = "<p>You open chest 3.</p><p>There is <em>nothing</em> inside this chest. Drat!</p>"
   + condChoices;
+  addScene(34);
 }
 
 function s40() {
   titler.innerHTML = "The Staircase";
   main.innerHTML = "<p>You leave the room. You've already checked both doors already, so you go down the stairs.</p><p>A giant spider blocks the staircase, but since you now own a slingshot, you shoot the spider! You reach the bottom of the staircase!</p>"
   + choices(["Continue onward.", "s42()"]);
+  addScene(35);
 }
 
 function s42() {
@@ -500,11 +543,13 @@ function s42() {
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
   copyright.style.visibility = "hidden";
+  addScene(36);
 }
 
 function s43() {
   main.innerHTML = "<p>As you move on through the corridor, there is a wall blocking your path. Dead end!</p><p>But as you try to go back, a sensor detects you, and a laser starts beaming on you, burning you until you die.</p><p>Curse those dead ends!</p>"
   + gameOver();
+  addScene(37);
 }
 
 function s44() {
@@ -514,6 +559,7 @@ function s44() {
     ["Corridor 2", "s43()"],
     ["Corridor 3", "s45()"]
   );
+  addScene(38);
 }
 
 function s45() {
@@ -524,6 +570,7 @@ function s45() {
     ["Corridor 3", "s43()"],
     ["Corridor 4", "s43()"]
   );
+  addScene(39);
 }
 
 function s46() {
@@ -535,6 +582,7 @@ function s46() {
     ["Corridor 4", "s47()"],
     ["Corridor 5", "s43()"]
   );
+  addScene(40);
 }
 
 function s47() {
@@ -543,6 +591,7 @@ function s47() {
   main.innerHTML = "<p><strong>EXCELLENT!!!</strong> You succeed in going through all four corridors!</p><p>But don't celebrate yet; when you head for the door to leave the corridors once and for all, a man with a long beard stops you from your tracks!</p><p><strong>&quot;INTRUDAH!&quot;</strong> he shouts as he whips out his rifle.</p><p>The good news is, he puts his rifle down right when he sees you. Strange, huh?</p>"
   + choices(["Continue.", "s48()"])
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(41);
   copyright.style.visibility = "hidden";
 }
 
@@ -555,28 +604,33 @@ function s48() {
     ["How do you play these games?", "s49()"],
     ["Forget about the games. Shoot this guy with your slingshot.", "s50()"]
   );
+  addScene(42);
 }
 
 function s49() {
   titler.innerHTML = "How to Play Memory/Trivia";
   main.innerHTML = "<p>In <strong>Memory</strong>, the man will present you five of something. You will have to remember what these five things are and the order they show up.</p><p>When you're ready, the man will give you a quiz based on the five things, and you must get all the questions correct. If you don't, it's GAME OVER for you.</p><p>In <strong>Trivia</strong>, the man will give you five completely random questions, and you must answer them all correctly, or else it is a GAME OVER for you. All your answers must come from your own knowledge.</p><p>And don't even <em>think</em> about cheating on any of these games. You have been warned.</p>"
   + choices(["Understood.", "s48()"]);
+  addScene(43);
 }
 
 function s50() {
   main.innerHTML = "<p>Well that was rude. It was also stupid as well. The slingshot is too weak to kill human beings. All you did is make the man angry.</p><p>&quot;So yer <strong><em>not</em></strong> innocent after all,&quot; he says. &quot;CURSE YA!!!&quot;</p><p>BAM! The man shoots you with his rifle, and you're dead. See ya!</p>"
   + gameOver();
+  addScene(44);
 }
 
 function s51() {
   titler.innerHTML = "Memory Game";
   main.innerHTML = "<p>You decide to play Memory.</p><p>&quot;Alright den,&quot; the man says. &quot;Memorize da five things. Then I'll quiz ya on dem.&quot;</p><div class='center'><em>Da Five Things</em></div><br><div class='IEThing'><table style='margin:auto;background-color:#BBB7B9;border: 1px solid #7F7F7F;'><tr><td style='padding:6px 31px;'><span style='font-family:serif;'>Bee, Bo, Boo, Ba, Po</span></td></tr></table></div><p>&quot;And ya bettah not cheat!&quot; the man adds.</p>"
   + choices(["I am ready to go.", "s53()"]);
+  addScene(45);
 }
 
 function s52() {
   main.innerHTML = "<p>&quot;Wrongity wrongity wrong!!&quot; shouts the man with the beard.</p><div class='center'><p><strong>&quot;U NO SMART. U DUMB. U R IDIOT!! ME KILL U!!!&quot;</strong></p></div><p>The man kills you with his rifle, which means...</p>"
   + gameOver();
+  addScene(46);
 }
 
 function s53() {
@@ -588,6 +642,7 @@ function s53() {
     ["Ba", "s54()"],
     ["Bee", "s52()"]
   );
+  addScene(47);
 }
 
 function s54() {
@@ -599,6 +654,7 @@ function s54() {
     ["4th", "s52()"],
     ["5th", "s52()"]
   );
+  addScene(48);
 }
 
 function s55() {
@@ -610,6 +666,7 @@ function s55() {
     ["Bo", "s52()"],
     ["Boo", "s52()"]
   );
+  addScene(49);
 }
 
 function s56() {
@@ -621,6 +678,7 @@ function s56() {
     ["4th", "s52()"],
     ["5th", "s52()"]
   );
+  addScene(50);
 }
 
 function s57() {
@@ -632,11 +690,13 @@ function s57() {
     ["Boo, Bo", "s58()"],
     ["Bo, Ba", "s52()"]
   );
+  addScene(51);
 }
 
 function s58() {
   main.innerHTML = "<p>&quot;Boo, Bo!&quot; you answer.</p><p>The man with the beard is amazed.</p><p>&quot;I can't believe it!&quot; the man says. &quot;Yer smart! Ya go through da door now!&quot;</p><p>The man steps out of the way for you to cross. Great job!</p><p>&quot;Across da door is an elevator,&quot; the man says. &quot;Get on it, and ya get to da bottah of da towah.&quot;</p>"
   + choices(["Go through the door.", "s71()"]);
+  addScene(52);
 }
 
 function s59() {
@@ -649,6 +709,7 @@ function s59() {
     ["Window", "s52()"],
     ["I like pie.", "s62()"]
   );
+  addScene(53);
 }
 
 function s60() {
@@ -660,11 +721,13 @@ function s60() {
     ["Window", "s52()"],
     ["I like pie.", "s62()"]
   );
+  addScene(54);
 }
 
 function s61() {
   main.innerHTML = "<p><strong>&quot;AHEM,&quot;</strong> shouts the man with the beard, <strong>&quot;I told ya, ah SINGLE NUMBER ANSWER!!!&quot;</strong></p><p>Before you can respond, the man shoots you with his rifle. You are dead.</p>"
   + gameOver();
+  addScene(55);
 }
 
 function s62() {
@@ -674,6 +737,7 @@ function s62() {
     ["No, no!", "s65()"],
     ["Give me my pie.", "s63()"]
   );
+  addScene(56);
 }
 
 function s63() {
@@ -683,11 +747,13 @@ function s63() {
     ["LOL no.", "s65()"],
     ["ME WANT ME PIE NOW!!!!!", "s64()"]
   );
+  addScene(57);
 }
 
 function s64() {
   main.innerHTML = "<p>(Sigh) Either you are in a pie craze or you just want to see what happens. Whatever the reason is, your little joke is going to end with a simple but powerful...</p>"
   + gameOver();
+  addScene(58);
 }
 
 function s65() {
@@ -698,6 +764,7 @@ function s65() {
     ["1+1", "s60()"],
     ["Window", "s52()"]
   );
+  addScene(59);
 }
 
 function s66() {
@@ -709,6 +776,7 @@ function s66() {
     ["1492 A.D.", "s67()"],
     ["1523 A.D.", "s52()"]
   );
+  addScene(60);
 }
 
 function s67() {
@@ -720,6 +788,7 @@ function s67() {
     ["A comma (,)", "s52()"],
     ["Sir, this sentence has bad grammar.", "sirGrammar()"]
   );
+  addScene(61);
 }
 
 function sirGrammar() {
@@ -728,11 +797,13 @@ function sirGrammar() {
     ["Gimme should be <em>Give me</em>, the two ah's should be <em>a</em> and <em>of</em> respectively.", "correctMansGrammar()"],
     ["On second thought, I take that back.", "s67()"]
   );
+  addScene(62);
 }
 
 function correctMansGrammar() {
   main.innerHTML = "<p>The man with the beard unsettlingly ponders over your declaration. Is it true? Is the grammar of his livelihood actually a mess? Sweat pours over his body as he desperately resists the defeat of his own intelligence by a foreigner...</p><p><strong>&quot;AHA!&quot;</strong> he snickers. <strong>&quot;YA USED AH RUN-ON SENTENCE!!!&quot;</strong></p><p>You gulp as you realize you forgot to add the word <em>and</em> between your two independent clauses.</p><div class='center'><p><strong>&quot;U NO GOOD AT GRAMMAH. U FAIL TEST. ME NO TRUST U. ME KILL YOU!!&quot;</strong></p></div><p>The man kills you with his rifle, which means...</p>"
   + gameOver();
+  addScene(63);
 }
 
 function s68() {
@@ -744,6 +815,7 @@ function s68() {
     ["Tin", "s52()"],
     ["Arsenic", "s52()"]
   );
+  addScene(64);
 }
 
 function s69() {
@@ -755,11 +827,13 @@ function s69() {
     ["Chest 467", "s52()"],
     ["The slingshot was not in a chest.", "s52()"]
   );
+  addScene(65);
 }
 
 function s70() {
   main.innerHTML = "<p>&quot;Chest 2!&quot; you answer boldly.</p><p>The man with the beard is amazed.</p><p>&quot;Excellent, excellent!&quot; he exclaims. &quot;Ya truly are ah smart fella. Go through da door if ya wish.&quot;</p><p>The man steps out of the way for you to cross. Great job!</p><p>&quot;Across da door is an elevator,&quot; the man says. &quot;Get on it, and and ya get to da botta of da towah.&quot;</p>"
   + choices(["Go through the door.", "s71()"]);
+  addScene(66);
 }
 
 function s71() {
@@ -772,6 +846,7 @@ function s71() {
     ["Go back to see if the man can help you.", "s74()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(67);
   copyright.style.visibility = "hidden";
 }
 
@@ -782,12 +857,14 @@ function s72() {
     ["That looks fishy. I shall leave the elevator.", "s71()"],
     ["Push the button. We're going down anyway.", "s82()"]
   );
+  addScene(68);
 }
 
 function s73() {
   titler.innerHTML = "Right Elevator";
   main.innerHTML = "<p>You get on the right elevator. When you enter, you immediately notice a horrible thing about the elevator you're in: there's no bottom (floor)!</p><p>It's too late. You tumble down and down the passageway of the elevator, feeling ashamed of yourself.</p><p>&quot;NOOOO!!!!&quot; you yell. &quot;I'm...&quot;</p><p>BOOM! You land on an electrical outlet, flat dead.</p>"
   + gameOver();
+  addScene(69);
 }
 
 function s74() {
@@ -797,11 +874,13 @@ function s74() {
     ["Go back.", "s71()"],
     ["Search for the man.", "s75()"]
   );
+  addScene(70);
 }
 
 function s75() {
   main.innerHTML = "<p>You do not succeed at locating the man. Instead, you encounter some bad news. After failing to find the man all over the corridors, you find yourself back on the first corridor. This unfortunately means you have to traverse the corridors once again!</p>"
   + choices(["Dang it! Continue.", "s76()"]);
+  addScene(71);
 }
 
 function s76() {
@@ -813,12 +892,14 @@ function s76() {
     ["Corridor 2", "s77()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(72);
   copyright.style.visibility = "hidden";
 }
 
 function s77() {
   main.innerHTML = "<p>Looks like you forgot which corridors to go through, as you went the wrong way. The sensor at the dead end beams at you so you burn up to death. You are dead.</p>"
   + gameOver();
+  addScene(73);
 }
 
 function s78() {
@@ -828,6 +909,7 @@ function s78() {
     ["Corridor 2", "s77()"],
     ["Corridor 3", "s79()"]
   );
+  addScene(74);
 }
 
 function s79() {
@@ -838,6 +920,7 @@ function s79() {
     ["Corridor 3", "s77()"],
     ["Corridor 4", "s77()"]
   );
+  addScene(75);
 }
 
 function s80() {
@@ -849,11 +932,13 @@ function s80() {
     ["Corridor 4", "s81()"],
     ["Corridor 5", "s77()"]
   );
+  addScene(76);
 }
 
 function s81() {
   main.innerHTML = "<p>Congratulations! You have traversed the corridors once again. You go through the door where the man made you play Memory or Trivia. Now you may continue the adventure from where you left off!</p>"
   + choices(["Glad that's over with. Let's resume.", "s71()"]);
+  addScene(77);
 }
 
 function s82() {
@@ -863,6 +948,7 @@ function s82() {
     ["Open the control panel of the elevator.", "s84()"],
     ["Do nothing.", "s85()"]
   );
+  addScene(78);
 }
 
 function s83() {
@@ -871,6 +957,7 @@ function s83() {
     ["(sigh) Open up that control panel then.", "s84()"],
     ["(sigh) Do nothing then.", "s85()"]
   );
+  addScene(79);
 }
 
 function s84() {
@@ -880,16 +967,19 @@ function s84() {
     ["Attempt to remove the battery by hand.", "s87()"],
     ["Attempt to remove the battery by slingshot.", "s88()"]
   );
+  addScene(80);
 }
 
 function s85() {
   main.innerHTML = "<p>You do nothing.</p><p>So here's what happens. You eventually get hungry and thirsty after a few hours, and since there's nothing in the elevator to help you with that, you subconsciously starve and dehydrate yourself.</p><p>Eventually, the hunger and thirst comes to a breaking point when eventually, you die.</p>"
   + gameOver();
+  addScene(81);
 }
 
 function s86() {
   main.innerHTML = "<p>You fiddle around with the buttons of the control panel.</p><p>Well, that wasn't smart. You push so many buttons at once that eventually, you unknowingly press the red button, aka: the <em>Self-destruct</em> button.</p><p>The elevator goes...BOOM! You go...BOOM! You've now faced...DOOM!</p>"
   + gameOver();
+  addScene(82);
 }
 
 function s87() {
@@ -898,6 +988,7 @@ function s87() {
     ["Let's fiddle around with the buttons then.", "s86()"],
     ["Let's take this sucker out by slingshot then.", "s88()"]
   );
+  addScene(83);
 }
 
 function s88() {
@@ -906,11 +997,13 @@ function s88() {
     ["Shoot it with a pellet.", "s89()"],
     ["Yank it out by using the sling.", "s90()"]
   );
+  addScene(84);
 }
 
 function s89() {
   main.innerHTML = "<p>Shooting the battery with a pellet was a very bad idea. The battery breaks, and now you have no way to escape the elevator. You're doomed.</p>"
   + gameOver();
+  addScene(85);
 }
 
 function s90() {
@@ -924,6 +1017,7 @@ function s90() {
     ["Cry.", "s100()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(86);
   copyright.style.visibility = "hidden";
 }
 
@@ -933,6 +1027,7 @@ function s91() {
     ["Yes.", "s95()"],
     ["No. Dump the spit and try something else.", "s90()"]
   );
+  addScene(87);
 }
 
 function s92() {
@@ -941,6 +1036,7 @@ function s92() {
     ["Yes.", "s96()"],
     ["No.", "s90()"]
   );
+  addScene(88);
 }
 
 function s93() {
@@ -949,16 +1045,19 @@ function s93() {
     ["I hate you. Go back.", "s90()"],
     ["(Looks up the definition on the dictionary)", "s94()"]
   );
+  addScene(89);
 }
 
 function s94() {
   main.innerHTML = "<p><span style='font-size:84pt;font-weight:700;display:block;text-align:center;'>&gt;:(</span></p>"
   + gameOver();
+  addScene(90);
 }
 
 function s95() {
   main.innerHTML = "<p>You put the battery with the spit into the control panel and turn the battery on.</p><p>The bad news is, spit has an <em>abnormally high</em> viscosity. So as you sail down the elevator, it begins to shake and shake until...</p><p>ZAP!</p><p>Electrical waves start appearing all over the elevator, and when it hits you, you find yourself at a</p>"
   + gameOver();
+  addScene(91);
 }
 
 function s96() {
@@ -968,6 +1067,7 @@ function s96() {
     ["The leg", "s98()"],
     ["The head", "s99()"]
   );
+  addScene(92);
 }
 
 function s97() {
@@ -977,16 +1077,19 @@ function s97() {
     ["Injure the head then.", "s99()"],
     ["Try something else.", "s90()"]
   );
+  addScene(93);
 }
 
 function s98() {
   main.innerHTML = "<p>You injure yourself in the leg.</p><p>Ouch!</p><p>Uh, oh. You've injured that leg so hard to the point you cannot move. To make matters worse, none of the blood makes it to the battery! Too bad.</p>"
   + gameOver();
+  addScene(94);
 }
 
 function s99() {
   main.innerHTML = "<p>You injure yourself in the head.</p><p>That was so stupid! Now your brain hurts, and you cannot operate the way you should be operating! Before we get into any more nonsense, let's bring this over to a</p>"
   + gameOver();
+  addScene(95);
 }
 
 function s100() {
@@ -995,12 +1098,14 @@ function s100() {
     ["Yes.", "s101()"],
     ["No. Dump the tears and try something else.", "s90()"]
   );
+  addScene(96);
 }
 
 function s101() {
   main.innerHTML = "<p>You put the battery with the tears into the control panel and turn the battery on.</p><p>The good news is, tears have a viscosity low enough for the elevator to operate!</p><p>The elevator moves smoothly until it reaches the bottom of the tower. Great job!</p>"
   + choices(["Continue onward.", "s102()"])
   + "<p><strong>Note:</strong> No research was put into how elevators operate, so the following situation you just faced may not occur in reality.</p>";
+  addScene(97);
 }
 
 function s102() {
@@ -1017,12 +1122,14 @@ function s102() {
     ["Head on over to the grand door.", "s108()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(98);
   copyright.style.visibility = "hidden";
 }
 
 function s103() {
   titler.innerHTML = "Guard Meeting Room";
   main.innerHTML = "<p>You manage to open the left door.</p><p>The left door leads to some sort of meeting room. Unfortunately, there are a whole bunch of guards in there!</p><p>&quot;Hey!&quot; says one of the guards. &quot;You're not a guard! We shall execute you now!&quot;</p><p>All the guards come with their guns, and they all shoot you until you are dead.</p>"
+  addScene(99);
   + gameOver();
 }
 
@@ -1043,16 +1150,19 @@ function s104(instance) {
     ["Interesting. Go back.", condFunction1],
     ["Let's come on in.", condFunction2]
   );
+  addScene(100);
 }
 
 function s105() {
   main.innerHTML = "<p>The right door is locked, but there are a set of numbers next to the handle. You can try to open the door by pressing a number, but do so at your own peril.</p><p class='IEThing'><table style='margin:auto;background-color:#CECFCB;border:1px solid #9E985C;'><tr><td style='padding:6px;'><span style='font-size:28pt;'><a onclick=s109()>1</a> | <a onclick=s109()>2</a> | <a onclick=s109()>3</a> | <a onclick=s109()>4</a> | <a onclick=s109()>5</a> | <a onclick=s109()>6</a> | <a onclick=s109()>7</a> | <a onclick=s110()>8</a> | <a onclick=s109()>9</a> | <a onclick=s109()>10</a></span></td></tr></table></p>"
   + choices(["Go back.", "s102()"]);
+  addScene(101);
 }
 
 function s106() {
   main.innerHTML = "<p>But you can't do that, since there is no peep window on the right door!</p>"
   + choices(["Curses! Go back.", "s102()"]);
+  addScene(102);
 }
 
 function s107(instance) {
@@ -1066,21 +1176,25 @@ function s107(instance) {
   }
   main.innerHTML = "<p>You take a look at the strange floor. It defnitely is strange. Here is what it looks like from top view.</p><p><table style='margin:auto;background-color:#AFA489;border:1px solid #766F4F;'><tr><td style='padding:11px;'><span style='font-size:28pt;font-family:times new roman;display:block;text-align:center;'>~*~<br>I ... II ... IV ... ___ ... XVI ... XXXII</span></td></tr></table></p>"
   + choices(["Go back.", condFunction]);
+  addScene(103);
 }
 
 function s108() {
   main.innerHTML = "<p>You head on over to the grand door.</p><p>A guard by the door notices you and gets <strong>angry</strong> at you.</p><p>&quot;You are in <strong>huge</strong> trouble!!&quot; the guard says.</p><p>He shoots you until you are dead.</p>"
   + gameOver();
+  addScene(104);
 }
 
 function s109() {
   main.innerHTML = "<p>You press a button to try to open the right door. A HUGE alarm goes off. The guards notice that, and they see you, so they shoot you off until you're dead. That ensures a simple but deadly</p>"
   + gameOver();
+  addScene(105);
 }
 
 function s110() {
   main.innerHTML = "<p>You press the &quot;8&quot; button, As you do so, the right door unlocks, and you can now go inside!</p>"
   + choices(["Go inside the door.", "s111()"]);
+  addScene(106);
 }
 
 function s111() {
@@ -1091,6 +1205,7 @@ function s111() {
     ["The medium box", "s113()"],
     ["The big box", "s114()"]
   );
+  addScene(107);
 }
 
 var smallbox = 0;
@@ -1113,11 +1228,13 @@ function s112() {
       ["Leave the room.", "s115()"]
     );
   }
+  addScene(108);
 }
 
 function s113() {
   main.innerHTML = "<p>You open the medium box. Inside, you find a gun! This can be incredibly useful somehow...</p><p>But then, a guard enters the storage room and sees you. He gets angry that you're fiddling around in here and shoots you. You try to shoot back, but your gun is not loaded! Sorry.</p>"
   + gameOver();
+  addScene(109);
 }
 
 function s114() {
@@ -1137,6 +1254,7 @@ function s114() {
       ["Leave the room.", "s115()"]
     );
   }
+  addScene(110);
 }
 
 function s115() {
@@ -1149,6 +1267,7 @@ function s115() {
     ["Head on over to the grand door.", "s119()"],
     ["Head back to the storage room.", "s120()"]
   );
+  addScene(111);
 }
 
 function s116() {
@@ -1161,6 +1280,7 @@ function s116() {
   if (bigbox === 1) {
     document.getElementById("guardsays").innerHTML = "<p>&quot;True guards don't wear just their uniform!&quot; a guard says. &quot;Go back when you put on your badge!&quot;</p><p>The guards escort you out of the room.</p>";
   }
+  addScene(112);
 }
 
 function s119() {
@@ -1172,6 +1292,7 @@ function s119() {
   if (bigbox === 1) {
     document.getElementById("guardsays").innerHTML = "<p>&quot;A true guard wears their badge!&quot; he yells. &quot;Now don't come back until that badge is on!&quot;</p>";
   }
+  addScene(113);
 }
 
 function s120() {
@@ -1193,6 +1314,7 @@ function s120() {
       ["Leave the storage room.", "s115()"]
     );
   }
+  addScene(114);
 }
 
 function s121() {
@@ -1208,6 +1330,7 @@ function s121() {
     ["Head back to the storage room.", "s122()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
+  addScene(115);
   copyright.style.visibility = "hidden";
 }
 
@@ -1218,6 +1341,7 @@ function s122() {
     ["Open the medium box.", "s113()"],
     ["Leave the storage room.", "s121()"]
   );
+  addScene(116);
 }
 
 function s126() {
@@ -1230,6 +1354,7 @@ function s126() {
     ["Sit on a lounge chair and relax.", "s135()"],
     ["Leave the room.", "s121()"]
   );
+  addScene(117);
 }
 
 var coffeeCount = 0;
@@ -1263,21 +1388,25 @@ function s127(instance) {
   }
   main.innerHTML = "<p>You brew "+singleMultiple+" cup of coffee. Then you drink it. Ahh! That was one GREAT coffee!</p>" + guardCommentary
   + choices(["Go back.", condFunction]);
+  addScene(118);
 }
 
 function seventeenCups() {
   main.innerHTML = "<p>Your 17th cup of coffee. Yup, that's it. After all, you <em>never</em> drink more than 17 cups of coffee on a given day.</p><p>Jaws drop as you triumphantly consume your final sip. Moments later, a rousing applause. Next thing you know, you're tossed in the air as guards wildly lob their popcorn as confetti.</p><p>All the commotion causes the kidnapper to barge in.</p>"
   + choices(["Continue.", "seventeenCups2()"]);
+  addScene(119);
 }
 
 function seventeenCups2() {
   main.innerHTML = "<p>But the kidnapper doesn't reprimand you. Instead, his eyes glow like a child receiving a Christmas present.</p><p>&quot;So much caffeine! So awake! This guard's <strong>THE ONE</strong>!&quot; he squeals.<p>And so you're immediately hired as the tower's executive guard. Your salary's to die for, every guard loves you, and you get as much coffee to yourself as you'd like. All is well.</p>"
   + choices(["Continue.", "seventeenCups3()"]);
+  addScene(120);
 }
 
 function seventeenCups3() {
   main.innerHTML = "<p>As great as this all is, you technically didn't escape the tower.</p><p>So unfortunately, you'll have to get a</p>"
   + gameOver();
+  addScene(121);
 }
 
 function s128(instance) {
@@ -1289,6 +1418,7 @@ function s128(instance) {
   }
   main.innerHTML = "<p class='IEThing'><table style='margin:auto;background-color:#EDDA70;border:1px solid #EDA93D;'><tr><td style='padding:6px;'><div style='color:#4195AE;font-family:arial;font-weight:700;'><div class='center' style='color:#FF6600;text-decoration:underline;'>NOTICE</div><ul><li>Remember that ALL GUARDS must wear their full uniform at all times while they're working. Anybody not obeying the rules will get kicked out of this room! NO EXCEPTIONS!</li><li>Remember that to leave the tower, you must show the guard your full uniform and insert the following code at the grand door: 7852</li><li>To open the door to the electrical room, insert the following code at the front: 3284</li><li>FREE coffee for all guards.</ul></div></td></tr></table></p>"
   + choices(["Go back.", condFunction]);
+  addScene(122);
 }
 
 function s129() {
@@ -1297,6 +1427,7 @@ function s129() {
     ["You're on, Hugo!", "s130()"],
     ["Nah, no thanks.", "s126()"]
   );
+  addScene(123);
 }
 
 function s130() {
@@ -1305,16 +1436,19 @@ function s130() {
     ["Heads!", "s131()"],
     ["Tails!", "s132()"]
   );
+  addScene(124);
 }
 
 function s131() {
   main.innerHTML = "<p>Hugo flips the coin. It lands on tails.</p><p>&quot;Sorry, but you lost,&quot; he says.</p>"
   + choices(["Well that stinks.", "s133()"]);
+  addScene(125);
 }
 
 function s132() {
   main.innerHTML = "<p>Hugo flips the coin. It lands on tails. You win!</p><p>&quot;Ok, here's the secret,&quot; he says. &quot;Once you beat this game, <strong>click on the top-left corner of the main menu</strong>, and something cool will happen. Got that?&quot;</p>"
   + choices(["Gotcha.", "s133()"]);
+  addScene(126);
 }
 
 function s133() {
@@ -1326,16 +1460,19 @@ function s133() {
     ["Sit on a lounge chair and relax.", "s135()"],
     ["Leave the room.", "s121()"]
   );
+  addScene(127);
 }
 
 function s134() {
   main.innerHTML = "<p>You chat with a different guard. This different guard does not seem to like you.</p><p>&quot;A real guard should not be socializing like this!&quot; he shouts. &quot;You must get to work now!&quot;</p><p>The guard then forces you to work on torturous activities, and since I'm too lazy to explain what really happens, I'll just give you a game over just because I want to.</p>"
   + gameOver();
+  addScene(128);
 }
 
 function s135() {
   main.innerHTML = "<p>You sit at a lounge chair and relax. A guard spots you and tells you, &quot;That is not a way a guard acts! You are not a guard! Execute this person!&quot;</p><p>You are then executed, which means…</p>"
   + gameOver();
+  addScene(129);
 }
 
 function s138() {
@@ -1344,11 +1481,13 @@ function s138() {
     ["Yes I am.", "s139()"],
     ["No I am not.", "s121()"]
   );
+  addScene(130);
 }
 
 function s139() {
   main.innerHTML = "<p>Enter the four numbers you think make the code.</p><div class='IEThing'><input id='pin' maxlength='4' type='text' style='margin:0 auto;display:block;text-align:center;font-size:24pt;width:100px;font-family:georgia;'></input><table style='margin:auto;background-color:#CECFCB;border:1px solid #9E985C;font-size:32pt;'><tr><td style='padding:8px 15px 3px 35px;'><a onclick=numpad(1)>1</a></td><td style='padding:8px 15px 3px 15px;'><a onclick=numpad(2)>2</a></td><td style='padding:8px 35px 3px 15px;'><a onclick=numpad(3)>3</a></td></tr><tr><td style='padding:3px 15px 3px 35px;'><a onclick=numpad(4)>4</a></td><td style='padding:3px 15px;'><a onclick=numpad(5)>5</a></td><td style='padding:3px 35px 3px 15px;'><a onclick=numpad(6)>6</a></td></tr><tr><td style='padding:3px 15px 3px 35px;'><a onclick=numpad(7)>7</a></td><td style='padding:3px 15px;'><a onclick=numpad(8)>8</a></td><td style='padding:3px 35px 3px 15px;'><a onclick=numpad(9)>9</a></td></tr><tr><td style='padding:3px 15px 8px 35px;'><a onclick=numpad(0)>0</a></td><td colspan='2'><a onclick='redo()' style='font-size:28pt;'>REDO</a></td></tr></table></div><div class='center' style='font-size:20pt;'><p style='margin:0.8em 0;'><a onclick=s140()>Enter code.</a></p></div>"
   + choices(["Go back.", "s121()"]);
+  addScene(131);
 }
 
 function numpad(text) {
@@ -1367,12 +1506,14 @@ function s140() {
     setTimeout(function () {
       titler.innerHTML = "Correct!";
       main.innerHTML = "<p>YEAH! Congratulations! The great, extraordinary grand door opens! Lights pop out, fresh air reveals itself, and best of all, <strong>you, yes you, can finally escape the tower!</strong></p><p>You step out the door in great delight, and when you see the fresh, green outdoors, you think to yourself, &quot;I did it! I did it with all I could!&quot;</p><p>And it's true. You officially win the game (that is, if you didn't cheat)!</p><div class='center'><p><span class='theend'>THE END!</span></p><p><a onclick='credits()'>Continue.</a></p></div>";
+      addScene(132);
     }, 500);
   } else {
     setTimeout(function () {
       titler.innerHTML = "Wrong!";
       main.innerHTML = "<p>You entered the wrong number!</p><p>Alarms ring, cowbells shriek, and the guard that guards the grand door is <strong>SUPER ANGRY</strong> at you!</p><p><strong>&quot;YOU!&quot;</strong> he screams. <strong>&quot;YOU ARE NOT A TRUE GUARD!!!!!!! HOW DARE YOU TRY TO ESCAPE, PRISONER!!!!!!!&quot;</strong></p><p>BAM, BAM, BAM! With three shots taken, you are taken out and dead for good.</p>"
       + gameOver();
+      addScene(133);
     }, 500);
   }
 }
@@ -1393,7 +1534,7 @@ function credits() {
     bonusFeaturesText = "<hr><p>You've unlocked the <strong>Bonus Features</strong> for beating the game!</p>";
   }
   titler.innerHTML = "Credits";
-  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='disableLeapMode();imdone()'>Main Menu</a></p></div>";
+  main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='imdone()'>Main Menu</a></p></div>";
   saveData.checkpoint = 0;
   saveData.complete = 1;
   save();
@@ -1417,13 +1558,73 @@ function qa() {
   main.innerHTML = "<p><strong>Q: What inspired you to make this game?</strong><p><p>A: It all started with the game <a href='http://www.neopets.com/' target='_blank'>Neopets</a>. On Neopets, users could create <a href='http://www.jellyneo.net/?go=adventure_generator' target='_blank'>Neoadventures</a>, text-based games that had choices, dead ends, and finish lines. As a kid who enjoyed writing stories, I was intrigued by this concept and created several neoadventures (before I deleted my Neopets account due to addiction).</p><p><strong>Q: Why did you make this game?</strong></p><p>A: One night at my grandparents' house, I felt the urge to write another neoadventure-like game. Since I no longer had my Neopets account, I cut some printer paper and created my new game using cards. Somehow, the first idea I had involved escaping a tower.</p><p>As I demoed the then-unnamed game, my mom suggested I remake the game on the computer. So I opened up Microsoft Word to complete the task. Along the way, I learned about hyperlinks, which let me click text to jump to other pages. That's when I thought, &quot;there has to be a better way to make this game than with Word.&quot; Naturally, I chose PowerPoint since I liked fullscreen and the ability to design the game with slides. I finished the first version of Escape a Tower by Thanksgiving 2010.</p><p><strong>Q: This game used to be on PowerPoint?</strong></p><p>A: Indeed it did. In fact, I created several PowerPoint games since this one. Who knew you could use PowerPoint beyond presentations?</p>In 2014, I converted Escape a Tower to the Web so people could play the game on their phones. I also added game over counting and save support, which would have been harder to implement on PowerPoint.<p>If you're curious, you can download the latest PowerPoint version <a href='https://timtree.github.io/download/escape-tower/?ver=1.7' target='_blank'>here</a>.</p><p><strong>Q: How long did it take to create this game?</strong></p><p>A: A LOT of time, and counting. While the original version from 2010 took about ten hours to create, I revised the game multiple times since. (Check out the version history to see for yourself.) Since I may update the game again, I could never give a definitive answer.</p><p><strong>Q: Will there ever be a sequel to Escape a Tower?</strong></p><p>A: Maybe. The planned sequel would be called <em>Journey to Home</em>, which is about navigating back home after escaping the tower. Problem is, I'm having trouble motivating myself to develop it. It's an extremely ambitious project, and there's a lot of obstacles I'll have to face with development. There's still hope though, so stay tuned.</p><p><strong>Q: I want to make a game like this. Any advice?</strong></p><p>A: Glad to hear that. Here are three tips you can keep in mind.</p><ul><li><strong>Keep the story simple.</strong> I'd rather jump straight to the action than have to think about what's going on.</li><li><strong>The shorter the paragraphs, the better.</strong> Who likes reading huge blocks of text? Break off longer paragraphs so it's easier to absorb the plot.</li><li><strong>Make it fun to lose.</strong> Losing may not be ideal, but funny text more than makes up for it. If done right, players will <em>want</em> to lose to get a good laugh.</li></ul><p><strong>Q: What else do you like to do other than make video games?</strong></p><p>A: I enjoy <em>playing</em> video games, as well as doodling, running, and cycling.</p><p><strong>Q: How can I give you feedback on this game?</strong></p><p>A: You can either let me know in person (if you know me) or you can post a comment on my <a href='https://www.gamesbytim.com/2011/08/escape-tower-more-info.html' target='_blank'>Website</a>. Thanks for your time to comment!</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
+var totalScenesSeen = 0;
 function gameLeaper() {
   titler.innerHTML = "Game Leaper";
   if (supportsIndexOf) {
-    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors</li><li onclick='enableLeapMode();s29()'>Mysterious Library</li><li onclick='enableLeapMode();s42()'>The Corridors</li><li onclick='enableLeapMode();s47()'>Memory or Trivia</li><li onclick='enableLeapMode();s71()'>Outside the Elevator</li><li onclick='enableLeapMode();s76()'>The Corridors (again)</li><li onclick='enableLeapMode();s90()'>Left Elevator</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2</li></ol><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+    var scenes1Display = calculateGameLeaperScore(scenes1);
+    var scenes2Display = calculateGameLeaperScore(scenes2);
+    var scenes3Display = calculateGameLeaperScore(scenes3);
+    var scenes4Display = calculateGameLeaperScore(scenes4);
+    var scenes5Display = calculateGameLeaperScore(scenes5);
+    var scenes6Display = calculateGameLeaperScore(scenes6);
+    var scenes7Display = calculateGameLeaperScore(scenes7);
+    var scenes8Display = calculateGameLeaperScore(scenes8);
+    var scenes9Display = calculateGameLeaperScore(scenes9);
+    var scenes10Display = calculateGameLeaperScore(scenes10);
+    var scenes11Display = calculateGameLeaperScore(scenes11);
+    var totalScenes;
+    if (totalScenesSeen < totalSceneCount()) {
+      totalScenes = "<p style='font-weight:700;font-size:150%;color:#808080;'>Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+"</p>";
+    } else {
+      totalScenes = "<p style='font-weight:700;font-size:150%;color:#008000;'>&#10003; Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+" &#10003;</p>";
+    }
+    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell "+scenes1Display+"</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors "+scenes2Display+"</li><li onclick='enableLeapMode();s29()'>Mysterious Library "+scenes3Display+"</li><li onclick='enableLeapMode();s42()'>The Corridors "+scenes4Display+"</li><li onclick='enableLeapMode();s47()'>Memory or Trivia "+scenes5Display+"</li><li onclick='enableLeapMode();s71()'>Outside the Elevator "+scenes6Display+"</li>"+scenes7Display+"<li onclick='enableLeapMode();s90()'>Left Elevator "+scenes8Display+"</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower "+scenes9Display+"</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2 "+scenes10Display+"</li>"+scenes11Display+"</ol><div class='center'>"+totalScenes+"</div><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
   } else {
     main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><hr><p>Your browser doesn't support the Game Leaper.</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>"
   }
+  totalScenesSeen = 0;
+}
+
+function calculateGameLeaperScore(sceneNum) {
+  var score = 0;
+  for (var i=0;i<sceneNum.length;i+=1) {
+    if (saveData.seenScenes.indexOf(sceneNum[i]) > -1) {
+      score+=1;
+    }
+  }
+  totalScenesSeen+=score;
+  if (sceneNum === scenes7) {
+    if (score === 0) {
+      return "<li style='cursor:auto;color:#000;'>???</li>"
+    } else {
+      if (score === sceneNum.length) {
+        return "<li onclick='enableLeapMode();s76()'>The Corridors (again) "+"<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+      } else {
+        return "<li onclick='enableLeapMode();s76()'>The Corridors (again) "+"<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+      }
+    }
+  }
+  else if (sceneNum === scenes11) {
+    if (score === 0) {
+      return "<li style='cursor:auto;color:#000;'>???</li>"
+    } else {
+      if (score === sceneNum.length) {
+        return "<li onclick='enableLeapMode();secret()'>The Secret Area "+"<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+      } else {
+        return "<li onclick='enableLeapMode();secret()'>The Secret Area "+"<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+      }
+    }
+  }
+  else if (score === sceneNum.length) {
+    return "<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span>";
+  } else {
+    return "<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span>";
+  }
+}
+
+function totalSceneCount() {
+  return scenes1.length+scenes2.length+scenes3.length+scenes4.length+scenes5.length+scenes6.length+scenes7.length+scenes8.length+scenes9.length+scenes10.length+scenes11.length;
 }
 
 var tempSave = 0;
@@ -1528,6 +1729,7 @@ function secret() {
       ["I peeked at the source code.", "secret7()"],
       ["Um, I got to get out of this creepy place.", "imdone()"]
     );
+    addScene(134);
   }
   else {
     main.innerHTML = "<p>&quot;Um, I'm still setting up this place. Come back here once you've completed the game at least once.&quot;</p>"
@@ -1541,11 +1743,13 @@ function secret2() {
     ["It was an accident, really.", "secret3()"],
     ["<span style='font-size:10pt;'>I learned that there are people out there who love to put in secret things in their stuff, so I went and tried it everywhere and eventually found this finger pointing to some invisible link so I clicked on it and then you were barking at me, so now I'm telling the truth and you're still barking at me, so what in the world-Oh what in the world am I supposed to do? What am I supposed to do? I really want you to understand so I don't have to discuss this ridiculously long reason again and again and again and again and forever going until I eventually pass out and faint so I have to go to the hospital and a whole bunch of bad things happen and then I die and go to a graveyard that I really don't want to be in! GAAHHH! It hurts my brain so much by saying all that things!!!! Curse my horrible intelligence by saying it so long that even I didn't understand!</span>", "secret4()"]
   );
+  addScene(135);
 }
 
 function secret3() {
   main.innerHTML = "<p>&quot;An ACCIDENT?&quot; (Looks at you directly in the eye) &quot;<strong>YOU'RE SMILING!</strong> I SAW THAT! YOU'RE GUILITY! I'M GONNA KICK YOU OUT!&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(136);
 }
 
 function secret4() {
@@ -1554,16 +1758,19 @@ function secret4() {
     ["In other words, I was curious.", "secret5()"],
     ["<span style='font-size:10pt;'>Well, if you wanted me to explain this reason simpler, I don't think I can do that. I am too used to saying things in this ridiculously small font that it would be a nightmare if I don't see the whole page filled up like madness, so that is why I have to say all this stuff in a long and long and random thing that sometimes, I don't know what the heck I am saying, so in order to restore my painful remorse, I jump up in the air three times in a row and breathe on my forehead until I'm filled with so much fresh-filled oxygen that I can inflate my way up to the sky and go to outer space and look at all the planets and breathe all my oxygen so that someday, I can be the first person to survive in space without an air tank, oh would that be awesome! I will be rich and famous and be crazy cool! Yee-haw! Woo-yeah! I am as happy as a fine goat lying in the valleys of a poor land of destiny! It definitely rocks. You should try it. Trust me, it feels as good as drinking juice. Juice is good.</span>", "secret6()"]
   );
+  addScene(137);
 }
 
 function secret5() {
   main.innerHTML = "<p>&quot;Did you know that <strong>curiosity killed the cat?</strong> Well this time, <strong>CURIOSITY KILLED YOU!!!</strong>&quot;</p><p>The person gets a knife out, and you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(138);
 }
 
 function secret6() {
   main.innerHTML = "<p><span style='font-size:10pt;'>&quot;Your long and somewhat random and nerdy and boring and funny and unmethodical and hilarious and silly talk is really crazy and I think you should shut up before I cut your eyeballs out and throw them off the secret area and LOL at you like you are such a sucker! Seriously, why do you enjoy talking a lot? It must take skill to do so, because it is so long for everyone else to talk in such a tiny font. How on Earth do you do it? Was it from your family genes? How about alleles? Is it dominant or recessive? I need a Punnett square to find out! Please give me a Punnett square! Oh please, will you? It will be so nice for you to do so so that maybe I will get out my guilt and fly away to Unicorn Land! UNICORNS! They are cute and fluffy and so magical...I want to marry one someday! It will be so romantic, and then we have kids and those kids would look so weird and people laugh at me, but I am a brave person and I will overcome...</span></p><p>&quot;Wait a sec, <strong>I'M INFECTED!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(139);
 }
 
 function secret7() {
@@ -1572,11 +1779,13 @@ function secret7() {
     ["No way! (Shoot the person with your slingshot)", "secret8()"],
     ["Yeah, gotta go.", "imdone()"]
   );
+  addScene(140);
 }
 
 function secret8() {
   main.innerHTML = "<p>&quot;OH, SO YOU REALLY THINK I WOULD DIE WITH A <strong>PUNY SLINGSHOT?!</strong> TAKE A LOOK AT WHAT <strong>I HAVE!!!</strong>&quot; (takes out a knife from the pocket)</p><p>To make a long story short, you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(141);
 }
 
 function secret9() {
@@ -1586,6 +1795,7 @@ function secret9() {
     ["I DID LIE! (cries) Please forgive me.", "secret10()"],
     ["Leave before anything else happens.", "imdone()"]
   );
+  addScene(142);
 }
 
 function secret10() {
@@ -1594,6 +1804,7 @@ function secret10() {
     ["Get out.", "imdone()"],
     ["Can I play with you?", "secret11()"]
   );
+  addScene(143);
 }
 
 function secret11() {
@@ -1602,11 +1813,13 @@ function secret11() {
     ["Get out.", "imdone()"],
     ["But we can have fun! We can have a tea party, play hide-and-seek, have a pillow fight, and...", "secret12()"]
   );
+  addScene(144);
 }
 
 function secret12() {
   main.innerHTML = "<p>&quot;<strong>OH THAT'S IT! I CAN'T TAKE THIS PAIN ANYMORE!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(145);
 }
 
 function secretWho() {
@@ -1616,6 +1829,7 @@ function secretWho() {
     ["Hugo!", "secretHugo()"],
     ["The man with the beard!", "secretManBeard()"]
   );
+  addScene(146);
 }
 
 function secretMartha() {
@@ -1624,28 +1838,33 @@ function secretMartha() {
     ["Aww man, you got me!", "secretMarthaAwwMan()"],
     ["Jokes on you, 'cause <em>AIN'T NO</em> really means <em>YES THERE IS</em>!", "secretMarthaAint()"]
   );
+  addScene(147);
 }
 
 function secretMarthaAwwMan() {
   main.innerHTML = "<p>&quot;Ha, thought so!</p><p>&quot;Man, that felt <em>great</em>. <strong>I CAUGHT SOMEONE LYING RED-HANDED!!</strong> Oh I'm so AWESOME, I should be a <strong>LAWYER</strong> someday! Ah, the <em>money</em> I'd get for my <strong>sheer</strong> lie-checking <em>brilliance</em>! <strong><em>MONEY MONEH MONAY!!</em></strong> Hallelujah, <strong>HOLLYWOOD!!!</strong> ...&quot;</p>"
   + choices(["Leave before anything worse happens.", "imdone()"]);
+  addScene(148);
 }
 
 function secretMarthaAint() {
   main.innerHTML = "<p>(groan) &quot;So you're one of <strong>THOSE PEOPLE</strong>...&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(149);
 }
 
 function secretHugo() {
   isHugo = true;
   main.innerHTML = "<p>&quot;<strong>Hugo</strong>, eh? Man, I can't <em>stand</em> that guy! <strong>I'M GONNA HUNT HUGO DOWN!!!</strong>&quot;</p><p>The person leaves the secret area to confront Hugo.</p>"
   + choices(["Continue.", "secret13()"]);
+  addScene(150);
 }
 
 function secretManBeard() {
   isHugo = false;
   main.innerHTML = "<p>&quot;<strong>The man with the beard</strong>, eh? Yeah, there's <em>something</em> about that guy. <strong>I'M GONNA HUNT HIM DOWN!!!</strong>&quot;</p><p>The person leaves the secret area to confront the man with the beard.</p>"
   + choices(["Continue.", "secret13()"]);
+  addScene(151);
 }
 
 function secret13() {
@@ -1662,6 +1881,7 @@ function secret13() {
     ["Scream, &quot;DON'T LEAVE! I LOVE YOU!&quot;", "secret24()"],
     ["Stay in the secret area silently and patiently.", condFunction]
   );
+  addScene(152);
 }
 
 function secret14() {
@@ -1671,16 +1891,19 @@ function secret14() {
     ["Leave the broken vase be and hope for the best.", "secret16()"],
     ["Run away.", "secret17()"]
   );
+  addScene(153);
 }
 
 function secret15() {
   main.innerHTML = "<p>You pick up any signs of the vase and hide the pieces in every pocket you have. As soon as you finish, the person comes back.</p><p>&quot;HEY, what happened to my VASE?&quot; (stares at you, notices your stuffed pockets) &quot;AHA! <strong>YOU STOLE IT! I THOUGHT I TRUSTED YOU! FEEL THE PAIN!</strong>&quot; (pulls out pocket knife)</p><p>To make a long story short, you die.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(154);
 }
 
 function secret16() {
   main.innerHTML = "<p>Eventually, the person returns.</p><p>&quot;Oh shoot, WHAT HAPPENED TO MY <strong>VASE??!!</strong>&quot; (stares blankly at you) &quot;<strong>IT'S ALL YOUR FAULT, IDIOT!!!</strong>&quot;</p><p>Before you can respond, the person kicks you out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(155);
 }
 
 function secret17() {
@@ -1689,16 +1912,19 @@ function secret17() {
     ["Yeah, I just broke your vase and now I'm trying to escape so I don't get in trouble, so...", "secret18()"],
     ["No...I, um, just realized I have, you know, other commitments.", "secret19()"]
   );
+  addScene(156);
 }
 
 function secret18() {
   main.innerHTML = "<p>&quot;Well, at least you're being honest. But still, <strong>YOU BROKE MY VASE, IDIOT!!!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(157);
 }
 
 function secret19() {
   main.innerHTML = "<p>&quot;<em>Really,</em> huh? <strong>Alright then.</strong>&quot;</p><p>The person lets you leave, and you escape. Let's just hope nothing bad happens once the person sees the broken vase, shall we?</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(158);
 }
 
 function secret20() {
@@ -1708,21 +1934,25 @@ function secret20() {
     ["Take the entire drawer and go.", "secret22()"],
     ["Close the drawer. That would be mean to take something.", "secret23()"]
   );
+  addScene(159);
 }
 
 function secret21() {
   main.innerHTML = "<p>You take the wallet out of the drawer and flee the scene. Somehow, you manage not to get caught.</p><p>Once the coast is clear, you open up the wallet and find...25 cents. That's something, but <em>was this really the right thing to do?</em></p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(160);
 }
 
 function secret22() {
   main.innerHTML = "<p>You take the entire drawer and leave.</p><p>Right as you take the drawer out, the person comes back. Uh, oh.</p><p>&quot;<strong>WHAT ARE YOU DOING INTRUDING MY BELONGINGS? I LEAVE AND NOW THIS HAPPENS?! GET OUT!</strong>&quot;</p><p>To make a long story short, you get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(161);
 }
 
 function secret23() {
   main.innerHTML = "<p>You close the drawer. You are right about the mean thing anyways.</p><p>The person comes back and notices the drawer that has been closed.</p><p>&quot;<strong>HEY! I DON'T REMEMBER MY DRAWER BEING <em>COMPLETELY</em> CLOSED! GET OUT!!!</strong>&quot;</p>"
   + choices(["Get out before things get worse.", "imdone()"]);
+  addScene(162);
 }
 
 function secret24() {
@@ -1731,6 +1961,7 @@ function secret24() {
     ["But I love you so much!", "secret25()"],
     ["Perhaps I should leave now.", "imdone()"]
   );
+  addScene(163);
 }
 
 function secret25() {
@@ -1739,11 +1970,13 @@ function secret25() {
     ["Of course I do! Let's go on a date.", "secret27()"],
     ["Just kidding! Obviously not!", "secret26()"]
   );
+  addScene(164);
 }
 
 function secret26() {
   main.innerHTML = "<p>&quot;YOU KNOW HOW MUCH I HATE YOU? <strong>I just want to kill you...NOW!!!</strong>&quot;</p><p>To make a long story short, you die when the knife is taken out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(165);
 }
 
 function secret27() {
@@ -1758,6 +1991,7 @@ function secret27() {
     ["Oh, come on! We'll have a great time! Forget about "+whichGuard+".", "secret28()"],
     ["Fine. I hate you then.", "secret29()"]
   );
+  addScene(166);
 }
 
 function secret28() {
@@ -1769,11 +2003,13 @@ function secret28() {
   }
   main.innerHTML = "<p>&quot;But I can't forget about "+whichGuard+", and you know what? You shouldn't be <strong>PEER-PRESSURING</strong> me to do things either. <strong>GET OUT!</strong>&quot;</p><p>You get kicked out.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(167);
 }
 
 function secret29() {
   main.innerHTML = "<p>&quot;If you hate me, then you really should GET OUT OF MY SECRET AREA.&quot;</p><p>You head on out, feeling indifferent.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(168);
 }
 
 function secret30() {
@@ -1782,6 +2018,7 @@ function secret30() {
     ["Leave the secret area. Let's respect the person.", "imdone()"],
     ["Nope, because I am evil.", "secret31()"]
   );
+  addScene(169);
 }
 
 function secretManBeardAftermath() {
@@ -1790,11 +2027,13 @@ function secretManBeardAftermath() {
     ["Leave the secret area. Let's respect the person.", "imdone()"],
     ["Nope, because I am evil.", "secret31()"]
   );
+  addScene(170);
 }
 
 function secret31() {
   main.innerHTML = "<p>&quot;<strong>Well, you're leaving anyway!</strong>&quot;</p><p>You get kicked out by the person without further notice.</p>"
   + choices(["Back to main menu", "imdone()"]);
+  addScene(171);
 }
 
 function imdone() {
@@ -1803,4 +2042,5 @@ function imdone() {
   main.innerHTML = "<div id='secret' onclick='changeEnclosure();secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\",sans-serif;font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
   copyright.style.visibility = "visible";
   loadit();
+  disableLeapMode();
 }
