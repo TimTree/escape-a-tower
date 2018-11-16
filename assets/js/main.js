@@ -6,10 +6,14 @@ var saveData = {
   counter: 0,
   checkpoint: 0,
   complete: 0,
-  seenScenes: []
+  seenScenes: [],
+  bestTime: null
 };
 
 var leaperMode = false;
+var timerMode = false;
+var tempSpawn = 0;
+var creatorTime = 33.2;
 
 var autoComplete = (function() {
     var counter = 0;
@@ -76,16 +80,22 @@ function loadit() {
 window.onload = function () { checkUnsupported(); loadit(); };
 
 function loadgame() {
-  if (saveData.checkpoint === 1) { s1(); }
-  if (saveData.checkpoint === 2) { s20(); }
-  if (saveData.checkpoint === 3) { s29(); }
-  if (saveData.checkpoint === 4) { s42(); }
-  if (saveData.checkpoint === 5) { s47(); }
-  if (saveData.checkpoint === 6) { s71(); }
-  if (saveData.checkpoint === 7) { s76(); }
-  if (saveData.checkpoint === 8) { s90(); }
-  if (saveData.checkpoint === 9) { s102(); }
-  if (saveData.checkpoint === 10) { s121(); }
+  var spawnVar;
+  if (leaperMode || timerMode) {
+    spawnVar = tempSpawn;
+  } else {
+    spawnVar = saveData.checkpoint;
+  }
+  if (spawnVar === 1) { s1(); }
+  if (spawnVar === 2) { s20(); }
+  if (spawnVar === 3) { s29(); }
+  if (spawnVar === 4) { s42(); }
+  if (spawnVar === 5) { s47(); }
+  if (spawnVar === 6) { s71(); }
+  if (spawnVar === 7) { s76(); }
+  if (spawnVar === 8) { s90(); }
+  if (spawnVar === 9) { s102(); }
+  if (spawnVar === 10) { s121(); }
 }
 
 function yousure() {
@@ -108,11 +118,15 @@ function howtoplay() {
 function unsupportedReason() {
   titler.innerHTML = "Unsupported Features";
   var noSaveSupport = "";
+  var noTimer = "";
   var noIndexOf = "";
   var oldIE = "";
   var workarounds = "";
   if (!supportsLocalStorage) {
     noSaveSupport = "<li>No save support</li>";
+  }
+  if (!supportsTimer) {
+    noTimer = "<li>No timer support</li>";
   }
   if (!supportsIndexOf) {
     noIndexOf = "<li>No Game Leaper support</li>";
@@ -120,10 +134,10 @@ function unsupportedReason() {
   if (oldIEMode) {
     oldIE = "<li>Old IE mode - condensed for 800x600 displays</li>";
   }
-  if (noIndexOf === "" && oldIE === "") {
+  if (noTimer === "" && noIndexOf === "" && oldIE === "") {
     workarounds = "<p>If your browser was released 2012 or newer, try these workarounds.</p><ul><li><strong>IE</strong> or <strong>Edge</strong>: Play the game online.</li><li> <strong>Safari</strong>: Play the game online or disable local file restrictions.</li><li><strong>Safari private browsing on iOS 10 or below</strong>: Turn off private browsing.</li></ul>";
   }
-  main.innerHTML = "<p>Your browser will run Escape a Tower with the following limitations:</p><ul>"+noSaveSupport+noIndexOf+oldIE+"</ul>"+workarounds+"<div id='prologueselect'><ul><li><a onclick=imdone()>Main&nbsp;Menu</a></li></ul></div>";
+  main.innerHTML = "<p>Your browser will run Escape a Tower with the following limitations:</p><ul>"+noSaveSupport+noTimer+noIndexOf+oldIE+"</ul>"+workarounds+"<div id='prologueselect'><ul><li><a onclick=imdone()>Main&nbsp;Menu</a></li></ul></div>";
   copyright.style.visibility = "hidden";
 }
 
@@ -155,12 +169,18 @@ function choices() {
 
 function gameOver() {
   var goBackWords;
-  if (saveData.checkpoint === 1) {
+  var spawnVar;
+  if (leaperMode || timerMode) {
+    spawnVar = tempSpawn;
+  } else {
+    spawnVar = saveData.checkpoint;
+  }
+  if (spawnVar === 1) {
     goBackWords = "Go back to beginning";
   } else {
     goBackWords = "Go back to checkpoint";
   }
-  if (!leaperMode) {
+  if (!leaperMode && !timerMode) {
     saveData.counter += 1;
     save();
   }
@@ -168,8 +188,10 @@ function gameOver() {
 }
 
 function markCheckpoint(x) {
-  saveData.checkpoint = x;
-  if (!leaperMode) {
+  if (leaperMode || timerMode) {
+    tempSpawn = x;
+  } else {
+    saveData.checkpoint = x;
     save();
   }
 }
@@ -189,9 +211,11 @@ function addScene(x) {
 }
 
 function prologue() {
-  saveData.counter = 0;
-  saveData.checkpoint = 0;
-  save();
+  if (!leaperMode && !timerMode) {
+    saveData.counter = 0;
+    saveData.checkpoint = 0;
+    save();
+  }
   titler.innerHTML = "Prologue";
   main.innerHTML = "<p>It is a warm, sunny day, and you decide to take a stroll downtown. There, you decide to visit the video game store. To get to the store, you have to cross through a dark, narrow alley.</p><p>As you walk through the alley, a man dressed in black suddenly appears out of nowhere!</p><p><strong>&quot;BOO!&quot;</strong> he yells, making a mad sprint towards you.</p><p>Scared, you decide to make a big run for it, but you are no match for the man. You've been snatched!</p>"
   + "<div id='prologueselect'><ul><li><a onclick='prologue2()'>Continue</a></li><wbr><li><a onclick=s1()>Skip&nbsp;Prologue</a></li></ul></div>";
@@ -464,8 +488,8 @@ function s29() {
     ["Leave the library.", "s32()"]
   )
   + "<div class='center'><p><span class='checkpoint'>CHECKPOINT!</span></p></div>";
-  copyright.style.visibility = "hidden";
   addScene(29);
+  copyright.style.visibility = "hidden";
 }
 
 function s32() {
@@ -1505,7 +1529,27 @@ function s140() {
   if (x === "7852") {
     setTimeout(function () {
       titler.innerHTML = "Correct!";
-      main.innerHTML = "<p>YEAH! Congratulations! The great, extraordinary grand door opens! Lights pop out, fresh air reveals itself, and best of all, <strong>you, yes you, can finally escape the tower!</strong></p><p>You step out the door in great delight, and when you see the fresh, green outdoors, you think to yourself, &quot;I did it! I did it with all I could!&quot;</p><p>And it's true. You officially win the game (that is, if you didn't cheat)!</p><div class='center'><p><span class='theend'>THE END!</span></p><p><a onclick='credits()'>Continue.</a></p></div>";
+      var endContinue;
+      if (timerMode) {
+        clearInterval(inTime);
+        document.getElementById("restart").innerHTML = "";
+        var recordOrNot = "";
+        if (saveData.bestTime === null || currentTime < saveData.bestTime) {
+          if ((currentTime < creatorTime) && (saveData.bestTime === null || saveData.bestTime > creatorTime)) {
+            recordOrNot = "<p><strong>YOU BEAT THE GAME CREATOR!!!</strong></p>";
+          } else {
+            recordOrNot = "<p><strong>That's a new record!</strong></p>";
+          }
+          saveData.bestTime = currentTime;
+          save();
+        } else {
+          endContinue = "<hr><p><a onclick='clearTimer()'>Continue.</a></p>";
+        }
+        endContinue = "<hr><p>Your time: "+secondsToDisplayedTime(currentTime)+"</p>"+recordOrNot+"<p><a onclick='clearTimer()'>Continue.</a></p>";
+      } else {
+        endContinue = "<p><a onclick='credits()'>Continue.</a></p>";
+      }
+      main.innerHTML = "<p>YEAH! Congratulations! The great, extraordinary grand door opens! Lights pop out, fresh air reveals itself, and best of all, <strong>you, yes you, can finally escape the tower!</strong></p><p>You step out the door in great delight, and when you see the fresh, green outdoors, you think to yourself, &quot;I did it! I did it with all I could!&quot;</p><p>And it's true. You officially win the game (that is, if you didn't cheat)!</p><div class='center'><p><span class='theend'>THE END!</span></p>"+endContinue+"</div>";
       addScene(132);
     }, 500);
   } else {
@@ -1535,7 +1579,7 @@ function credits() {
   }
   titler.innerHTML = "Credits";
   main.innerHTML = "<div class='center'><p><span style='font-size:20pt;'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</span></p><p><strong>Game Creator</strong><br><em>Timothy Hsu</em></p><p><strong>Software Used</strong><br><em>PowerPoint (v1.0-1.7)<br>Notepad/TextEdit (v2.0-2.1)<br>Notepad++ (v2.2-2.4.2)<br>Atom (v2.4.3+)<br>GitHub (v2.2+)</em></p><p><strong>Special Thanks</strong><br><em>My family<br>Jeremy Lee<br>Kaizad Taraporevala<br>Michael Wu<br>Make School</em></p><p>&copy;2010-2018 Timothy Hsu</p>"+gameOverCountText+bonusFeaturesText+"<p><a onclick='leaveGame()'>Main Menu</a></p></div>";
-  saveData.checkpoint = 0;
+  markCheckpoint(0);
   saveData.complete = 1;
   save();
   clearGameVars();
@@ -1552,6 +1596,7 @@ function bonus() {
   titler.innerHTML = "Bonus Features";
   main.innerHTML = "<p>Select a bonus feature from here.</p><ul id='moveon'><li onclick='qa()'>Q&A</li><li onclick='gameLeaper()'>Game Leaper</li><li onclick='gamequiz()'>Game Quiz</li><li onclick='beatcreator()'>Beat the Creator</li><li onclick='vhistory()'>Version History</li><li onclick='recgames()'>Recommended Games</li><li onclick='bonusEverywhere()'>Bonus Features Everywhere</li></ul><div class='center'><p><span id ='prologueselect'><a onclick='imdone()'>Main&nbsp;Menu</a></span></p></div>";
   copyright.style.visibility = "hidden";
+  document.getElementById("theTime").innerHTML = "";
 }
 
 function qa() {
@@ -1562,6 +1607,7 @@ function qa() {
 var totalScenesSeen = 0;
 function gameLeaper() {
   titler.innerHTML = "Game Leaper";
+  var content;
   if (supportsIndexOf) {
     var scenes1Display = calculateGameLeaperScore(scenes1);
     var scenes2Display = calculateGameLeaperScore(scenes2);
@@ -1580,10 +1626,11 @@ function gameLeaper() {
     } else {
       totalScenes = "<p style='font-weight:700;font-size:150%;color:#008000;'>&#10003; Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+" &#10003;</p>";
     }
-    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell "+scenes1Display+"</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors "+scenes2Display+"</li><li onclick='enableLeapMode();s29()'>Mysterious Library "+scenes3Display+"</li><li onclick='enableLeapMode();s42()'>The Corridors "+scenes4Display+"</li><li onclick='enableLeapMode();s47()'>Memory or Trivia "+scenes5Display+"</li><li onclick='enableLeapMode();s71()'>Outside the Elevator "+scenes6Display+"</li>"+scenes7Display+"<li onclick='enableLeapMode();s90()'>Left Elevator "+scenes8Display+"</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower "+scenes9Display+"</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2 "+scenes10Display+"</li>"+scenes11Display+"</ol><div class='center'>"+totalScenes+"</div><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+    content = "<ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell "+scenes1Display+"</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors "+scenes2Display+"</li><li onclick='enableLeapMode();s29()'>Mysterious Library "+scenes3Display+"</li><li onclick='enableLeapMode();s42()'>The Corridors "+scenes4Display+"</li><li onclick='enableLeapMode();s47()'>Memory or Trivia "+scenes5Display+"</li><li onclick='enableLeapMode();s71()'>Outside the Elevator "+scenes6Display+"</li>"+scenes7Display+"<li onclick='enableLeapMode();s90()'>Left Elevator "+scenes8Display+"</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower "+scenes9Display+"</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2 "+scenes10Display+"</li>"+scenes11Display+"</ol><div class='center'>"+totalScenes+"</div>";
   } else {
-    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><hr><p>Your browser doesn't support the Game Leaper.</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>"
+    content = "<hr><p>Your browser doesn't support the Game Leaper.</p>"
   }
+  main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p>"+content+"<div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
   totalScenesSeen = 0;
 }
 
@@ -1628,18 +1675,14 @@ function totalSceneCount() {
   return scenes1.length+scenes2.length+scenes3.length+scenes4.length+scenes5.length+scenes6.length+scenes7.length+scenes8.length+scenes9.length+scenes10.length+scenes11.length;
 }
 
-var tempSave = 0;
 function enableLeapMode() {
   leaperMode = true;
-  tempSave = saveData.checkpoint;
   document.getElementById("leaper").style.display = "block";
   clearGameVars();
 }
 
 function disableLeapMode() {
   leaperMode = false;
-  saveData.checkpoint = tempSave;
-  tempSave = 0;
   document.getElementById("leaper").style.display = "none";
   document.getElementById("checkmarker").innerHTML = "";
   clearGameVars();
@@ -1647,7 +1690,7 @@ function disableLeapMode() {
 
 function gamequiz() {
   titler.innerHTML = "Game Quiz";
-  main.innerHTML = "<p>Questions related to the game will appear. When you think you have an answer, click on the Reveal the Answer button. There will be 6 questions.</p><ul id='moveon'><li onclick='playquiz()'>Play Game Quiz</li></ul><p><a onclick=bonus()>Back to Bonus Features</a></p>";
+  main.innerHTML = "<p>Questions related to the game will appear. When you think you have an answer, click on the Reveal the Answer button. There will be 6 questions.</p><ul id='moveon'><li onclick='playquiz()'>Play Game Quiz</li></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
 function playquiz() {
@@ -1698,14 +1741,78 @@ function reveal6() {
   document.getElementById("answer").innerHTML = "<p>Answer: A shard of light beams out.</p><p><a onclick='bonus()'>Back to Bonus Features</a></p>";
 }
 
-function trythis() {
-  titler.innerHTML = "Try This!";
-  main.innerHTML = "<p>Now that you've beaten Escape the Tower, you can go back and look through all the other choices in the game! If you do so, you should really try these.</p><p>- Open chest 1 in the Room of Chests.</p><p>- Choose &quot;I like pie&quot; in the first question of Trivia.</p><p>- In the elevator, ask what viscosity is and then choose (looks up the definition on the dictionary).</p><p>- In the guard room, chat with the guard and play his game.</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
-}
-
 function beatcreator() {
   titler.innerHTML = "Beat the Creator";
-  main.innerHTML = "<p>I the creator, can beat Escape a Tower in just <strong>33.2 seconds.</strong></p><p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Here are a few guidelines.</p><ul><li>Start the stopwatch when you click on New Game.</li><li>Stop the stopwatch as soon as you see The End.</li><li>Don't cheat. That means no Game Leaper, JavaScript Console, etc.</li><li>Good luck, and have fun.</li></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  var content;
+  if (supportsTimer) {
+    var yourRecord = "";
+    if (typeof saveData.bestTime === "number") {
+      if (saveData.bestTime < creatorTime) {
+        yourRecord = "<div style='font-size:120%;margin-bottom:1em;'>Your Record: <span style='font-weight:700;color:#008000;'>"+secondsToDisplayedTime(saveData.bestTime)+"</span></div>";
+      } else {
+        yourRecord = "<div style='font-size:120%;margin-bottom:1em;'>Your Record: "+secondsToDisplayedTime(saveData.bestTime)+"</div>";
+      }
+    }
+    content = "<div class='center'><div style='font-weight:700;font-size:150%;margin:1em 0 0.5em 0;'><a onclick='startTimer()'>Start Game</a></div>"+yourRecord+"</div>";
+  } else {
+    content = "<hr><p>Your browser doesn't support the built-in timer. You can still use a stopwatch with these guidelines.</p><li>Start the stopwatch when you click on New Game.</li><li>Stop the stopwatch as soon as you see The End.</li><li>Don't cheat. That means no Game Leaper, JavaScript Console, etc.</li><li>Good luck, and have fun.</li></ul>";
+  }
+  main.innerHTML = "<p>I the creator, can beat Escape a Tower in just <strong>"+secondsToDisplayedTime(creatorTime)+".</strong></p><p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Give it a shot!</p>"+content+"<div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  document.getElementById("theTime").innerHTML = secondsToTime(0);
+}
+
+var currentTime;
+var inTime;
+var offset;
+
+function startTimer() {
+  timerMode = true;
+  document.getElementById("restart").innerHTML = "<a title='Restart' onclick='clearTimer();'>&#x21bb;</a> ";
+  currentTime = 0;
+  inTime = setInterval(stopwatch,100);
+  offset = Date.now();
+  prologue();
+}
+
+function clearTimer() {
+  timerMode = false;
+  clearInterval(inTime);
+  currentTime = 0;
+  document.getElementById("restart").innerHTML = "";
+  clearGameVars();
+  beatcreator();
+}
+
+function stopwatch() {
+  //currentTime = (currentTime*1+(stopwatch2()/1000)).toFixed(1);
+  currentTime = Math.round((currentTime + stopwatch2()/1000)*10)/10;
+  document.getElementById("theTime").innerHTML = secondsToTime(currentTime);
+}
+
+function stopwatch2() {
+  var now = Date.now(),
+  d = now - offset;
+  offset = now;
+  return d;
+}
+
+function secondsToTime(totalSeconds) {
+  var minutes = parseInt(totalSeconds/60);
+  var seconds = (totalSeconds - 60 * minutes).toFixed(1);
+  if (seconds < 10) {
+    return minutes + ":0" + seconds;
+  } else {
+    return minutes + ":" + seconds;
+  }
+}
+
+function secondsToDisplayedTime(totalSeconds) {
+  var seconds = totalSeconds;
+  if (seconds > 60) {
+    return secondsToTime(totalSeconds);
+  } else {
+    return seconds.toFixed(1) + " seconds";
+  }
 }
 
 function recgames() {

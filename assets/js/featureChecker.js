@@ -14,15 +14,25 @@ function testLocalStorage() {
 
 // Check indexOf support
 function testIndexOf() {
-  if (Array.prototype.indexOf) {
-    return true;
-  } else {
+  if (!Array.prototype.indexOf) {
     return false;
+  } else {
+    return true;
+  }
+}
+
+// Check timer support (date.now)
+function testTimerSupport() {
+  if (!Date.now) {
+    return false;
+  } else {
+    return true;
   }
 }
 
 var supportsLocalStorage = testLocalStorage();
 var supportsIndexOf = testIndexOf();
+var supportsTimer = testTimerSupport();
 
 function checkUnsupported() {
   if (!supportsLocalStorage) {
