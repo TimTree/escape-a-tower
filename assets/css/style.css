@@ -24,13 +24,25 @@ body {
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-#title {
+#titleHeader {
   background:#eee;
   display:block;
-  padding:12px 50px;
+  position:relative;
+  padding:0.4em 50px;
   text-align:center;
   color:#74685F;
-  line-height:1.8;
+  font-family:"trebuchet ms","droid sans",sans-serif;
+  font-size:50pt;
+  font-weight:700;
+}
+
+#topHeader {
+  background:#eee;
+  display:none;
+  position:relative;
+  padding:0.7em 50px;
+  text-align:center;
+  color:#74685F;
   font-size:24pt;
 }
 
@@ -77,14 +89,12 @@ span.theend {
   font-size:20pt;
 }
 
-#titlefont {
-  font-family:"trebuchet ms","droid sans",sans-serif;
-  font-size:50pt;
-  font-weight:700;
-}
-
 #titleselect {
   font-size:27pt;
+}
+
+#title {
+  display:inline-block;
 }
 
 #prologueselect {
@@ -184,7 +194,7 @@ ol li span {
 }
 
 #unsupported {
-  display:block;
+  font-family:"Georgia", "bitstream charter", serif;
   text-align:center;
   font-weight:700;
   font-size:14pt;
@@ -205,6 +215,7 @@ blockquote {
   text-align:center;
   padding:0.35em 0;
   background-color:#47a547;
+  border-bottom:2px solid #000;
   cursor:pointer;
   display:none;
 }
@@ -213,24 +224,33 @@ blockquote {
   background-color:#3c963c;
 }
 
+#gameTimer {
+  position:absolute;
+  top:2px;
+  right:20px;
+  font-size:15.5pt;
+}
+
+#checkmarker {
+  color:#008000;
+}
+
 /* Mobile Device CSS */
 
 @media screen and (max-width: 670px) {
-  #title {
-    padding-right:15px;
-    padding-left:15px;
+  #titleHeader {
+    padding:0.3em 15px;
+    font-size:32pt;
+  }
+
+  #topHeader {
+    padding:0.56em 15px;
     font-size:20pt;
-    line-height:1.4;
   }
 
   #footer {
     padding-right:15px;
     padding-left:15px;
-  }
-
-  #titlefont {
-    font-size:32pt;
-    font-weight:700;
   }
 
   #main {
@@ -240,7 +260,11 @@ blockquote {
   }
 
   #titleselect {
-  font-size:24pt;
+    font-size:24pt;
+  }
+
+  #unsupported {
+    font-size:12pt;
   }
 
   #bonusfeatures {
@@ -249,6 +273,12 @@ blockquote {
 
   #leaper {
     font-size:12pt;
+  }
+
+  #gameTimer {
+    top:1px;
+    right:10px;
+    font-size:12.5pt;
   }
 }
 

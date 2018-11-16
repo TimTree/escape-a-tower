@@ -14,8 +14,15 @@
 
     <link rel="stylesheet" href="./assets/css/style.css">
 
+    <script>
+      var oldIEMode;
+    </script>
+
     <!--[if lte IE 7]>
     	<link rel="stylesheet" type="text/css" href="./assets/css/oldIE.css" />
+      <script>
+        oldIEMode = true;
+      </script>
     <![endif]-->
 
   </head>
@@ -29,17 +36,23 @@
           Back to Game Leaper
         </div>
 
-        <div id="title">
-            <span id="unsupported">
+        <div id="titleHeader">
+            <div id="unsupported">
               <noscript>JavaScript is disabled. Please enable it in order to play the game.</noscript>
-            </span>
-          <div id="titlefont">
-            <span style="color:#184EC6;">Escape</span> <span style="color:#9E8E5C;">a</span> Tower
-          </div>
+            </div>
+            <div style="padding:0.1em 0;">
+              <span style="color:#184EC6;">Escape</span> <span style="color:#9E8E5C;">a</span> Tower
+            </div>
+        </div>
+
+        <div id="topHeader">
+          <div id="gameTimer"></div>
+          <span id="checkmarker"></span>
+          <span id="settingHeader"></span>
         </div>
 
         <div id="main">
-          <div id="secret" onclick="secret()"></div>
+          <div id="secret" onclick="changeEnclosure();secret()"></div>
           <div id="secret2" onclick="autoComplete()"></div>
           <div class="center">
             <p style="margin-bottom:0.7em;">

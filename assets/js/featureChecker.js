@@ -12,10 +12,20 @@ function testLocalStorage() {
   }
 }
 
+// Check indexOf support
+function testIndexOf() {
+  if (Array.prototype.indexOf) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 var supportsLocalStorage = testLocalStorage();
+var supportsIndexOf = testIndexOf();
 
 function checkUnsupported() {
   if (!supportsLocalStorage) {
-    document.getElementById("unsupported").innerHTML="Your browser doesn't support some of the game's features. <a onclick='unsupportedReason()'>Learn More</a>";
+    document.getElementById("unsupported").innerHTML="Your browser doesn't support some of the game's features. <a onclick='changeEnclosure();unsupportedReason()'>Learn More</a>";
   }
 }

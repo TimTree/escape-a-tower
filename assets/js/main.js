@@ -1,11 +1,12 @@
-var titler = document.getElementById("title");
+var titler = document.getElementById("settingHeader");
 var main = document.getElementById("main");
 var copyright = document.getElementById("copyright");
 
 var saveData = {
   counter: 0,
   checkpoint: 0,
-  complete: 0
+  complete: 0,
+  seenScenes: []
 };
 
 var leaperMode = false;
@@ -23,6 +24,8 @@ var autoComplete = (function() {
       }
     };
 })();
+
+var scenes1 = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
 
 if (supportsLocalStorage) {
   if (localStorage.getItem("escapeTowerSaveData")) {
@@ -42,15 +45,20 @@ function save() {
   }
 }
 
+function changeEnclosure() {
+  document.getElementById("titleHeader").style.display = "none";
+  document.getElementById("topHeader").style.display = "block";
+}
+
 function loadit() {
   if (saveData.checkpoint === 0) {
-    document.getElementById("titleselect").innerHTML = "<ul><li><a onclick='howtoplay()'><strong>How&nbsp;to&nbsp;Play</strong></a></li><wbr><li><a onclick='prologue()'><strong>New&nbsp;Game</strong></a></li></ul>";
+    document.getElementById("titleselect").innerHTML = "<ul><li><a onclick='changeEnclosure();howtoplay()'><strong>How&nbsp;to&nbsp;Play</strong></a></li><wbr><li><a onclick='changeEnclosure();prologue()'><strong>New&nbsp;Game</strong></a></li></ul>";
   }
   if (saveData.checkpoint >= 1) {
-    document.getElementById("titleselect").innerHTML = "<ul><li><a onclick='howtoplay()'><strong>How&nbsp;to&nbsp;Play</strong></a></li><wbr><li><a onclick='yousure()'><strong>New&nbsp;Game</strong></a></li><wbr><li><a onclick='loadgame()'><strong>Load&nbsp;Game</strong></a></li></ul>";
+    document.getElementById("titleselect").innerHTML = "<ul><li><a onclick='changeEnclosure();howtoplay()'><strong>How&nbsp;to&nbsp;Play</strong></a></li><wbr><li><a onclick='yousure()'><strong>New&nbsp;Game</strong></a></li><wbr><li><a onclick='changeEnclosure();loadgame()'><strong>Load&nbsp;Game</strong></a></li></ul>";
   }
   if (saveData.complete === 1) {
-    document.getElementById("bonusfeatures").innerHTML = "<a onclick='bonus()'><strong>Bonus&nbsp;Features</strong></a>";
+    document.getElementById("bonusfeatures").innerHTML = "<a onclick='changeEnclosure();bonus()'><strong>Bonus&nbsp;Features</strong></a>";
     document.getElementById("secret2").style.display="none";
   }
 }
@@ -72,7 +80,7 @@ function loadgame() {
 
 function yousure() {
   var b = window.confirm("Are you sure you want to start a new game? This will delete your current save data.");
-  if (b === true) { prologue(); }
+  if (b === true) { changeEnclosure();prologue(); }
 }
 
 function howtoplay() {
@@ -89,10 +97,23 @@ function howtoplay() {
 
 function unsupportedReason() {
   titler.innerHTML = "Unsupported Features";
-  main.innerHTML = "<p>Your browser will run the game with the following limitations:</p>";
-  main.innerHTML += "<ul><li>No save support</li>";
-  main.innerHTML += "</ul>Workarounds</p><ul><li>If you use <strong>IE11</strong> or <strong>Edge</strong>, play the game online.</li><li>If you use <strong>Safari</strong>, play the game online or disable local file restrictions.</li><li>If you use <strong>Safari private browsing on iOS 10 or below</strong>, turn off private browsing or update to iOS 11+.</li></ul>";
-  main.innerHTML += "<div id='prologueselect'><ul><li><a onclick=imdone()>Main&nbsp;Menu</a></li></ul></div>";
+  var noSaveSupport = "";
+  var noIndexOf = "";
+  var oldIE = "";
+  var workarounds = "";
+  if (!supportsLocalStorage) {
+    noSaveSupport = "<li>No save support</li>";
+  }
+  if (!supportsIndexOf) {
+    noIndexOf = "<li>No Game Leaper support</li>";
+  }
+  if (oldIEMode) {
+    oldIE = "<li>Old IE mode - condensed for 800x600 displays</li>";
+  }
+  if (noIndexOf === "" && oldIE === "") {
+    workarounds = "<p>If your browser was released 2012 or newer, try these workarounds.</p><ul><li><strong>IE</strong> or <strong>Edge</strong>: Play the game online.</li><li> <strong>Safari</strong>: Play the game online or disable local file restrictions.</li><li><strong>Safari private browsing on iOS 10 or below</strong>: Turn off private browsing.</li></ul>";
+  }
+  main.innerHTML = "<p>Your browser will run Escape a Tower with the following limitations:</p><ul>"+noSaveSupport+noIndexOf+oldIE+"</ul>"+workarounds+"<div id='prologueselect'><ul><li><a onclick=imdone()>Main&nbsp;Menu</a></li></ul></div>";
   copyright.style.visibility = "hidden";
 }
 
@@ -143,6 +164,20 @@ function markCheckpoint(x) {
   }
 }
 
+function addScene(x) {
+  if (supportsIndexOf) {
+    if (saveData.seenScenes.indexOf(x) === -1) {
+      document.getElementById("checkmarker").innerHTML = "";
+      saveData.seenScenes.push(x);
+      save();
+    } else {
+      if (leaperMode) {
+        document.getElementById("checkmarker").innerHTML = "&#10003;";
+      }
+    }
+  }
+}
+
 function prologue() {
   saveData.counter = 0;
   saveData.checkpoint = 0;
@@ -168,6 +203,7 @@ function s1() {
     ["See what's inside the cabinet.", "s4()"],
     ["Do nothing.", "s5()"]
   );
+  addScene(1);
   copyright.style.visibility = "hidden";
 }
 
@@ -179,6 +215,7 @@ function s2() {
     ["Give up and check the cabinet.", "s4()"],
     ["Cry.", "s7()"]
   );
+  addScene(2);
 }
 
 function s3() {
@@ -1382,14 +1419,18 @@ function qa() {
 
 function gameLeaper() {
   titler.innerHTML = "Game Leaper";
-  main.innerHTML = "<p>Work in progress.</p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors</li><li onclick='enableLeapMode();s29()'>Mysterious Library</li><li onclick='enableLeapMode();s42()'>The Corridors</li><li onclick='enableLeapMode();s47()'>Memory or Trivia</li><li onclick='enableLeapMode();s71()'>Outside the Elevator</li><li onclick='enableLeapMode();s76()'>The Corridors (again)</li><li onclick='enableLeapMode();s90()'>Left Elevator</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2</li></ol><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  if (supportsIndexOf) {
+    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><ol id='moveon'><li onclick='enableLeapMode();s1()'>The Prison Cell</li><li onclick='enableLeapMode();s20()'>Staircase Area With Two Doors</li><li onclick='enableLeapMode();s29()'>Mysterious Library</li><li onclick='enableLeapMode();s42()'>The Corridors</li><li onclick='enableLeapMode();s47()'>Memory or Trivia</li><li onclick='enableLeapMode();s71()'>Outside the Elevator</li><li onclick='enableLeapMode();s76()'>The Corridors (again)</li><li onclick='enableLeapMode();s90()'>Left Elevator</li><li onclick='enableLeapMode();s102()'>Bottom of the Tower</li><li onclick='enableLeapMode();s121()'>Bottom of the Tower 2</li></ol><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  } else {
+    main.innerHTML = "<p>Now that you've beaten Escape a Tower, you can leap back to any checkpoint you've reached. <strong>Try to find every scene in the game!</strong></p><hr><p>Your browser doesn't support the Game Leaper.</p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>"
+  }
 }
 
 var tempSave = 0;
 function enableLeapMode() {
   leaperMode = true;
   tempSave = saveData.checkpoint;
-  document.getElementById("leaper").style.display="block";
+  document.getElementById("leaper").style.display = "block";
   clearGameVars();
 }
 
@@ -1397,7 +1438,8 @@ function disableLeapMode() {
   leaperMode = false;
   saveData.checkpoint = tempSave;
   tempSave = 0;
-  document.getElementById("leaper").style.display="none";
+  document.getElementById("leaper").style.display = "none";
+  document.getElementById("checkmarker").innerHTML = "";
   clearGameVars();
 }
 
@@ -1756,10 +1798,9 @@ function secret31() {
 }
 
 function imdone() {
-  titler.innerHTML = "<span id='unsupported'></span><div id='titlefont'><span style='color:#184EC6;'>Escape</span> <span style='color:#9E8E5C;'>a</span> Tower</div>";
-  checkUnsupported();
-  main.innerHTML = "<div id='secret' onclick='secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\",sans-serif;font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
+  document.getElementById("titleHeader").style.display = "block";
+  document.getElementById("topHeader").style.display = "none";
+  main.innerHTML = "<div id='secret' onclick='changeEnclosure();secret()'></div><div id='secret2' onclick='autoComplete()'></div><div class='center'><p style='margin-bottom:0.7em;'><span style='font-size:24pt;'><span style='color:#C95000;'>An <span style='color:#00A000;'><strong>Adventure Game</strong></span> by</span></span></p><p style='margin-top:0.7em;'><span style='color:#660066;font-family:verdana,\"DejaVu Sans\",sans-serif;font-size:24pt;'>Timothy Hsu</span></p><div id='em'><div id='titleselect'></div><div id='bonusfeatures'></div></div></div>";
   copyright.style.visibility = "visible";
-  copyright.innerHTML = "Version 2.5 Alpha &nbsp;&#126;&nbsp; &copy;2010-2018 Timothy Hsu";
   loadit();
 }
