@@ -1,20 +1,20 @@
 Version 2.5 Full Release Notes
 
-GAME SCRIPT
-- Corrects grammar in various places
-- Worsens grammar in other places...
-- Adds some bonus game scenes (check the trivia game and the guard meeting room)
-- Revises a scene in a certain area that confused most players
-- Adds quotes to a certain person so the text is less confusing
-
 BONUS FEATURES
-- Updates and reformats Q&A
 - Adds Game Leaper, which lets you leap back to every checkpoint you've reached. Try to find every scene!
+- Updates and reformats Q&A
 - Adds in-game timer to Beat the Creator
 - Adds Escape a Tower Box Art, which features box art made for a psychology class
 - Moves Version History to the Bonus Features list
 - Revises and reformats some of the Recommend Games
-- Removes Guide to Web Design (wasn't useful) and Try This! (Game Leaper replaces this)
+- Retires Guide to Web Design (wasn't useful) and Try This! (replaced with Game Leaper)
+
+GAME SCRIPT
+- Corrects grammar in various places
+- Worsens grammar in other places...
+- Adds some additional game scenes (check the trivia game and the guard meeting room)
+- Revises a scene in a certain area that confused most players
+- Adds quotes to a certain person so the text is less confusing
 
 QUALITY OF LIFE
 - Adds ability to unlock Bonus Features without beating the game
@@ -29,6 +29,8 @@ UNDER THE HOOD
 - Refactors several functions so the code is easier to read
 - Switches to JSON-based local storage for better save management
 - Adds feature detection. The game now informs you if your browser cannot use some features (or run the game at all).
-- Fixes offline support on Microsoft Edge
+- Fixes game-breaking bugs when playing the downloaded game on Microsoft Edge and Safari
 - Works around a font issue on Safari 12
 - Fixes ? bug on Netscape
+
+Note: Save data from versions 2.4.3 and earlier are no longer compatible.
