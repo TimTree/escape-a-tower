@@ -143,7 +143,7 @@ function unsupportedReason() {
 
 function vhistory() {
   titler.innerHTML = "Version History";
-  main.innerHTML = "<ul><li><strong>Version 2.4.3</strong> (released Oct 25, 2018)<ul><li>Corrects grammatical errors</li><li>Updates links to Games by Tim</li><li>Removes deprecated appcache</li></ul></li><li><strong>Version 2.4.2</strong> (released Dec 1, 2016)<ul><li>Minor script changes</li></ul></li><li><strong>Version 2.4.1</strong> (released Nov 3, 2016)<ul><li>Fixes Javascript syntax errors</li></ul></li><li><strong>Version 2.4</strong> (released Feb 15, 2016)<ul><li>Lots of formatting improvements</li><li>Visual enhancements, including shadows and active selectors</li><li>Bug fixes</li></ul></li><li><strong>Version 2.3.2</strong> (released Oct 11, 2015)<ul><li>Now compatible with more ancient browsers, including Netscape</li><li>Formatting fix for Internet Explorer</li></ul></li><li><strong>Version 2.3.1</strong> (released Oct 10, 2015)<ul><li>Improves game scaling</li><li>Explains how to play with fewer words</li><li>The game is now playable on Safari private browsing mode.</li></ul></li><li><strong>Version 2.3</strong> (released Jun 21, 2014)<ul><li>Fixes HTML5 validation issues</li><li>Erasing save data now only deletes Escape a Tower data.</li><li>IE8 support</li></ul></li><li><strong>Version 2.2</strong> (released May 8, 2014)<ul><li>Formatting fixes for Firefox, Internet Explorer, and mobile devices.</li><li>Added the option to erase save data on the bottom of version history.</li><li>The file size has decreased.</li></ul></li><li><strong>Version 2.1</strong> (released Mar 8, 2014)<ul><li>Based on user feedback, I made a small modification to the first part of the game to make that section a little easier. It does NOT alter the solution; rather, it provides a hint towards the right direction.</li></ul></li><li><strong>Version 2.0</strong> (released Mar 4, 2014)<br>The classic PowerPoint game has been rewritten in HTML5. What does this mean for you?<ul><li>Escape a Tower is playable natively on a Web browser. The game loads more quickly, has a smaller file size, and best of all, you no longer need to download a file and open PowerPoint to play!</li><li>You can also play Escape a Tower on mobile devices, such as the iPhone, iPad, Nexus, Samsung Galaxy, you name it!</li><li>New save feature. If you exit the game before you beat it, you are now able to load the game from your nearest checkpoint!</li><li>The game now tracks how many Game Over's you get while playing, which is displayed at the end of the game.</li><li>Corrects some grammatical errors.</li></ul></li><p> <a href='./assets/other/PPThistory.txt' target='_blank'>Click here</a> for the PowerPoint version history.</p></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<ul><li><strong>Version 2.5</strong> (released tba)<p>The biggest update since the conversion to Web. Escape a Tower version 2.5 features new post-game content, such as:</p><ul><li><strong>Game Leaper</strong> - Leap back to certain parts of the game to find secrets you may have missed.</li><li><strong>Beat the Creator</strong> - Use the new in-game timer to challenge my time.</li><li><strong>Escape a Tower Box Art</strong> - See box art I made for a psychology class.</li></ul><p>In addition, this update corrects grammatical errors, adds a few new game scenes, and includes a multitude of QOL/behind-the-scenes impovements.</p><p><a href='./assets/other/2.5ReleaseNotes.txt' target='_blank'>Click here</a> for the full release notes.</p><li><strong>Version 2.4.3</strong> (released Oct 25, 2018)<ul><li>Corrects grammatical errors</li><li>Updates links to Games by Tim</li><li>Removes deprecated appcache</li></ul></li><li><strong>Version 2.4.2</strong> (released Dec 1, 2016)<ul><li>Minor script changes</li></ul></li><li><strong>Version 2.4.1</strong> (released Nov 3, 2016)<ul><li>Fixes Javascript syntax errors</li></ul></li><li><strong>Version 2.4</strong> (released Feb 15, 2016)<ul><li>Lots of formatting improvements</li><li>Visual enhancements, including shadows and active selectors</li><li>Bug fixes</li></ul></li><li><strong>Version 2.3.2</strong> (released Oct 11, 2015)<ul><li>Now compatible with more ancient browsers, including Netscape</li><li>Formatting fix for Internet Explorer</li></ul></li><li><strong>Version 2.3.1</strong> (released Oct 10, 2015)<ul><li>Improves game scaling</li><li>Explains how to play with fewer words</li><li>The game is now playable on Safari private browsing mode.</li></ul></li><li><strong>Version 2.3</strong> (released Jun 21, 2014)<ul><li>Fixes HTML5 validation issues</li><li>Erasing save data now only deletes Escape a Tower data.</li><li>IE8 support</li></ul></li><li><strong>Version 2.2</strong> (released May 8, 2014)<ul><li>Formatting fixes for Firefox, Internet Explorer, and mobile devices.</li><li>Added the option to erase save data on the bottom of version history.</li><li>The file size has decreased.</li></ul></li><li><strong>Version 2.1</strong> (released Mar 8, 2014)<ul><li>Based on user feedback, I made a small modification to the first part of the game to make that section a little easier. It does NOT alter the solution; rather, it provides a hint towards the right direction.</li></ul></li><li><strong>Version 2.0</strong> (released Mar 4, 2014)<br>The classic PowerPoint game has been rewritten in HTML5. What does this mean for you?<ul><li>Escape a Tower is playable natively on a Web browser. The game loads more quickly, has a smaller file size, and best of all, you no longer need to download a file and open PowerPoint to play!</li><li>You can also play Escape a Tower on mobile devices, such as the iPhone, iPad, Nexus, Samsung Galaxy, you name it!</li><li>New save feature. If you exit the game before you beat it, you are now able to load the game from your nearest checkpoint!</li><li>The game now tracks how many Game Over's you get while playing, which is displayed at the end of the game.</li><li>Corrects some grammatical errors.</li></ul></li><p> <a href='./assets/other/PPThistory.txt' target='_blank'>Click here</a> for the PowerPoint version history.</p></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
   copyright.style.visibility = "hidden";
 }
 
@@ -1533,19 +1533,19 @@ function s140() {
       if (timerMode) {
         clearInterval(inTime);
         document.getElementById("restart").innerHTML = "";
-        var recordOrNot = "";
+        var pbOrNot = "";
         if (saveData.bestTime === null || currentTime < saveData.bestTime) {
           if ((currentTime < creatorTime) && (saveData.bestTime === null || saveData.bestTime > creatorTime)) {
-            recordOrNot = "<p><strong>YOU BEAT THE GAME CREATOR!!!</strong></p>";
+            pbOrNot = "<p><strong>YOU BEAT THE GAME CREATOR!!!</strong></p>";
           } else {
-            recordOrNot = "<p><strong>That's a new record!</strong></p>";
+            pbOrNot = "<p><strong>That's a new personal best!</strong></p>";
           }
           saveData.bestTime = currentTime;
           save();
         } else {
           endContinue = "<hr><p><a onclick='clearTimer()'>Continue.</a></p>";
         }
-        endContinue = "<hr><p>Your time: "+secondsToDisplayedTime(currentTime)+"</p>"+recordOrNot+"<p><a onclick='clearTimer()'>Continue.</a></p>";
+        endContinue = "<hr><p>Your time: "+secondsToDisplayedTime(currentTime)+"</p>"+pbOrNot+"<p><a onclick='clearTimer()'>Continue.</a></p>";
       } else {
         endContinue = "<p><a onclick='credits()'>Continue.</a></p>";
       }
@@ -1594,7 +1594,7 @@ function clearGameVars() {
 
 function bonus() {
   titler.innerHTML = "Bonus Features";
-  main.innerHTML = "<p>Select a bonus feature from here.</p><ul id='moveon'><li onclick='qa()'>Q&A</li><li onclick='gameLeaper()'>Game Leaper</li><li onclick='gamequiz()'>Game Quiz</li><li onclick='beatcreator()'>Beat the Creator</li><li onclick='vhistory()'>Version History</li><li onclick='recgames()'>Recommended Games</li><li onclick='bonusEverywhere()'>Bonus Features Everywhere</li></ul><div class='center'><p><span id ='prologueselect'><a onclick='imdone()'>Main&nbsp;Menu</a></span></p></div>";
+  main.innerHTML = "<p>Select a bonus feature from here.</p><ul id='moveon'><li onclick='qa()'>Q&A</li><li onclick='gameLeaper()'>Game Leaper</li><li onclick='beatcreator()'>Beat the Creator</li><li onclick='gamequiz()'>Game Quiz</li><li onclick='boxart()'>Escape a Tower Box Art</li><li onclick='vhistory()'>Version History</li><li onclick='recgames()'>Recommended Games</li><li onclick='bonusEverywhere()'>Bonus Features Everywhere</li></ul><div class='center'><p><span id ='prologueselect'><a onclick='imdone()'>Main&nbsp;Menu</a></span></p></div>";
   copyright.style.visibility = "hidden";
   document.getElementById("theTime").innerHTML = "";
 }
@@ -1743,21 +1743,23 @@ function reveal6() {
 
 function beatcreator() {
   titler.innerHTML = "Beat the Creator";
+  var commentary = "<p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Give it a shot!</p>";
   var content;
   if (supportsTimer) {
-    var yourRecord = "";
+    var yourPB = "";
     if (typeof saveData.bestTime === "number") {
       if (saveData.bestTime < creatorTime) {
-        yourRecord = "<div style='font-size:120%;margin-bottom:1em;'>Your Record: <span style='font-weight:700;color:#008000;'>"+secondsToDisplayedTime(saveData.bestTime)+"</span></div>";
+        commentary = "<p>Wait, <em>you BEAT my time?!</em> Never have I been more jealous in my life...</p>";
+        yourPB = "<div style='font-size:120%;margin-bottom:1em;'>Personal Best: <span style='font-weight:700;color:#008000;'>"+secondsToDisplayedTime(saveData.bestTime)+"</span></div>";
       } else {
-        yourRecord = "<div style='font-size:120%;margin-bottom:1em;'>Your Record: "+secondsToDisplayedTime(saveData.bestTime)+"</div>";
+        yourPB = "<div style='font-size:120%;margin-bottom:1em;'>Personal Best: "+secondsToDisplayedTime(saveData.bestTime)+"</div>";
       }
     }
-    content = "<div class='center'><div style='font-weight:700;font-size:150%;margin:1em 0 0.5em 0;'><a onclick='startTimer()'>Start Game</a></div>"+yourRecord+"</div>";
+    content = "<div class='center'><div style='font-weight:700;font-size:150%;margin:1em 0 0.5em 0;'><a onclick='startTimer()'>Start Game</a></div>"+yourPB+"</div>";
   } else {
     content = "<hr><p>Your browser doesn't support the built-in timer. You can still use a stopwatch with these guidelines.</p><li>Start the stopwatch when you click on New Game.</li><li>Stop the stopwatch as soon as you see The End.</li><li>Don't cheat. That means no Game Leaper, JavaScript Console, etc.</li><li>Good luck, and have fun.</li></ul>";
   }
-  main.innerHTML = "<p>I the creator, can beat Escape a Tower in just <strong>"+secondsToDisplayedTime(creatorTime)+".</strong></p><p><em>Can you beat this time?</em> If you can, go ahead and call yourself the true champion of this game. Give it a shot!</p>"+content+"<div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<p>I, the creator, can beat Escape a Tower in just <strong>"+secondsToDisplayedTime(creatorTime)+".</strong></p>"+commentary+content+"<div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
   document.getElementById("theTime").innerHTML = secondsToTime(0);
 }
 
@@ -1784,7 +1786,6 @@ function clearTimer() {
 }
 
 function stopwatch() {
-  //currentTime = (currentTime*1+(stopwatch2()/1000)).toFixed(1);
   currentTime = Math.round((currentTime + stopwatch2()/1000)*10)/10;
   document.getElementById("theTime").innerHTML = secondsToTime(currentTime);
 }
@@ -1807,12 +1808,16 @@ function secondsToTime(totalSeconds) {
 }
 
 function secondsToDisplayedTime(totalSeconds) {
-  var seconds = totalSeconds;
-  if (seconds > 60) {
+  if (totalSeconds > 60) {
     return secondsToTime(totalSeconds);
   } else {
-    return seconds.toFixed(1) + " seconds";
+    return totalSeconds.toFixed(1) + " seconds";
   }
+}
+
+function boxart() {
+  titler.innerHTML = "Escape a Tower Box Art";
+  main.innerHTML = "<p>For a college psychology class, I studied how video game box art can persuade people to purchase games. It turns out many games have different box art for American and Japanese audiences.</p><p>American box art tends to invoke action and aggression to stimulate people's minds (Barratt & GamesRadar Staff, 2013; Gaston, 2014). Japanese box art, on the other hand, usually focuses on artistic qualities (Carlson, 2014; Haske, 2014).</p><p>To illustrate this finding, I drafted potential box art for Escape a Tower. To the left, the American version, and to the right, the Japanese version.</p><div class='center'><p><img src='./assets/img/TowerBoxArtUS.png' alt='Escape a Tower box art American' style='width:47%;max-width:300px;margin-right:2%;'><img src='./assets/img/TowerBoxArtJP.png' alt='Escape a Tower box art Japanese' style='width:47%;max-width:300px;'></p></div><p>For the American box art, I added an evocative kidnapper and a determined protagonist to showcase action. For the Japanese box art, I emphasized the tower for artistic purposes. <em>Which box art do you prefer?</em></p><p><strong>Works Cited</strong></p><div style='font-size:75%;text-indent:-7%;margin-left:7%;overflow-wrap: break-word;'><p>Barratt, C., & GamesRadar Staff. (2013, August 02). Japanese box art that's a billion times better than ours. Retrieved from <a href='https://www.gamesradar.com/why-japanese-box-art-is-better/' target='_blank'>https://www.gamesradar.com/why-japanese-box-art-is-better/</a></p><p>Carlson, A. (2014, June 28). Video Game Box Art: America Is Getting Trounced By Japan. Retrieved from <a href='https://www.hardcoregamer.com/2014/06/28/video-game-box-art-america-is-getting-trounced-by-japan/91580/' target='_blank'>https://www.hardcoregamer.com/2014/06/28/video-game-box-art-america-is-getting-trounced-by-japan/91580/</a></p><p>Gaston, M. (2014, April 28). Why is Kirby always angry in the US? Nintendo explains. Retrieved from <a href='https://www.gamespot.com/articles/why-is-kirby-always-angry-in-the-us-nintendo-explains/1100-6419263/' target='_blank'>https://www.gamespot.com/articles/why-is-kirby-always-angry-in-the-us-nintendo-explains/1100-6419263/</a></p><p>Haske, S. (2014, February 01). The Coolest International Video Game Box Art. Retrieved from <a href='https://www.complex.com/pop-culture/2014/02/coolest-international-video-game-box-art/' target='_blank'>https://www.complex.com/pop-culture/2014/02/coolest-international-video-game-box-art/</a></p></div><p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
 function recgames() {
