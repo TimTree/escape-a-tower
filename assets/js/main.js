@@ -1594,7 +1594,7 @@ function clearGameVars() {
 
 function bonus() {
   titler.innerHTML = "Bonus Features";
-  main.innerHTML = "<p>Select a bonus feature from here.</p><ul id='moveon'><li onclick='qa()'>Q&A</li><li onclick='gameLeaper()'>Game Leaper</li><li onclick='beatcreator()'>Beat the Creator</li><li onclick='gamequiz()'>Game Quiz</li><li onclick='boxart()'>Escape a Tower Box Art</li><li onclick='vhistory()'>Version History</li><li onclick='recgames()'>Recommended Games</li><li onclick='bonusEverywhere()'>Bonus Features Everywhere</li></ul><div class='center'><p><span id ='prologueselect'><a onclick='imdone()'>Main&nbsp;Menu</a></span></p></div>";
+  main.innerHTML = "<p>Select a bonus feature from here.</p><ul id='moveon'><li onclick='gameLeaper()'><strong>Game Leaper</strong></li><li onclick='gamequiz()'><strong>Game Quiz</strong></li><li onclick='beatcreator()'><strong>Beat the Creator</strong></li><li onclick='qa()'>Q&A</li><li onclick='boxart()'>Escape a Tower Box Art</li><li onclick='vhistory()'>Version History</li><li onclick='recgames()'>Recommended Games</li><li onclick='bonusEverywhere()'>Bonus Features Everywhere</li></ul><div class='center'><p><span id ='prologueselect'><a onclick='imdone()'>Main&nbsp;Menu</a></span></p></div>";
   copyright.style.visibility = "hidden";
   document.getElementById("theTime").innerHTML = "";
 }
@@ -1827,7 +1827,7 @@ function recgames() {
 
 function bonusEverywhere() {
   titler.innerHTML = "Bonus Features Everywhere";
-  main.innerHTML = "<div id='secretDemo' onclick='alert(\"Yup, you got it! Remember this position for your other browsers/devices.\")'><div>Right here ->&nbsp;&nbsp;</div><div id='secretDemoShape'></div></div><p>Want to quickly unlock the bonus features on other browsers/devices?</p><p>On those browsers/devices, <strong>click the top-right corner of the main menu three times.</strong></p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<div id='secretDemo' onclick='alert(\"Yup, you got it! Remember this position in the main menu on your other browsers/devices.\")'><div>Right here ->&nbsp;&nbsp;</div><div id='secretDemoShape'></div></div><p>Want to quickly unlock the bonus features on other browsers/devices?</p><p>On those browsers/devices, <strong>click the top-right corner of the main menu three times.</strong></p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
 var isHugo;

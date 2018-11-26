@@ -1,25 +1,15 @@
 body {
-  padding:0 22px;
+  padding:0 26px;
   width:720px;
 }
 
-#secret {
-  width:20px;
-  height:20px;
-  cursor:hand;
+#secret, #secret2 {
   background-color:#85776D;
 }
 
-#secret2 {
-  width:20px;
-  height:20px;
-  cursor:hand;
-  background-color:#85776D;
-}
-
-#secretDemoShape {
-  width:20px;
-  height:20px;
+#secret, #secret2, #secretDemoShape {
+  width:24px;
+  height:24px;
   cursor:hand;
 }
 

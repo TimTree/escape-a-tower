@@ -111,9 +111,6 @@ span.theend {
   position:absolute;
   left:1px;
   top:1px;
-  width:35px;
-  height:35px;
-  cursor:pointer;
 }
 
 #secret:active {
@@ -124,9 +121,6 @@ span.theend {
   position:absolute;
   right:1px;
   top:1px;
-  width:35px;
-  height:35px;
-  cursor:pointer;
 }
 
 #secret2:active {
@@ -147,9 +141,12 @@ span.theend {
 }
 
 #secretDemoShape {
-  width:35px;
-  height:35px;
   background-color:#9db6d6;
+}
+
+#secret, #secret2, #secretDemoShape {
+  width:36px;
+  height:36px;
   cursor:pointer;
 }
 
