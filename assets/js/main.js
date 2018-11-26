@@ -143,7 +143,7 @@ function unsupportedReason() {
 
 function vhistory() {
   titler.innerHTML = "Version History";
-  main.innerHTML = "<ul><li><strong>Version 2.5</strong> (released Nov 17, 2018)<p>The biggest update since the conversion to Web. Escape a Tower version 2.5 features new post-game content, such as:</p><ul><li><strong>Game Leaper</strong> - Leap back to certain parts of the game to find secrets you may have missed.</li><li><strong>Beat the Creator</strong> - Use the new in-game timer to challenge my time.</li><li><strong>Escape a Tower Box Art</strong> - See box art I made for a psychology class.</li></ul><p>In addition, this update corrects grammatical errors, adds a few new game scenes, and includes a multitude of behind-the-scenes impovements.</p><p><a href='./assets/other/2.5ReleaseNotes.txt' target='_blank'>Click here</a> for the full release notes.</p><li><strong>Version 2.4.3</strong> (released Oct 25, 2018)<ul><li>Corrects grammatical errors</li><li>Updates links to Games by Tim</li><li>Removes deprecated appcache</li></ul></li><li><strong>Version 2.4.2</strong> (released Dec 1, 2016)<ul><li>Minor script changes</li></ul></li><li><strong>Version 2.4.1</strong> (released Nov 3, 2016)<ul><li>Fixes Javascript syntax errors</li></ul></li><li><strong>Version 2.4</strong> (released Feb 15, 2016)<ul><li>Lots of formatting improvements</li><li>Visual enhancements, including shadows and active selectors</li><li>Bug fixes</li></ul></li><li><strong>Version 2.3.2</strong> (released Oct 11, 2015)<ul><li>Now compatible with more ancient browsers, including Netscape</li><li>Formatting fix for Internet Explorer</li></ul></li><li><strong>Version 2.3.1</strong> (released Oct 10, 2015)<ul><li>Improves game scaling</li><li>Explains how to play with fewer words</li><li>The game is now playable on Safari private browsing mode.</li></ul></li><li><strong>Version 2.3</strong> (released Jun 21, 2014)<ul><li>Fixes HTML5 validation issues</li><li>Erasing save data now only deletes Escape a Tower data.</li><li>IE8 support</li></ul></li><li><strong>Version 2.2</strong> (released May 8, 2014)<ul><li>Formatting fixes for Firefox, Internet Explorer, and mobile devices.</li><li>Added the option to erase save data on the bottom of version history.</li><li>The file size has decreased.</li></ul></li><li><strong>Version 2.1</strong> (released Mar 8, 2014)<ul><li>Based on user feedback, I made a small modification to the first part of the game to make that section a little easier. It does NOT alter the solution; rather, it provides a hint towards the right direction.</li></ul></li><li><strong>Version 2.0</strong> (released Mar 4, 2014)<br>The classic PowerPoint game has been rewritten in HTML5. What does this mean for you?<ul><li>Escape a Tower is playable natively on a Web browser. The game loads more quickly, has a smaller file size, and best of all, you no longer need to download a file and open PowerPoint to play!</li><li>You can also play Escape a Tower on mobile devices, such as the iPhone, iPad, Nexus, Samsung Galaxy, you name it!</li><li>New save feature. If you exit the game before you beat it, you are now able to load the game from your nearest checkpoint!</li><li>The game now tracks how many Game Over's you get while playing, which is displayed at the end of the game.</li><li>Corrects some grammatical errors.</li></ul></li><p> <a href='./assets/other/PPThistory.txt' target='_blank'>Click here</a> for the PowerPoint version history.</p></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<ul><li><strong>Version 2.5.1</strong> (released Nov 26, 2018)<ul><li>Increases the hit box of hidden buttons</li><li>Makes minor Bonus Features revisions</li></ul></li><li><strong>Version 2.5</strong> (released Nov 17, 2018)<p>The biggest update since the conversion to Web. Escape a Tower version 2.5 features new post game content, such as:</p><ul><li><strong>Game Leaper</strong> - Leap back to certain parts of the game to find secrets you may have missed.</li><li><strong>Beat the Creator</strong> - Use the new in-game timer to challenge my time.</li><li><strong>Escape a Tower Box Art</strong> - See box art I made for a psychology class.</li></ul><p>In addition, this update corrects grammatical errors, adds a few new game scenes, and includes a multitude of behind-the-scenes impovements.</p><p><a href='./assets/other/2.5ReleaseNotes.txt' target='_blank'>Click here</a> for the full release notes.</p><li><strong>Version 2.4.3</strong> (released Oct 25, 2018)<ul><li>Corrects grammatical errors</li><li>Updates links to Games by Tim</li><li>Removes deprecated appcache</li></ul></li><li><strong>Version 2.4.2</strong> (released Dec 1, 2016)<ul><li>Minor script changes</li></ul></li><li><strong>Version 2.4.1</strong> (released Nov 3, 2016)<ul><li>Fixes Javascript syntax errors</li></ul></li><li><strong>Version 2.4</strong> (released Feb 15, 2016)<ul><li>Lots of formatting improvements</li><li>Visual enhancements, including shadows and active selectors</li><li>Bug fixes</li></ul></li><li><strong>Version 2.3.2</strong> (released Oct 11, 2015)<ul><li>Now compatible with more ancient browsers, including Netscape</li><li>Formatting fix for Internet Explorer</li></ul></li><li><strong>Version 2.3.1</strong> (released Oct 10, 2015)<ul><li>Improves game scaling</li><li>Explains how to play with fewer words</li><li>The game is now playable on Safari private browsing mode.</li></ul></li><li><strong>Version 2.3</strong> (released Jun 21, 2014)<ul><li>Fixes HTML5 validation issues</li><li>Erasing save data now only deletes Escape a Tower data.</li><li>IE8 support</li></ul></li><li><strong>Version 2.2</strong> (released May 8, 2014)<ul><li>Formatting fixes for Firefox, Internet Explorer, and mobile devices.</li><li>Added the option to erase save data on the bottom of version history.</li><li>The file size has decreased.</li></ul></li><li><strong>Version 2.1</strong> (released Mar 8, 2014)<ul><li>Based on user feedback, I made a small modification to the first part of the game to make that section a little easier. It does NOT alter the solution; rather, it provides a hint towards the right direction.</li></ul></li><li><strong>Version 2.0</strong> (released Mar 4, 2014)<br>The classic PowerPoint game has been rewritten in HTML5. What does this mean for you?<ul><li>Escape a Tower is playable natively on a Web browser. The game loads more quickly, has a smaller file size, and best of all, you no longer need to download a file and open PowerPoint to play!</li><li>You can also play Escape a Tower on mobile devices, such as the iPhone, iPad, Nexus, Samsung Galaxy, you name it!</li><li>New save feature. If you exit the game before you beat it, you are now able to load the game from your nearest checkpoint!</li><li>The game now tracks how many Game Over's you get while playing, which is displayed at the end of the game.</li><li>Corrects some grammatical errors.</li></ul></li><p> <a href='./assets/other/PPThistory.txt' target='_blank'>Click here</a> for the PowerPoint version history.</p></ul><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
   copyright.style.visibility = "hidden";
 }
 
@@ -1710,27 +1710,27 @@ function reveal2() {
 }
 
 function playquiz3() {
-  main.innerHTML = "<p>3. What special perk do guards get? (listed on notice board)</p><p><div id='answer'><a onclick='reveal3()'>Reveal the answer.</a></div></p>";
+  main.innerHTML = "<p>4. What is the code to escape the tower?</p><p><div id='answer'><a onclick='reveal3()'>Reveal the answer.</a></div></p>";
 }
 
 function reveal3() {
-  document.getElementById("answer").innerHTML = "<p>Answer: Free coffee</p><p><a onclick='playquiz4()'>Next Question</a></p>";
+  document.getElementById("answer").innerHTML = "<p>Answer: 7852</p><p><a onclick='playquiz4()'>Next Question</a></p>";
 }
 
 function playquiz4() {
-  main.innerHTML = "<p>4. What is the code to escape the tower?</p><p><div id='answer'><a onclick='reveal4()'>Reveal the answer.</a></div></p>";
+  main.innerHTML = "<p>3. What special perk do guards get? (listed on notice board)</p><p><div id='answer'><a onclick='reveal4()'>Reveal the answer.</a></div></p>";
 }
 
 function reveal4() {
-  document.getElementById("answer").innerHTML = "<p>Answer: 7852</p><p><a onclick='playquiz5()'>Next Question</a></p>";
+  document.getElementById("answer").innerHTML = "<p>Answer: Free coffee</p><p><a onclick='playquiz5()'>Next Question</a></p>";
 }
 
 function playquiz5() {
-  main.innerHTML = "<p>5. There are 2 ways to complete the prison cell section of the game. What are they?</p><p><div id='answer'><a onclick='reveal5()'>Reveal the answer.</a></div></p>";
+  main.innerHTML = "<p>5. How many cups of coffee do you <em>never</em> drink more of on a given day?</p><p><div id='answer'><a onclick='reveal5()'>Reveal the answer.</a></div></p>";
 }
 
 function reveal5() {
-  document.getElementById("answer").innerHTML = "<p>Answer: Eat the lunch the witch gives you OR escape the cell while the witch is heating up your lunch.</p><p><a onclick='playquiz6()'>Next Question</a></p>";
+  document.getElementById("answer").innerHTML = "<p>Answer: Seventeen</p><p><a onclick='playquiz6()'>Next Question</a></p>";
 }
 
 function playquiz6() {
@@ -1827,7 +1827,7 @@ function recgames() {
 
 function bonusEverywhere() {
   titler.innerHTML = "Bonus Features Everywhere";
-  main.innerHTML = "<div id='secretDemo'><div>Right here ->&nbsp;&nbsp;</div><div id='secretDemoShape'></div></div><p>Want to quickly unlock the bonus features on other browsers/devices?</p><p>On those browsers/devices, <strong>click the top-right corner of the main menu three times.</strong></p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
+  main.innerHTML = "<div id='secretDemo' onclick='alert(\"Yup, you got it! Remember this position for your other browsers/devices.\")'><div>Right here ->&nbsp;&nbsp;</div><div id='secretDemoShape'></div></div><p>Want to quickly unlock the bonus features on other browsers/devices?</p><p>On those browsers/devices, <strong>click the top-right corner of the main menu three times.</strong></p><div class='center'><p><a onclick='bonus()'>Back to Bonus Features</a></p></div>";
 }
 
 var isHugo;

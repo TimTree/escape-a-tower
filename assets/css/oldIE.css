@@ -4,13 +4,23 @@ body {
 }
 
 #secret {
+  width:20px;
+  height:20px;
   cursor:hand;
   background-color:#85776D;
 }
 
 #secret2 {
+  width:20px;
+  height:20px;
   cursor:hand;
   background-color:#85776D;
+}
+
+#secretDemoShape {
+  width:20px;
+  height:20px;
+  cursor:hand;
 }
 
 ol li {
