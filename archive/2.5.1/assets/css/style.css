@@ -1,0 +1,292 @@
+/* Laptop/Desktop CSS */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin:0 auto;
+  padding:0;
+  background-color:#85776D;
+  height:100%;
+  width:850px;
+}
+
+.center {
+  display:block;
+  text-align:center;
+}
+
+.wrap {
+  font-family:"Georgia", "bitstream charter", serif;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+#titleHeader {
+  background:#eee;
+  display:block;
+  position:relative;
+  padding:0.4em 50px;
+  text-align:center;
+  color:#74685F;
+  font-family:"trebuchet ms","droid sans",sans-serif;
+  font-size:50pt;
+  font-weight:700;
+}
+
+#topHeader {
+  background:#eee;
+  display:none;
+  position:relative;
+  padding:0.7em 50px;
+  text-align:center;
+  color:#74685F;
+  font-size:24pt;
+}
+
+#footer {
+  background:#99918A;
+  display:block;
+  padding:8px 50px;
+}
+
+#copyright {
+  font-size:10pt;
+  text-align:center;
+}
+
+a {
+  color:#817237;
+  cursor:pointer;
+}
+
+#main {
+  background:#D0CCB9;
+  display:block;
+  padding:10px 50px 25px 50px;
+  font-size:16pt;
+}
+
+ul li {
+  margin:0.35em 0;
+}
+
+span.gameover {
+  color:#FF0000;
+  font-size:20pt;
+}
+
+span.checkpoint {
+  color:#008000;
+  font-size:20pt;
+  font-weight:700;
+}
+
+span.theend {
+  color:#0000FF;
+  font-size:20pt;
+}
+
+#titleselect {
+  font-size:27pt;
+}
+
+#title {
+  display:inline-block;
+}
+
+#prologueselect {
+  font-size:22pt;
+  display:block;
+  text-align:center;
+}
+
+#bonusfeatures {
+  font-size:27pt;
+}
+
+#secret {
+  position:absolute;
+  left:1px;
+  top:1px;
+}
+
+#secret:active {
+  background-color:#bfac9f;
+}
+
+#secret2 {
+  position:absolute;
+  right:1px;
+  top:1px;
+}
+
+#secret2:active {
+  background-color:#9db6d6;
+}
+
+#secretDemo {
+  display:inline-block;
+  position:absolute;
+  right:1px;
+  top:1px;
+}
+
+#secretDemo div {
+  float:left;
+  clear:none;
+  font-size:80%;
+}
+
+#secretDemoShape {
+  background-color:#9db6d6;
+}
+
+#secret, #secret2, #secretDemoShape {
+  width:36px;
+  height:36px;
+  cursor:pointer;
+}
+
+ol {
+  font-weight:bold;
+}
+
+ol li {
+  color:#817237;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+#moveon li {
+  color:#817237;
+  cursor:pointer;
+}
+
+a:active, ol li:active, ol li span:active, a strong:active, #moveon li:active {
+  color:#483E28;
+}
+
+#titleselect ul {
+  padding:0;
+  margin:1em 0 5px 0;
+}
+
+#prologueselect ul {
+  padding:0;
+  margin:0.5em 0;
+}
+
+#titleselect ul li, #prologueselect ul li {
+  list-style-type: none;
+  display:inline;
+  padding:18px;
+  line-height:1.5;
+  margin:0;
+}
+
+ol li span {
+  font-weight:normal;
+}
+
+#unsupported {
+  font-family:"Georgia", "bitstream charter", serif;
+  text-align:center;
+  font-weight:700;
+  font-size:14pt;
+  color:#000;
+}
+
+#em {
+  margin-bottom:1.1em;
+}
+
+blockquote {
+  font-family:courier, serif;
+}
+
+#leaper {
+  font-size:14pt;
+  font-weight:700;
+  text-align:center;
+  padding:0.35em 0;
+  background-color:#47a547;
+  border-bottom:2px solid #000;
+  cursor:pointer;
+  display:none;
+}
+
+#leaper:active {
+  background-color:#3c963c;
+}
+
+#gameTimer {
+  position:absolute;
+  top:4px;
+  right:20px;
+  font-size:15.5pt;
+  font-family:serif;
+}
+
+#checkmarker {
+  color:#008000;
+}
+
+/* Mobile Device CSS */
+
+@media screen and (max-width: 670px) {
+  #titleHeader {
+    padding:0.3em 15px;
+    font-size:32pt;
+  }
+
+  #topHeader {
+    padding:0.56em 15px;
+    font-size:20pt;
+  }
+
+  #footer {
+    padding-right:15px;
+    padding-left:15px;
+  }
+
+  #main {
+    padding-right:15px;
+    padding-left:15px;
+    font-size:14pt;
+  }
+
+  #titleselect {
+    font-size:24pt;
+  }
+
+  #unsupported {
+    font-size:12pt;
+  }
+
+  #bonusfeatures {
+    font-size:24pt;
+  }
+
+  #leaper {
+    font-size:12pt;
+  }
+
+  #gameTimer {
+    top:2px;
+    right:10px;
+    font-size:12.5pt;
+  }
+}
+
+@media screen and (max-width: 944px) {
+  body {
+    width:90%;
+  }
+
+  wbr:after {
+    content: "\00200B";
+  }
+}

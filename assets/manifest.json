@@ -1,0 +1,21 @@
+{
+    "name": "Escape a Tower",
+    "short_name": "Escape Tower",
+    "description": "My first text-based game. Escape that tower!",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#61564e",
+    "background_color": "#85776D",
+    "icons": [
+      {
+        "src": "../assets/img/towerappicon192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "../assets/img/towerappicon512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }

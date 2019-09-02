@@ -1,0 +1,35 @@
+body {
+  padding:0 26px;
+  width:720px;
+}
+
+#secret, #secret2 {
+  background-color:#85776D;
+}
+
+#secret, #secret2, #secretDemoShape {
+  width:24px;
+  height:24px;
+  cursor:hand;
+}
+
+ol li {
+  cursor:hand;
+}
+
+#moveon li {
+  cursor:hand;
+}
+
+a {
+  cursor:hand;
+}
+
+.wrap {
+  width:720px;
+  text-align:left;
+}
+
+.IEThing {
+  text-align:center;
+}

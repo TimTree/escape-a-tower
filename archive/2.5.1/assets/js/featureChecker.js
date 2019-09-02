@@ -35,7 +35,7 @@ var supportsIndexOf = testIndexOf();
 var supportsTimer = testTimerSupport();
 
 function checkUnsupported() {
-  if (!supportsLocalStorage || !supportsIndexOf || !supportsTimer) {
+  if (!supportsLocalStorage) {
     document.getElementById("unsupported").innerHTML="Your browser doesn't support some of the game's features. <a onclick='changeEnclosure();unsupportedReason()'>Learn More</a>";
   }
 }
