@@ -2,7 +2,7 @@
     "name": "Escape a Tower",
     "short_name": "Escape Tower",
     "description": "My first text-based game. Escape that tower!",
-    "start_url": "/escape-a-tower",
+    "start_url": "/escape-a-tower/",
     "display": "standalone",
     "theme_color": "#61564e",
     "background_color": "#85776D",
