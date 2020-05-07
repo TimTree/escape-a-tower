@@ -58,7 +58,7 @@ body {
 }
 
 a {
-  color:#817237;
+  color:#605720;
   cursor:pointer;
 }
 
@@ -155,18 +155,18 @@ ol {
 }
 
 ol li {
-  color:#817237;
+  color:#605720;
   cursor:pointer;
   margin-top:10px;
 }
 
 #moveon li {
-  color:#817237;
+  color:#605720;
   cursor:pointer;
 }
 
 a:active, ol li:active, ol li span:active, a strong:active, #moveon li:active {
-  color:#483E28;
+  color:#3d3522;
 }
 
 #titleselect ul {

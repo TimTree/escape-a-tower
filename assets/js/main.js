@@ -1622,7 +1622,7 @@ function gameLeaper() {
     var scenes11Display = calculateGameLeaperScore(scenes11);
     var totalScenes;
     if (totalScenesSeen < totalSceneCount()) {
-      totalScenes = "<p style='font-weight:700;font-size:150%;color:#808080;'>Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+"</p>";
+      totalScenes = "<p style='font-weight:700;font-size:150%;color:#707070;'>Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+"</p>";
     } else {
       totalScenes = "<p style='font-weight:700;font-size:150%;color:#008000;'>&#10003; Total Scenes: "+totalScenesSeen+"/"+totalSceneCount()+" &#10003;</p>";
     }
@@ -1649,7 +1649,7 @@ function calculateGameLeaperScore(sceneNum) {
       if (score === sceneNum.length) {
         return "<li onclick='enableLeapMode();s76()'>The Corridors (again) "+"<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
       } else {
-        return "<li onclick='enableLeapMode();s76()'>The Corridors (again) "+"<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+        return "<li onclick='enableLeapMode();s76()'>The Corridors (again) "+"<span style='color:#707070;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
       }
     }
   }
@@ -1660,14 +1660,14 @@ function calculateGameLeaperScore(sceneNum) {
       if (score === sceneNum.length) {
         return "<li onclick='enableLeapMode();secret()'>The Secret Area "+"<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
       } else {
-        return "<li onclick='enableLeapMode();secret()'>The Secret Area "+"<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
+        return "<li onclick='enableLeapMode();secret()'>The Secret Area "+"<span style='color:#707070;font-weight:700;'>("+score+"/"+sceneNum.length+")</span></li>";
       }
     }
   }
   else if (score === sceneNum.length) {
     return "<span style='color:#008000;font-weight:700;'>("+score+"/"+sceneNum.length+")</span>";
   } else {
-    return "<span style='color:#808080;font-weight:700;'>("+score+"/"+sceneNum.length+")</span>";
+    return "<span style='color:#707070;font-weight:700;'>("+score+"/"+sceneNum.length+")</span>";
   }
 }
 
