@@ -30,7 +30,7 @@ Want to see for yourself? Download the latest version from the GitHub releases p
 I highly recommend using a virtual machine to run the ancient browsers for security reasons.
 
 ## Copyright Notice
-Escape a Tower is copyright (c) 2010-2019 Timothy Hsu. You may use the game layout for your personal projects, but redistributing the game text, verbatim or modified, is not permitted without the author's permission.
+Escape a Tower is copyright (c) 2010-2020 Timothy Hsu. You may use the game layout for your personal projects, but redistributing the game text, verbatim or modified, is not permitted without the author's permission.
 
 
 ## Contact Info
