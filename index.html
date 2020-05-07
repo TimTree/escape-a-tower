@@ -1,98 +1,101 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <title>Escape a Tower</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta name="description" content="My first text-based game. Escape that tower!">
-    <meta name="author" content="Timothy Hsu">
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/img/towerfavicon.ico" />
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-title" content="Escape Tower">
-    <link rel="apple-touch-icon" href="./assets/img/towerappicon512.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="./assets/manifest.json">
-    <meta name="theme-color" content="#61564e"/>
 
-    <link rel="stylesheet" href="./assets/css/style.css">
+<head>
+  <title>Escape a Tower</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="description" content="My first text-based game. Escape that tower!">
+  <meta name="author" content="Timothy Hsu">
+  <link rel="shortcut icon" type="image/x-icon" href="./assets/img/towerfavicon.ico" />
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-title" content="Escape Tower">
+  <link rel="apple-touch-icon" href="./assets/img/towerappicon512.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="./assets/manifest.json">
+  <meta name="theme-color" content="#61564e" />
 
-    <script>
-      var oldIEMode;
-    </script>
+  <link rel="stylesheet" href="./assets/css/style.css">
 
-    <!--[if lte IE 7]>
+  <script>
+    var oldIEMode;
+  </script>
+
+  <!--[if lte IE 7]>
     	<link rel="stylesheet" type="text/css" href="./assets/css/oldIE.css" />
       <script>
         oldIEMode = true;
       </script>
     <![endif]-->
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="IEThing">
-      <div class="wrap">
+  <div class="IEThing">
+    <div class="wrap">
 
-        <div id="leaper" onclick='disableLeapMode();gameLeaper()'>
-          Back to Game Leaper
-        </div>
-
-        <div id="titleHeader">
-            <div id="unsupported">
-              <noscript>JavaScript is disabled. Please enable it in order to play the game.</noscript>
-            </div>
-            <div style="padding:0.1em 0;">
-              <span style="color:#184EC6;">Escape</span> <span style="color:#9E8E5C;">a</span> Tower
-            </div>
-        </div>
-
-        <div id="topHeader">
-          <div id="gameTimer"><span id='restart'></span><span id='theTime'></span></div>
-          <span id="checkmarker"></span>
-          <span id="settingHeader"></span>
-        </div>
-
-        <div id="main">
-          <div id="secret" onclick="changeEnclosure();secret()"></div>
-          <div id="secret2" onclick="autoComplete()"></div>
-          <div class="center">
-            <p style="margin-bottom:0.7em;">
-              <span style='font-size:24pt;'><span style="color:#C95000;">An <span style="color:#00A000;"><strong>Adventure Game</strong></span> by</span></span>
-            </p>
-            <p style="margin-top:0.7em;">
-              <span style="color:#660066;font-family:verdana,'DejaVu Sans',sans-serif;font-size:24pt;">Timothy Hsu</span>
-            </p>
-            <div id="em">
-              <div id="titleselect"></div><div id="bonusfeatures"></div>
-            </div>
-          </div>
-        </div>
-
-        <div id="footer">
-          <div id="copyright">
-            Version 2.6 &nbsp;&#126;&nbsp; &copy;2010-2019 Timothy Hsu
-          </div>
-        </div>
-
+      <div id="leaper" onclick='disableLeapMode();gameLeaper()'>
+        Back to Game Leaper
       </div>
+
+      <div id="titleHeader">
+        <div id="unsupported">
+          <noscript>JavaScript is disabled. Please enable it in order to play the game.</noscript>
+        </div>
+        <div style="padding:0.1em 0;">
+          <span style="color:#184EC6;">Escape</span> <span style="color:#9E8E5C;">a</span> Tower
+        </div>
+      </div>
+
+      <div id="topHeader">
+        <div id="gameTimer"><span id='restart'></span><span id='theTime'></span></div>
+        <span id="checkmarker"></span>
+        <span id="settingHeader"></span>
+      </div>
+
+      <div id="main">
+        <div id="secret" onclick="changeEnclosure();secret()"></div>
+        <div id="secret2" onclick="autoComplete()"></div>
+        <div class="center">
+          <p style="margin-bottom:0.7em;">
+            <span style='font-size:24pt;'><span style="color:#C95000;">An <span style="color:#00A000;"><strong>Adventure
+                    Game</strong></span> by</span></span>
+          </p>
+          <p style="margin-top:0.7em;">
+            <span style="color:#660066;font-family:verdana,'DejaVu Sans',sans-serif;font-size:24pt;">Timothy Hsu</span>
+          </p>
+          <div id="em">
+            <div id="titleselect"></div>
+            <div id="bonusfeatures"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer">
+        <div id="copyright">
+          Version 2.6 &nbsp;&#126;&nbsp; &copy;2010-2019 Timothy Hsu
+        </div>
+      </div>
+
     </div>
+  </div>
 
-    <script>
-      // Check for unsupported browsers
-      if (!document.getElementById || !document.getElementById("main").innerHTML) {
-        document.write("<h1>Your browser cannot run Escape a Tower.</h1>");
-      }
-    </script>
+  <script>
+    // Check for unsupported browsers
+    if (!document.getElementById || !document.getElementById("main").innerHTML) {
+      document.write("<h1>Your browser cannot run Escape a Tower.</h1>");
+    }
+  </script>
 
-    <script type="text/javascript" src="./assets/js/featureChecker.js"></script>
-    <script type="text/javascript" src="./assets/js/main.js"></script>
-    <script src="./upup.min.js"></script>
-    <script>
-      UpUp.start({
-        'cache-version': 'v2.6',
-        'content-url': 'index.html',
-        'assets': [
+  <script type="text/javascript" src="./assets/js/featureChecker.js"></script>
+  <script type="text/javascript" src="./assets/js/main.js"></script>
+  <script src="./upup.min.js"></script>
+  <script>
+    UpUp.start({
+      'cache-version': 'v2.6',
+      'content-url': 'index.html',
+      'assets': [
         './assets/css/oldIE.css',
         './assets/css/style.css',
         './assets/img/TowerBoxArtJP.png',
@@ -103,8 +106,9 @@
         './assets/other/2.5ReleaseNotes.txt',
         './assets/other/PPThistory.txt',
         './assets/manifest.json'
-        ]
-      });
-    </script>
-  </body>
+      ]
+    });
+  </script>
+</body>
+
 </html>
