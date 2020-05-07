@@ -1440,7 +1440,7 @@ function s128(instance) {
   } else {
     condFunction = "s133()";
   }
-  main.innerHTML = "<p class='IEThing'><table style='margin:auto;background-color:#EDDA70;border:1px solid #EDA93D;'><tr><td style='padding:6px;'><div style='color:#4195AE;font-family:arial;font-weight:700;'><div class='center' style='color:#FF6600;text-decoration:underline;'>NOTICE</div><ul><li>Remember that ALL GUARDS must wear their full uniform at all times while they're working. Anybody not obeying the rules will get kicked out of this room! NO EXCEPTIONS!</li><li>Remember that to leave the tower, you must show the guard your full uniform and insert the following code at the grand door: 7852</li><li>To open the door to the electrical room, insert the following code at the front: 3284</li><li>FREE coffee for all guards.</ul></div></td></tr></table></p>"
+  main.innerHTML = "<p class='IEThing'><table style='margin:auto;background-color:#EDDA70;border:1px solid #EDA93D;'><tr><td style='padding:6px;'><div style='color:#2B6573;font-family:arial;font-weight:700;'><div class='center' style='color:#bb5613;text-decoration:underline;'>NOTICE</div><ul><li>Remember that ALL GUARDS must wear their full uniform at all times while they're working. Anybody not obeying the rules will get kicked out of this room! NO EXCEPTIONS!</li><li>Remember that to leave the tower, you must show the guard your full uniform and insert the following code at the grand door: 7852</li><li>To open the door to the electrical room, insert the following code at the front: 3284</li><li>FREE coffee for all guards.</ul></div></td></tr></table></p>"
     + choices(["Go back.", condFunction]);
   addScene(122);
 }
