@@ -36,4 +36,4 @@ Escape a Tower is copyright (c) 2010-2020 Timothy Hsu. You may use the game layo
 ## Contact Info
 To send feedback or bug reports about Escape a Tower, leave a comment at the following URL.
 
-https://www.gamesbytim.com/2011/08/escape-tower-more-info.html
+https://www.gamesbytim.com/escape-a-tower/
